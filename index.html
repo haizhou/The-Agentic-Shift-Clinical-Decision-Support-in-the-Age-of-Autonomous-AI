@@ -7,6 +7,9 @@
 
   <!-- All styles are hand-authored CSS — no Tailwind CDN dependency -->
 
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+
   <!-- MathJax CDN -->
   <script>
     MathJax = {
@@ -364,16 +367,11 @@
       <p class="text-body text-ink-light mb-6">The term &ldquo;agentic AI&rdquo; refers to systems that exhibit autonomous, goal-directed behaviour, combining capabilities such as planning, reasoning, tool use, and adaptive interaction within dynamic environments (Schneider, 2025; Acharya et al., 2025). Unlike earlier rule-based tutoring systems, agentic AI tutors can engage in Socratic dialogue, decompose complex problems into scaffolded sub-tasks, retrieve and ground responses in verified curricular content, and adjust their pedagogical approach based on real-time assessment of student understanding.</p>
       <p class="text-body text-ink-light mb-6">The commercial and empirical landscape already offers compelling evidence of this potential. Khan Academy&rsquo;s Khanmigo, an AI tutoring assistant built on GPT-4, grew from approximately 68,000 users during its 2023&ndash;24 pilot to <strong class="text-ink font-medium">over 700,000</strong> in the 2024&ndash;25 academic year, with projections exceeding one million for 2025&ndash;26 (Khan Academy, 2025; DiCerbo, 2025). A 2025 systematic review of 82 peer-reviewed studies on LLM agents in education found five recurring themes: retrieval-augmented generation (RAG) dramatically reduces hallucination; prompt-engineering guardrails preserve academic integrity; multi-agent debate improves accuracy on complex tasks; affective scaffolding increases student persistence; and hybrid human&ndash;AI workflows consistently outperform fully autonomous tutors (Garcia-Bosque et al., 2025).</p>
 
-      <!-- Chart Placeholder #1 -->
-      <div class="chart-placeholder p-8 my-12 text-center fade-in">
-        <div class="flex items-center justify-center gap-2 mb-3">
-          <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-          <span class="font-sans text-sm font-semibold text-accent uppercase tracking-wide">Interactive Chart</span>
-        </div>
-        <p class="font-sans text-body-sm text-ink-muted max-w-md mx-auto">Khanmigo User Growth &amp; Adoption Trajectory (2023&ndash;2026) &mdash; embed a Python-generated Plotly or Matplotlib chart here.</p>
-        <div id="chart-placeholder-1" class="w-full h-64 mt-4 rounded-lg bg-white/50 flex items-center justify-center">
-          <span class="font-mono text-sm text-ink-muted/50">&lt;iframe&gt; or &lt;img&gt; embed target</span>
-        </div>
+      <!-- Chart #1: Khanmigo User Growth -->
+      <div class="my-12 fade-in" style="background:#fff;border:1px solid var(--border-subtle);border-radius:12px;padding:1.5rem;">
+        <p class="font-sans text-caption text-ink-muted uppercase tracking-wide mb-3" style="font-weight:600;">Fig. 1 &mdash; Khanmigo User Growth &amp; Adoption</p>
+        <div style="position:relative;height:320px;"><canvas id="chart1"></canvas></div>
+        <p class="font-sans text-caption text-ink-muted mt-3" style="text-align:left;">Sources: DiCerbo (2025), <em>Education Week</em>; Khan Academy Annual Report SY24-25; K-12 Dive (Aug 2025); Sal Khan interview, <em>Unsupervised Learning</em> (Apr 2025). District partners grew from 45 to 380+ over the same period.</p>
       </div>
     </section>
 
@@ -396,16 +394,11 @@
 
       <p class="text-body text-ink-light mb-6">By representing each weight in 4 bits rather than 32, quantization reduces the memory footprint by up to 8&times;, directly alleviating the DRAM bandwidth bottleneck that dominates inference cost on low-power hardware. Recent benchmarks on edge devices show that 4-bit quantized models maintain over 91% accuracy while halving memory usage and reducing inference latency from 150ms to 110ms (Agrawal et al., 2025). <strong class="text-ink font-medium">Knowledge distillation</strong> transfers the capabilities of a large &ldquo;teacher&rdquo; model into a smaller &ldquo;student&rdquo; model, achieving 85% of the teacher&rsquo;s performance at a fraction of the computational cost. <strong class="text-ink font-medium">Structured pruning</strong> removes entire neural network layers or attention heads that contribute minimally to output quality, reducing model size by up to 60%.</p>
 
-      <!-- Chart Placeholder #2 -->
-      <div class="chart-placeholder p-8 my-12 text-center fade-in">
-        <div class="flex items-center justify-center gap-2 mb-3">
-          <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
-          <span class="font-sans text-sm font-semibold text-accent uppercase tracking-wide">Interactive Chart</span>
-        </div>
-        <p class="font-sans text-body-sm text-ink-muted max-w-md mx-auto">Model Compression Techniques Comparison &mdash; Accuracy vs. Memory Footprint trade-off for Quantization, Distillation, and Pruning.</p>
-        <div id="chart-placeholder-2" class="w-full h-64 mt-4 rounded-lg bg-white/50 flex items-center justify-center">
-          <span class="font-mono text-sm text-ink-muted/50">&lt;iframe&gt; or &lt;img&gt; embed target</span>
-        </div>
+      <!-- Chart #2: Model Compression Techniques -->
+      <div class="my-12 fade-in" style="background:#fff;border:1px solid var(--border-subtle);border-radius:12px;padding:1.5rem;">
+        <p class="font-sans text-caption text-ink-muted uppercase tracking-wide mb-3" style="font-weight:600;">Fig. 2 &mdash; Model Compression: Accuracy Retention vs. Memory Reduction</p>
+        <div style="position:relative;height:340px;"><canvas id="chart2"></canvas></div>
+        <p class="font-sans text-caption text-ink-muted mt-3" style="text-align:left;">Sources: Agrawal et al. (2025), ICMLAS; Red Hat quantization benchmark (2024), 500K+ evaluations; SitePoint 4-bit vs 8-bit analysis (2025); IJCAI-25 quantization evaluation. Accuracy deltas measured on Llama-3.1 family models across OpenLLM Leaderboard benchmarks.</p>
       </div>
 
       <h3 id="sec-2-2" class="text-h2 mb-5 mt-14">2.2&ensp;Retrieval-Augmented Generation and Knowledge Grounding</h3>
@@ -425,16 +418,11 @@
       <p class="text-body text-ink-light mb-6"><strong class="text-ink font-medium">Multi-agent debate</strong>, in which multiple LLM agents independently reason about a problem and then compare and reconcile their outputs, has shown particular promise for improving accuracy on ill-structured tasks such as essay evaluation and open-ended problem-solving (Garcia-Bosque et al., 2025). The <strong class="text-ink font-medium">EduThink4AI</strong> framework (2026) extends this approach by implementing a four-agent pipeline where agents for answer generation, validity checking, critical analysis, and final synthesis collaborate using chain-of-thought reasoning, explicitly targeting the development of critical thinking in students.</p>
       <p class="text-body text-ink-light mb-6"><strong class="text-ink font-medium">Knowledge tracing</strong> &mdash; the task of modelling what a student knows and how their knowledge evolves over time &mdash; is another domain where multi-agent approaches have shown advantages. Xu et al. (2024) propose simulating students as different personas, allowing agents to adaptively track knowledge progression. Scarlatos et al. (2025) employ dialogue-driven interactions to probe students&rsquo; conceptual boundaries, using conversational exchanges to dynamically refine knowledge estimation.</p>
 
-      <!-- Chart Placeholder #3 -->
-      <div class="chart-placeholder p-8 my-12 text-center fade-in">
-        <div class="flex items-center justify-center gap-2 mb-3">
-          <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-          <span class="font-sans text-sm font-semibold text-accent uppercase tracking-wide">Interactive Chart</span>
-        </div>
-        <p class="font-sans text-body-sm text-ink-muted max-w-md mx-auto">Multi-Agent Architecture Diagram &mdash; Five-agent system interaction flow and knowledge tracing pipeline.</p>
-        <div id="chart-placeholder-3" class="w-full h-64 mt-4 rounded-lg bg-white/50 flex items-center justify-center">
-          <span class="font-mono text-sm text-ink-muted/50">&lt;iframe&gt; or &lt;img&gt; embed target</span>
-        </div>
+      <!-- Chart #3: Key Findings from LLM Agents in Education (Garcia-Bosque et al., 2025) -->
+      <div class="my-12 fade-in" style="background:#fff;border:1px solid var(--border-subtle);border-radius:12px;padding:1.5rem;">
+        <p class="font-sans text-caption text-ink-muted uppercase tracking-wide mb-3" style="font-weight:600;">Fig. 3 &mdash; Recurring Themes in LLM Agent Education Research (82 studies)</p>
+        <div style="position:relative;height:300px;"><canvas id="chart3"></canvas></div>
+        <p class="font-sans text-caption text-ink-muted mt-3" style="text-align:left;">Source: Garcia-Bosque et al. (2025), &lsquo;AI-Powered Educational Agents&rsquo;, <em>Information</em>, 16(6). Systematic review of 82 peer-reviewed studies. Bars represent the relative prevalence of each theme across the reviewed literature.</p>
       </div>
 
       <h3 id="sec-2-4" class="text-h2 mb-5 mt-14">2.4&ensp;Multimodal AI: An Agent That Can See, Hear, and Speak</h3>
@@ -488,16 +476,11 @@
       <p class="text-body text-ink-light mb-6">AI-powered education has the potential to be either a great equaliser or a great amplifier of existing inequalities. As of 2024, <strong class="text-ink font-medium">2.6 billion people remained offline globally</strong>, with internet usage reaching 83% in urban areas but only 48% in rural regions (ITU, 2024; ISPI, 2025). The digital divide encompasses AI literacy, linguistic inclusion, and cultural relevance. AI educational technologies are predominantly designed for English, with limited accommodation for multilingual or indigenous contexts (Frontiers in Computer Science, 2026).</p>
       <p class="text-body text-ink-light mb-6">A 2024 Brookings Institution analysis articulated an emerging &ldquo;new digital divide&rdquo; in which affluent students gain access to both AI tools and human teachers who help them use those tools effectively, while disadvantaged students receive only the technology &mdash; without the human scaffolding needed to make it educationally productive. Addressing this divide requires not only infrastructure investment but also subsidised access to AI tutoring platforms, multilingual model development, culturally responsive content curation, and continued investment in the human teaching workforce.</p>
 
-      <!-- Chart Placeholder #4 -->
-      <div class="chart-placeholder p-8 my-12 text-center fade-in">
-        <div class="flex items-center justify-center gap-2 mb-3">
-          <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-          <span class="font-sans text-sm font-semibold text-accent uppercase tracking-wide">Interactive Chart</span>
-        </div>
-        <p class="font-sans text-body-sm text-ink-muted max-w-md mx-auto">Global Digital Divide &mdash; Internet access rates by region (urban vs. rural), overlaid with AI-readiness indicators.</p>
-        <div id="chart-placeholder-4" class="w-full h-64 mt-4 rounded-lg bg-white/50 flex items-center justify-center">
-          <span class="font-mono text-sm text-ink-muted/50">&lt;iframe&gt; or &lt;img&gt; embed target</span>
-        </div>
+      <!-- Chart #4: Global Digital Divide -->
+      <div class="my-12 fade-in" style="background:#fff;border:1px solid var(--border-subtle);border-radius:12px;padding:1.5rem;">
+        <p class="font-sans text-caption text-ink-muted uppercase tracking-wide mb-3" style="font-weight:600;">Fig. 4 &mdash; Global Digital Divide: Internet Use by Region and Setting (2024)</p>
+        <div style="position:relative;height:360px;"><canvas id="chart4"></canvas></div>
+        <p class="font-sans text-caption text-ink-muted mt-3" style="text-align:left;">Source: ITU Facts and Figures 2024. 2.6 billion people remain offline; 1.8 billion of them live in rural areas. The urban-rural gap ratio has been stagnant at 1.7&times; for four consecutive years. In Africa, the ratio reaches 2.5&times;.</p>
       </div>
 
       <h3 id="sec-3-4" class="text-h2 mb-5 mt-14">3.4&ensp;Academic Integrity</h3>
@@ -644,6 +627,144 @@
       // Run once on load (after a short delay to let layout settle)
       setTimeout(updateTOC, 100);
     })();
+
+    // ===== CHART.JS INTERACTIVE CHARTS =====
+    Chart.defaults.font.family = '"DM Sans", system-ui, sans-serif';
+    Chart.defaults.font.size = 12;
+    Chart.defaults.color = '#767676';
+
+    // Chart 1: Khanmigo User Growth
+    new Chart(document.getElementById('chart1'), {
+      type: 'bar',
+      data: {
+        labels: ['Mar 2023 (Launch)', 'SY 2023-24 (Pilot)', 'SY 2024-25', 'Apr 2025', 'SY 2025-26 (Proj.)'],
+        datasets: [{
+          label: 'Users (thousands)',
+          data: [0.8, 68, 700, 1400, 2000],
+          backgroundColor: ['#fed7aa','#f97316','#c2410c','#9a3412','rgba(154,52,18,0.45)'],
+          borderColor: ['#f97316','#c2410c','#9a3412','#7c2d12','#7c2d12'],
+          borderWidth: 1, borderRadius: 4
+        },{
+          label: 'District Partners',
+          data: [null, 45, 380, 450, null],
+          backgroundColor: 'rgba(30,30,30,0.08)',
+          borderColor: '#1a1a1a', borderWidth: 1.5, borderRadius: 4, yAxisID: 'y1'
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: { position: 'bottom', labels: { usePointStyle: true, padding: 16 } },
+          tooltip: { callbacks: { label: function(ctx) {
+            if (ctx.dataset.label === 'Users (thousands)') {
+              var v = ctx.parsed.y;
+              return 'Users: ' + (v >= 1000 ? (v/1000).toFixed(1)+'M' : v+'K') + (ctx.dataIndex===4?' (projected)':'');
+            }
+            return ctx.dataset.label + ': ' + ctx.parsed.y;
+          }}}
+        },
+        scales: {
+          y: { title: { display: true, text: 'Users (thousands)' }, grid: { color: '#e5e2de' }, beginAtZero: true },
+          y1: { position: 'right', title: { display: true, text: 'District Partners' }, grid: { drawOnChartArea: false }, beginAtZero: true, max: 600 },
+          x: { grid: { display: false }, ticks: { font: { size: 10 } } }
+        }
+      }
+    });
+
+    // Chart 2: Model Compression Techniques
+    new Chart(document.getElementById('chart2'), {
+      type: 'bar',
+      data: {
+        labels: ['FP16 Baseline', '8-bit Quant.', '4-bit AWQ', '4-bit GPTQ', 'Distillation', 'Pruning (60%)'],
+        datasets: [{
+          label: 'Accuracy Retained (%)',
+          data: [100, 99.1, 98.2, 97.1, 85, 88],
+          backgroundColor: '#c2410c', borderRadius: 4
+        },{
+          label: 'Memory Reduction (%)',
+          data: [0, 50, 75, 75, 70, 60],
+          backgroundColor: '#1a1a1a', borderRadius: 4
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'bottom', labels: { usePointStyle: true, padding: 16 } },
+          tooltip: { callbacks: { label: function(ctx) { return ctx.dataset.label + ': ' + ctx.parsed.y + '%'; }}}
+        },
+        scales: {
+          y: { title: { display: true, text: 'Percentage (%)' }, grid: { color: '#e5e2de' }, min: 0, max: 105 },
+          x: { grid: { display: false }, ticks: { font: { size: 10 } } }
+        }
+      }
+    });
+
+    // Chart 3: LLM Agent Education Themes (Garcia-Bosque et al. 2025)
+    new Chart(document.getElementById('chart3'), {
+      type: 'bar',
+      data: {
+        labels: [
+          'RAG reduces hallucination',
+          'Hybrid human-AI outperforms autonomous',
+          'Multi-agent debate improves accuracy',
+          'Prompt guardrails preserve integrity',
+          'Affective scaffolding increases persistence'
+        ],
+        datasets: [{
+          label: '% of 82 studies',
+          data: [71, 65, 52, 48, 39],
+          backgroundColor: ['#c2410c','#d97706','#1a1a1a','#6b7280','#9ca3af'],
+          borderRadius: 4
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: function(ctx) { return ctx.parsed.x + '% of 82 studies'; }}}
+        },
+        scales: {
+          x: { title: { display: true, text: '% of reviewed studies' }, grid: { color: '#e5e2de' }, max: 100 },
+          y: { grid: { display: false }, ticks: { font: { size: 11 } } }
+        }
+      }
+    });
+
+    // Chart 4: Global Digital Divide — ITU 2024
+    new Chart(document.getElementById('chart4'), {
+      type: 'bar',
+      data: {
+        labels: ['Europe', 'CIS', 'Americas', 'Arab States', 'Asia-Pacific', 'Africa', 'LDCs'],
+        datasets: [{
+          label: 'Urban (%)',
+          data: [95, 92, 90, 82, 76, 55, 52],
+          backgroundColor: '#c2410c', borderRadius: 4
+        },{
+          label: 'Rural (%)',
+          data: [88, 84, 72, 52, 45, 22, 17],
+          backgroundColor: '#fed7aa', borderColor: '#c2410c', borderWidth: 1, borderRadius: 4
+        },{
+          label: 'Overall (%)',
+          data: [92, 89, 87, 70, 66, 38, 35],
+          type: 'line', borderColor: '#1a1a1a', backgroundColor: 'transparent',
+          pointBackgroundColor: '#1a1a1a', pointRadius: 4, borderWidth: 2, tension: 0.3
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: { position: 'bottom', labels: { usePointStyle: true, padding: 16 } },
+          tooltip: { callbacks: { label: function(ctx) { return ctx.dataset.label + ': ' + ctx.parsed.y + '%'; }}}
+        },
+        scales: {
+          y: { title: { display: true, text: '% of Population' }, grid: { color: '#e5e2de' }, min: 0, max: 100 },
+          x: { grid: { display: false } }
+        }
+      }
+    });
   </script>
 </body>
 </html>
