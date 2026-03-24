@@ -1595,37 +1595,43 @@
 
       <p class="text-body text-ink-light mb-6">Forty years later, the structural reality makes Bloom&rsquo;s finding feel even more remote. The world now needs <strong class="text-ink font-medium">44 million additional teachers by 2030</strong> just to achieve universal basic education (UNESCO, 2024). In the United States, one in eight teaching positions was unfilled or staffed by an under-qualified teacher in 2024&ndash;25 (Learning Policy Institute, 2025). In Sub-Saharan Africa, the student-to-teacher ratio can exceed <strong class="text-ink font-medium">56:1</strong> &mdash; at which point personalised instruction is not merely unaffordable; it is physically impossible. And the pipeline is collapsing from the other end too: one in five teachers under 30 plans to leave the profession within five years (TALIS, 2024), with burnout, workload, and stagnating pay cited as the driving forces. The crisis is not a shortage of evidence about what works. It is a shortage of the people and resources needed to deliver it.</p>
      
-      <h3 id="sec-1-2" class="text-h2 mb-5 mt-14">1.2&ensp;The Attempts That Fell Short</h3>
-      <p class="text-body text-ink-light mb-6">The decades since Bloom were not short of ambition. MOOCs burst onto the scene in the early 2010s with world-changing promises: top-university lectures, free, for anyone with an internet connection. The reality was more modest. Completion rates rarely exceeded 10%, and the experience was fundamentally passive &mdash; watching videos and clicking through quizzes is not the same as learning. Adaptive platforms like early Khan Academy and Carnegie Learning went further, adding personalisation through item-response algorithms. But they remained confined to predefined content paths and rigid rule-based logic. They could make a problem slightly harder if you got the last one right. They could not ask you why you got it wrong. The gap between what Bloom proved and what technology could actually do remained stubbornly, frustratingly wide.</p>
-      <div class="crisis-dialogue fade-in" style="background: var(--surface); border: 1px solid var(--border-subtle); padding: 0; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.08); position: relative;">
+    <div class="crisis-dialogue fade-in" style="background: var(--surface); border: 1px solid var(--border-subtle); padding: 0; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.06); position: relative;">
   
-  <div class="crisis-header" style="background: rgba(255,255,255,0.8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; padding: 1rem 1.5rem; position: relative; z-index: 10;">
-    <span class="crisis-label" style="color: var(--ink-muted); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;">System Topology: The 2-Sigma Paradox</span>
-    <span id="sim-status" style="font-family: var(--font-mono); font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase;">50 Teachers · 250 Students</span>
+  <div class="crisis-header" style="background: rgba(250,250,249,0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; padding: 1rem 1.5rem; position: relative; z-index: 10;">
+    <span class="crisis-label" style="color: var(--ink-muted); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;">System Topology: Capacity & Load Analysis</span>
+    <span id="sim-status" style="font-family: var(--font-mono); font-size: 0.7rem; color: #64748b; font-weight: 600; text-transform: uppercase;">Status: Nominal Equilibrium</span>
   </div>
   
-  <div style="position: relative; width: 100%; height: 460px; background: linear-gradient(180deg, #ffffff 0%, #f5f0eb 100%); overflow: hidden;">
+  <div style="position: relative; width: 100%; height: 500px; background: var(--surface); overflow: hidden;">
     
-    <div style="position: absolute; top: 1.5rem; left: 1.5rem; background: rgba(255,255,255,0.7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 0.75rem 1rem; border-radius: 12px; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 4px 12px rgba(0,0,0,0.03); z-index: 10; font-family: var(--font-sans); font-size: 0.7rem; color: var(--ink-muted); display: flex; flex-direction: column; gap: 0.5rem;">
-      <div style="display: flex; align-items: center; gap: 0.5rem;"><span style="width:10px; height:10px; border-radius:50%; background:#1e293b;"></span> Teacher (Active)</div>
-      <div style="display: flex; align-items: center; gap: 0.5rem;"><span style="width:10px; height:10px; border-radius:50%; background:#ef4444; box-shadow: 0 0 6px rgba(239,68,68,0.5);"></span> Teacher (Overloaded)</div>
-      <div style="display: flex; align-items: center; gap: 0.5rem;"><span style="width:6px; height:6px; border-radius:50%; background:#94a3b8;"></span> Student</div>
-      <div style="display: flex; align-items: center; gap: 0.5rem;"><span style="width:6px; height:6px; border-radius:50%; background:#c2410c;"></span> AI Copilot</div>
+    <div style="position: absolute; top: 1.5rem; left: 1.5rem; background: rgba(255,255,255,0.6); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 0.85rem 1.2rem; border-radius: 12px; border: 1px solid var(--border-subtle); z-index: 10; font-family: var(--font-sans); font-size: 0.7rem; color: var(--ink-muted); display: flex; flex-direction: column; gap: 0.6rem;">
+      <div style="display: flex; align-items: center; gap: 0.6rem;"><span style="width:10px; height:10px; border-radius:50%; background:#1e293b;"></span> Educator Node</div>
+      <div style="display: flex; align-items: center; gap: 0.6rem;"><span style="width:10px; height:10px; border-radius:50%; background:#ef4444; box-shadow: 0 0 6px rgba(239,68,68,0.5);"></span> Overloaded Node</div>
+      <div style="display: flex; align-items: center; gap: 0.6rem;"><span style="width:6px; height:6px; border-radius:50%; background:#94a3b8;"></span> Learner</div>
+      <div style="display: flex; align-items: center; gap: 0.6rem;"><span style="width:6px; height:6px; border-radius:50%; background:var(--accent);"></span> Agentic Copilot</div>
     </div>
 
-    <div style="position: absolute; bottom: 1.5rem; right: 1.5rem; width: 260px; background: rgba(255,255,255,0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); padding: 1.25rem; border-radius: 16px; border: 1px solid rgba(0,0,0,0.08); box-shadow: 0 12px 30px rgba(0,0,0,0.08); z-index: 10; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); transform: translateY(0); opacity: 1;" id="narrative-card">
-      <div id="narrative-title" style="font-family: var(--font-sans); font-size: 0.75rem; font-weight: 700; color: var(--ink); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">1. The Baseline</div>
-      <div id="narrative-desc" style="font-family: var(--font-sans); font-size: 0.85rem; color: var(--ink-muted); line-height: 1.5;">Every student has attention. The system handles a balanced 5:1 ratio effortlessly.</div>
+    <div id="narrative-card" style="position: absolute; top: 1.5rem; right: 1.5rem; width: 280px; background: rgba(255,255,255,0.9); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 12px; border: 1px solid var(--border-subtle); box-shadow: 0 12px 30px rgba(0,0,0,0.06); z-index: 20; display: flex; flex-direction: column;">
+      <div id="drag-handle" style="padding: 0.5rem; cursor: grab; display: flex; justify-content: center; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.03);">
+        <svg width="24" height="10" viewBox="0 0 24 10" fill="var(--ink-muted)" style="opacity: 0.4;">
+          <circle cx="8" cy="3" r="1.5"/><circle cx="16" cy="3" r="1.5"/>
+          <circle cx="8" cy="7" r="1.5"/><circle cx="16" cy="7" r="1.5"/>
+        </svg>
+      </div>
+      <div style="padding: 1rem 1.25rem 1.25rem;" id="narrative-content">
+        <div id="narrative-title" style="font-family: var(--font-sans); font-size: 0.75rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.6rem; transition: opacity 0.3s;">Phase 1: The Baseline</div>
+        <div id="narrative-desc" style="font-family: var(--font-serif); font-size: 0.9rem; color: var(--ink-light); line-height: 1.6; transition: opacity 0.3s;">A balanced ecosystem. Teaching capacity matches student volume, allowing for distributed cognitive load and stable personal connections.</div>
+      </div>
     </div>
 
     <canvas id="fluid-evolution-canvas" style="display: block; width: 100%; height: 100%;"></canvas>
   </div>
 
-  <div style="display: flex; gap: 0.5rem; padding: 1.25rem 1.5rem; background: #fff; border-top: 1px solid var(--border-subtle); overflow-x: auto; scrollbar-width: none;">
+  <div style="display: flex; gap: 0.5rem; padding: 1.25rem 1.5rem; background: var(--surface); border-top: 1px solid var(--border-subtle); overflow-x: auto; scrollbar-width: none;">
     <button class="sim-btn active" data-phase="0">1. Baseline</button>
-    <button class="sim-btn" data-phase="1">2. Crisis</button>
-    <button class="sim-btn" data-phase="2">3. MOOC Era</button>
-    <button class="sim-btn" data-phase="3">4. Agentic AI</button>
+    <button class="sim-btn" data-phase="1">2. Systemic Crisis</button>
+    <button class="sim-btn" data-phase="2">3. MOOC Illusion</button>
+    <button class="sim-btn" data-phase="3">4. Agentic Era</button>
     <button class="sim-btn" data-phase="4" style="margin-left: auto;">Bloom's Ideal</button>
   </div>
   
@@ -1633,15 +1639,38 @@
     .sim-btn {
       font-family: var(--font-sans); font-size: 0.75rem; font-weight: 600;
       padding: 0.6rem 1.2rem; border-radius: 100px; border: 1px solid var(--border-subtle);
-      background: #fff; color: var(--ink-muted); cursor: pointer; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      background: #fff; color: var(--ink-muted); cursor: pointer; transition: all 0.3s ease;
       white-space: nowrap; box-shadow: 0 2px 4px rgba(0,0,0,0.02);
     }
-    .sim-btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-    .sim-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); box-shadow: 0 6px 16px rgba(194,65,12,0.25); transform: translateY(-1px); }
+    .sim-btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+    .sim-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); box-shadow: 0 4px 12px rgba(194,65,12,0.15); }
   </style>
 
   <script>
     (function() {
+      // ===== 拖拽逻辑 (Drag & Drop) =====
+      const card = document.getElementById('narrative-card');
+      const handle = document.getElementById('drag-handle');
+      let isDragging = false, startX, startY, translateX = 0, translateY = 0;
+
+      handle.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        handle.style.cursor = 'grabbing';
+        startX = e.clientX - translateX;
+        startY = e.clientY - translateY;
+      });
+      window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        translateX = e.clientX - startX;
+        translateY = e.clientY - startY;
+        card.style.transform = `translate(${translateX}px, ${translateY}px)`;
+      });
+      window.addEventListener('mouseup', () => {
+        isDragging = false;
+        handle.style.cursor = 'grab';
+      });
+
+      // ===== Canvas 系统逻辑 =====
       const canvas = document.getElementById('fluid-evolution-canvas');
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
@@ -1649,26 +1678,24 @@
       let currentPhase = 0;
       let phaseTimer = 0;
 
-      // 规模升级：50老师，250学生
-      const NUM_STUDENTS = 250;
-      const NUM_TEACHERS = 50;
-      const NUM_SURVIVORS = 10;
-      const EXIT_MESSAGES = ["Burnout", "Overwhelmed", "Too many...", "Resigning", "Exhausted"];
+      // 规模极大化：120名老师，600名学生，呈现满屏生态感
+      const NUM_TEACHERS = 120;
+      const NUM_STUDENTS = 600;
+      const NUM_SURVIVORS = 18; 
       
       let students = [];
       let teachers = [];
       let mooc = { x: 0, y: 0, tx: 0, ty: 0, opacity: 0 };
 
-      // 叙事文案配置
+      // 定性叙事文案 (与主文章字体/风格高度统一)
       const narratives = [
-        { t: "1. The Baseline", d: "The system is stable. 50 teachers manage 250 students. A healthy 5:1 ratio allows for personal connection." },
-        { t: "2. The Crisis", d: "80% of teachers leave due to burnout. The remaining 10 are instantly crushed by a 25:1 ratio. Quality plummets." },
-        { t: "3. The MOOC Illusion", d: "Massive online courses promise relief. Half the students connect, but without guidance, they drop out in seconds and flood back." },
-        { t: "4. Agentic Copilot", d: "AI copilots deploy locally. Teachers don't disappear—they become orchestrators. The cognitive load is shared." },
-        { t: "5. Bloom's Vision", d: "1:1 tutoring is finally achieved at scale. Every student has a dedicated pedagogical agent. The two-sigma gap closes." }
+        { t: "Phase 1: The Baseline", d: "A balanced ecosystem. Teaching capacity structurally matches student volume, allowing for distributed cognitive load and stable pedagogical connections." },
+        { t: "Phase 2: Systemic Crisis", d: "Severe attrition. The majority of nodes collapse, leaving the remaining educators massively overloaded. Network stress reaches critical levels, turning lines red." },
+        { t: "Phase 3: The MOOC Illusion", d: "Centralized scaling. A massive online node absorbs initial volume, providing false relief. Without guided scaffolding, retention plummets, and traffic violently floods back." },
+        { t: "Phase 4: Agentic Copilot", d: "Distributed intelligence. Local AI agents form alongside learners, absorbing routine queries. Teachers shift from direct responders to network orchestrators." },
+        { t: "Phase 5: Bloom's Vision", d: "Universal 1:1 scaling. The traditional hub-and-spoke model dissolves into a perfectly distributed matrix, achieving the two-sigma ideal system-wide." }
       ];
 
-      // 黄金比例向日葵排列
       function getPhyllotaxis(center, index, scaling) {
         const angle = index * 137.5 * (Math.PI / 180);
         const radius = scaling * Math.sqrt(index);
@@ -1686,35 +1713,45 @@
         ctx.scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
 
         mooc.x = W / 2; mooc.y = -50; 
-        mooc.tx = W / 2; mooc.ty = H / 2 - 20;
+        mooc.tx = W / 2; mooc.ty = H / 2;
 
-        // 初始化 50 个老师 (初始同心圆阵列分布)
+        // 初始化老师：在全屏范围内生成带有一定随机噪点的网格分布
+        const cols = Math.ceil(Math.sqrt(NUM_TEACHERS * (W/H)));
+        const rows = Math.ceil(NUM_TEACHERS / cols);
+        const cellW = W / cols;
+        const cellH = H / rows;
+
         teachers = Array.from({length: NUM_TEACHERS}, (_, i) => {
+          const c = i % cols;
+          const r = Math.floor(i / cols);
+          // 加上随机抖动，使其看起来像有机的生态聚落，而不是死板的军阵
+          const baseX = c * cellW + cellW/2 + (Math.random()-0.5)*cellW*0.6;
+          const baseY = r * cellH + cellH/2 + (Math.random()-0.5)*cellH*0.6;
+          
           return {
             id: i,
-            x: W/2, y: H/2, 
-            tx: 0, ty: 0,
+            x: baseX, y: baseY, 
+            tx: baseX, ty: baseY,
+            originX: baseX, originY: baseY,
             opacity: 1, targetOpacity: 1,
             load: 0,
-            state: 'active', 
-            msg: (i % 3 === 0) ? EXIT_MESSAGES[i % EXIT_MESSAGES.length] : "" // 减少文字密集度，1/3的人说话
+            state: 'active'
           };
         });
 
-        // 设定哪 10 个老师幸存 (均匀分布的索引)
-        const survivorStep = Math.floor(NUM_TEACHERS / NUM_SURVIVORS);
-        teachers.forEach((t, i) => t.survivor = (i % survivorStep === 0 && i < survivorStep * NUM_SURVIVORS));
+        // 随机挑选幸存者，确保他们依然分散在各个区域
+        let shuffledIndexes = Array.from({length: NUM_TEACHERS}, (_, i) => i).sort(() => Math.random() - 0.5);
+        let survivorIndexes = new Set(shuffledIndexes.slice(0, NUM_SURVIVORS));
+        teachers.forEach(t => t.survivor = survivorIndexes.has(t.id));
 
-        // 初始化 250 个学生
+        // 初始化学生
         students = Array.from({length: NUM_STUDENTS}, (_, i) => {
           return {
             id: i,
-            x: W / 2 + (Math.random()-0.5)*W, 
-            y: H / 2 + (Math.random()-0.5)*H, 
+            x: W/2, y: H/2, // 动画开始时会从中间散开，有个出场感
             tx: 0, ty: 0,
             teacherId: i % NUM_TEACHERS,
-            stress: 0, 
-            hasAI: 0
+            stress: 0, hasAI: 0
           };
         });
 
@@ -1728,51 +1765,36 @@
         
         if (currentPhase === 2) {
             phaseTimer++;
-            mooc.targetOpacity = (phaseTimer < 250) ? 1 : 0.05; // 约4秒后断开
+            mooc.targetOpacity = (phaseTimer < 250) ? 1 : 0.05;
         } else {
             phaseTimer = 0;
             mooc.targetOpacity = 0;
         }
 
-        // 1. 老师阵型计算
-        let survivorCount = 0;
-        teachers.forEach((t, i) => {
-          const tFloatX = Math.cos(now * 0.0005 + t.id) * 8;
-          const tFloatY = Math.sin(now * 0.0006 + t.id) * 8;
+        // 1. 老师定位：幸存者留在原地，流失者飞散
+        teachers.forEach((t) => {
+          const tFloatX = Math.cos(now * 0.0003 + t.id) * 6;
+          const tFloatY = Math.sin(now * 0.0004 + t.id) * 6;
 
           if (currentPhase === 0) {
-            // 50个老师散开成 3 个同心圆
-            const ring = i < 8 ? 0 : (i < 24 ? 1 : 2);
-            const indexInRing = ring === 0 ? i : (ring === 1 ? i - 8 : i - 24);
-            const totalInRing = ring === 0 ? 8 : (ring === 1 ? 16 : 26);
-            const radius = ring === 0 ? W*0.08 : (ring === 1 ? W*0.18 : W*0.3);
-            const angle = (indexInRing / totalInRing) * Math.PI * 2;
-            
-            t.tx = W/2 + Math.cos(angle) * radius + tFloatX;
-            t.ty = H/2 + Math.sin(angle) * (radius*0.8) + tFloatY;
+            t.tx = t.originX + tFloatX;
+            t.ty = t.originY + tFloatY;
             t.state = 'active';
             t.targetOpacity = 1;
           } 
           else if (currentPhase >= 1 && currentPhase <= 3) {
             if (t.survivor) {
-              // 10个幸存老师收缩成高密度核心 (2圈)
-              const ring = survivorCount < 3 ? 0 : 1;
-              const idx = ring === 0 ? survivorCount : survivorCount - 3;
-              const total = ring === 0 ? 3 : 7;
-              const radius = ring === 0 ? W*0.05 : W*0.12;
-              const angle = (idx / total) * Math.PI * 2 + (ring*0.5); // 交错
-              
-              t.tx = W/2 + Math.cos(angle) * radius + tFloatX;
-              t.ty = H/2 + Math.sin(angle) * (radius*0.8) + tFloatY;
+              // 幸存老师留在自己原本的区域，分散全场
+              t.tx = t.originX + tFloatX;
+              t.ty = t.originY + tFloatY;
               t.state = 'active';
               t.targetOpacity = 1;
-              survivorCount++;
             } else {
-              // 40名退场老师向外爆发散开
+              // 退场老师像四周散去
               if (t.state === 'active') { 
-                 const exitAngle = (i / NUM_TEACHERS) * Math.PI * 2;
-                 t.tx = W/2 + Math.cos(exitAngle) * (W*0.9); // 飞出屏幕
-                 t.ty = H/2 + Math.sin(exitAngle) * (H*0.9);
+                 const exitAngle = Math.atan2(t.originY - H/2, t.originX - W/2);
+                 t.tx = W/2 + Math.cos(exitAngle) * (W * 1.5); // 飞远
+                 t.ty = H/2 + Math.sin(exitAngle) * (W * 1.5);
                  t.state = 'departing';
                  t.targetOpacity = 0;
               }
@@ -1780,12 +1802,11 @@
           }
           else if (currentPhase === 4) {
              t.targetOpacity = 0; 
-             t.ty = H + 100; // 沉入底部
+             t.ty = H + 200; 
           }
           
-          // 老师移动插值 (更平滑)
-          t.x += (t.tx - t.x) * 0.025;
-          t.y += (t.ty - t.y) * 0.025;
+          t.x += (t.tx - t.x) * 0.02;
+          t.y += (t.ty - t.y) * 0.02;
           t.opacity += (t.targetOpacity - t.opacity) * 0.03;
         });
 
@@ -1798,8 +1819,8 @@
           let targetStress = 0;
           let targetAI = 0;
 
-          const sFloatX = Math.cos(now * 0.001 + s.id * 1.3) * 5;
-          const sFloatY = Math.sin(now * 0.0012 + s.id * 1.7) * 5;
+          const sFloatX = Math.cos(now * 0.0008 + s.id * 1.2) * 5;
+          const sFloatY = Math.sin(now * 0.0009 + s.id * 1.5) * 5;
 
           if (currentPhase === 0) {
             s.teacherId = i % NUM_TEACHERS;
@@ -1807,21 +1828,22 @@
             teachers[s.teacherId].load++;
           } 
           else if (currentPhase === 1) {
+            // 找最近的活跃老师
             s.teacherId = activeTeachers[i % activeTeachers.length].id;
             center = { x: teachers[s.teacherId].x, y: teachers[s.teacherId].y };
             teachers[s.teacherId].load++;
-            targetStress = 1; // 25:1 压力全满
+            targetStress = 1; 
           }
           else if (currentPhase === 2) {
             if (i % 2 === 0 && phaseTimer < 250) {
               center = { x: mooc.x, y: mooc.y };
-              clusterSpacing = 9; 
+              clusterSpacing = 8; 
               targetStress = 0; 
             } else {
               s.teacherId = activeTeachers[i % activeTeachers.length].id;
               center = { x: teachers[s.teacherId].x, y: teachers[s.teacherId].y };
               teachers[s.teacherId].load++;
-              targetStress = 0.6; 
+              targetStress = 0.5; 
             }
             if (phaseTimer >= 250 && i % 2 === 0) targetStress = 1; 
           }
@@ -1834,7 +1856,7 @@
           }
           else if (currentPhase === 4) {
             center = { x: W/2, y: H/2 };
-            clusterSpacing = 13; // 银河展开
+            clusterSpacing = 11; // 极大螺旋展开
             targetAI = 1; 
           }
 
@@ -1851,22 +1873,21 @@
           s.tx = pos.x + sFloatX;
           s.ty = pos.y + sFloatY;
 
-          const speed = (currentPhase === 1 || currentPhase === 2) ? 0.025 : 0.04;
+          const speed = (currentPhase === 1 || currentPhase === 2) ? 0.02 : 0.04;
           s.x += (s.tx - s.x) * speed;
           s.y += (s.ty - s.y) * speed;
           s.stress += (targetStress - s.stress) * 0.05;
           s.hasAI += (targetAI - s.hasAI) * 0.05;
         });
 
-        mooc.y += (mooc.ty - mooc.y) * 0.04;
-        mooc.opacity += (mooc.targetOpacity - mooc.opacity) * 0.04;
+        mooc.y += (mooc.ty - mooc.y) * 0.03;
+        mooc.opacity += (mooc.targetOpacity - mooc.opacity) * 0.03;
       }
 
       function drawLoop() {
         ctx.clearRect(0, 0, W, H);
         updateTargets();
 
-        // 连线 (优化绘制性能：只在需要时绘制)
         ctx.lineWidth = 1;
         students.forEach(s => {
           if (currentPhase === 4) return;
@@ -1889,55 +1910,47 @@
             let r = 148 + s.stress * (239 - 148);
             let g = 163 + s.stress * (68 - 163);
             let b = 184 + s.stress * (68 - 184);
-            ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${0.1 + s.stress * 0.15})`;
+            ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${0.08 + s.stress * 0.1})`;
             ctx.stroke();
           }
         });
 
-        // 绘制 MOOC
         if (mooc.opacity > 0.01) {
           ctx.save();
           ctx.globalAlpha = mooc.opacity;
           ctx.beginPath(); ctx.arc(mooc.x, mooc.y, 24, 0, Math.PI*2);
           ctx.fillStyle = '#10b981'; ctx.fill();
-          ctx.shadowColor = 'rgba(16, 185, 129, 0.4)'; ctx.shadowBlur = 20;
+          ctx.shadowColor = 'rgba(16, 185, 129, 0.3)'; ctx.shadowBlur = 20;
           ctx.fillStyle = '#fff'; ctx.font = '700 12px var(--font-sans)'; ctx.textAlign = 'center';
           ctx.fillText('MOOC', mooc.x, mooc.y + 4);
           ctx.restore();
         }
 
-        // 绘制老师
         teachers.forEach(t => {
           if (t.opacity < 0.01) return;
           ctx.save();
           ctx.globalAlpha = t.opacity;
-          
-          if (t.state === 'departing' && t.msg) {
-             ctx.fillStyle = '#ef4444'; 
-             ctx.font = '500 10px var(--font-sans)';
-             ctx.textAlign = 'center';
-             ctx.fillText(t.msg, t.x, t.y - 12);
-          }
 
           ctx.beginPath();
-          ctx.arc(t.x, t.y, 8, 0, Math.PI*2);
-          ctx.fillStyle = t.load > 15 ? '#ef4444' : '#1e293b';
+          ctx.arc(t.x, t.y, 6.5, 0, Math.PI*2);
+          // 判断过载阈值（均匀分布下每人带5个，超过15个视为压力）
+          const isOverloaded = t.load > 15;
+          ctx.fillStyle = isOverloaded ? '#ef4444' : '#1e293b';
           ctx.fill();
           
-          if (t.load > 15) {
+          if (isOverloaded) {
              ctx.beginPath();
-             ctx.arc(t.x, t.y, 14 + Math.sin(Date.now() * 0.008) * 2.5, 0, Math.PI*2);
-             ctx.strokeStyle = 'rgba(239,68,68,0.5)';
-             ctx.lineWidth = 1.5;
+             ctx.arc(t.x, t.y, 11 + Math.sin(Date.now() * 0.008) * 2, 0, Math.PI*2);
+             ctx.strokeStyle = 'rgba(239,68,68,0.4)';
+             ctx.lineWidth = 1.2;
              ctx.stroke();
           }
           ctx.restore();
         });
 
-        // 绘制学生 & AI
         students.forEach(s => {
           ctx.beginPath(); 
-          ctx.arc(s.x, s.y, 2.5, 0, Math.PI*2);
+          ctx.arc(s.x, s.y, 2, 0, Math.PI*2);
           let r = 148 + s.stress * (239 - 148);
           let g = 163 + s.stress * (68 - 163);
           let b = 184 + s.stress * (68 - 184);
@@ -1947,17 +1960,14 @@
           if (s.hasAI > 0.01) {
              ctx.save();
              ctx.globalAlpha = s.hasAI;
-             const aiX = s.x + Math.cos(Date.now()*0.002 + s.id) * 6;
-             const aiY = s.y + Math.sin(Date.now()*0.002 + s.id) * 6;
+             const aiX = s.x + Math.cos(Date.now()*0.002 + s.id) * 5;
+             const aiY = s.y + Math.sin(Date.now()*0.002 + s.id) * 5;
              
              ctx.beginPath(); ctx.moveTo(s.x, s.y); ctx.lineTo(aiX, aiY);
              ctx.strokeStyle = 'rgba(194,65,12,0.3)'; ctx.lineWidth = 1; ctx.stroke();
 
-             ctx.beginPath(); ctx.arc(aiX, aiY, 1.8, 0, Math.PI*2);
-             ctx.fillStyle = '#c2410c'; ctx.fill();
-             
-             ctx.shadowColor = '#c2410c'; ctx.shadowBlur = 6;
-             ctx.fill();
+             ctx.beginPath(); ctx.arc(aiX, aiY, 1.5, 0, Math.PI*2);
+             ctx.fillStyle = 'var(--accent)'; ctx.fill();
              ctx.restore();
           }
         });
@@ -1965,31 +1975,27 @@
         requestAnimationFrame(drawLoop);
       }
 
-      // UI 状态卡片更新逻辑
       function updateNarrative(phaseIdx) {
-        const card = document.getElementById('narrative-card');
         const title = document.getElementById('narrative-title');
         const desc = document.getElementById('narrative-desc');
         const status = document.getElementById('sim-status');
         
-        // 微弱的卡片弹跳动效
-        card.style.transform = 'translateY(10px)';
-        card.style.opacity = '0';
+        title.style.opacity = '0';
+        desc.style.opacity = '0';
         
         setTimeout(() => {
           title.innerText = narratives[phaseIdx].t;
           desc.innerText = narratives[phaseIdx].d;
           
-          // 顶部状态条更新
-          if (phaseIdx === 0) { status.innerText = '50 Teachers · 250 Students · Ratio 5:1'; status.style.color = '#64748b'; }
-          if (phaseIdx === 1) { status.innerText = '10 Teachers · 250 Students · Ratio 25:1'; status.style.color = '#ef4444'; }
-          if (phaseIdx === 2) { status.innerText = 'MOOC Era · High Initial Adoption -> 90% Dropout'; status.style.color = '#10b981'; }
-          if (phaseIdx === 3) { status.innerText = 'Agentic Cohorts · AI distributes cognitive load'; status.style.color = 'var(--accent)'; }
-          if (phaseIdx === 4) { status.innerText = 'Bloom\'s Vision · Universal 1:1 Scale'; status.style.color = '#3b82f6'; }
+          if (phaseIdx === 0) { status.innerText = 'Status: Nominal Equilibrium'; status.style.color = '#64748b'; }
+          if (phaseIdx === 1) { status.innerText = 'Status: Critical Capacity Depletion'; status.style.color = '#ef4444'; }
+          if (phaseIdx === 2) { status.innerText = 'Status: False Centralization (High Dropout)'; status.style.color = '#10b981'; }
+          if (phaseIdx === 3) { status.innerText = 'Status: Hybrid Copilot Network'; status.style.color = 'var(--accent)'; }
+          if (phaseIdx === 4) { status.innerText = 'Status: Ideal Scaled Symmetry'; status.style.color = '#3b82f6'; }
 
-          card.style.transform = 'translateY(0)';
-          card.style.opacity = '1';
-        }, 200);
+          title.style.opacity = '1';
+          desc.style.opacity = '1';
+        }, 300);
       }
 
       document.querySelectorAll('.sim-btn').forEach(btn => {
@@ -2011,6 +2017,7 @@
     })();
   </script>
 </div>
+
       <h3 id="sec-1-3" class="text-h2 mb-5 mt-14">1.3&ensp;Enter Agentic AI: From Chatbot to Pedagogical Partner</h3>
       <p class="text-body text-ink-light mb-6">The difference between a chatbot and an agentic AI is the difference between a search engine and a research assistant. A chatbot responds to queries; an agentic system <em>pursues goals</em>. It plans, reasons, uses tools, and adapts its approach based on what is working. In education, that means a tutor that does not just answer your question. It notices you are confused, traces the confusion to a specific misconception, retrieves a relevant example from your textbook, and walks you through it with Socratic questions (Schneider, 2025; Acharya et al., 2025).</p>
       <div class="pull-quote pl-6 py-1 my-10">
