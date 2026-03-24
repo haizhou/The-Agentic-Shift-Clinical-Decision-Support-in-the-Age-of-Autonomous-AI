@@ -422,6 +422,90 @@
       color: #9a3412;
       border-bottom-left-radius: 2px;
     }
+
+    /* ===== RAG Console Live Demo ===== */
+    .rag-console-wrapper {
+      background: #1a1b26; /* Deep dark theme */
+      border-radius: 12px;
+      overflow: hidden;
+      font-family: var(--font-mono);
+      color: #a9b1d6;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+      margin: 3rem 0;
+      border: 1px solid #292e42;
+    }
+    .rag-console-header {
+      background: #16161e;
+      padding: 0.75rem 1.25rem;
+      font-size: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #292e42;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #7aa2f7;
+      font-weight: 600;
+    }
+    .rag-console-body {
+      padding: 1.5rem;
+      font-size: 0.85rem;
+      line-height: 1.7;
+      min-height: 280px;
+    }
+    .rag-log {
+      margin-bottom: 0.85rem;
+      opacity: 0;
+      transform: translateY(5px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      display: none; /* Controlled by JS */
+    }
+    .rag-log.visible {
+      opacity: 1;
+      transform: translateY(0);
+      display: block;
+    }
+    .rag-tag {
+      display: inline-block;
+      padding: 0.1rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      margin-right: 0.6rem;
+      font-weight: 700;
+      color: #1a1b26;
+    }
+    .tag-query { background: #7dcfff; } /* Cyan */
+    .tag-encode { background: #bb9af7; } /* Purple */
+    .tag-retrieve { background: #e0af68; } /* Orange */
+    .tag-llm { background: #9ece6a; } /* Green */
+    
+    .rag-text-highlight { color: #c0caf5; font-weight: 500; }
+    .rag-vector-text { color: #565f89; word-break: break-all; font-size: 0.75rem; font-family: var(--font-mono); margin-top: 0.3rem; line-height: 1.4; }
+    .rag-doc-box { 
+      border-left: 2px solid #e0af68; 
+      padding-left: 0.8rem; 
+      margin-top: 0.5rem; 
+      color: #9aa5ce;
+      background: rgba(224, 175, 104, 0.05);
+      padding: 0.5rem 0.8rem;
+      border-radius: 0 4px 4px 0;
+    }
+    .rag-answer-box {
+      margin-top: 0.75rem;
+      color: #9ece6a;
+      font-family: var(--font-sans); /* Output is readable sans-serif */
+      font-size: 1rem;
+      border-top: 1px dashed #292e42;
+      padding-top: 0.75rem;
+    }
+    .rag-cursor {
+      display: inline-block;
+      width: 6px;
+      height: 14px;
+      background: #9ece6a;
+      animation: blink 1s step-end infinite;
+      vertical-align: middle;
+      margin-left: 4px;
+    }
     
     /* Typing Dots Animation */
     .typing-dots { display: flex; gap: 4px; align-items: center; height: 22px; }
@@ -988,42 +1072,46 @@
       <p class="text-body text-ink-light mb-6">In plain English: when a student asks a question, the system first encodes the query into a vector and searches a curated corpus (textbooks, lecture notes, problem sets) for semantically similar content. The best matches are fed to the LLM as context, constraining it to generate answers grounded in <em>your course materials</em>, not the unfiltered internet. Verma (2025) describes <strong class="text-ink font-medium">LPITutor</strong>, which takes this further with a modular pipeline: one stage extracts the student&rsquo;s intent, another retrieves relevant materials, and a third synthesises a pedagogically appropriate response anchored in those sources.</p>
       <p class="text-body text-ink-light mb-6">The Garcia-Bosque et al. (2025) systematic review identifies retrieval grounding as the single most effective technique for reducing hallucination in educational agents. But the benefits extend beyond accuracy. RAG gives educators institutional control: you curate and update the corpus, and the AI teaches what <em>your</em> course intends, not whatever happened to be popular on the internet during pre-training.</p>
 
-      <!-- RAG Pipeline Diagram -->
-      <div class="my-12 fade-in" style="background:#fff;border:1px solid var(--border-subtle);border-radius:12px;padding:1.5rem 1rem;">
-        <p class="font-sans text-caption text-ink-muted uppercase tracking-wide mb-3" style="font-weight:600;">How RAG grounds a tutoring response</p>
-        <svg width="100%" viewBox="0 0 640 220" style="display:block;">
-          <defs><marker id="a1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
-          <!-- Step 1: Student Query -->
-          <rect x="16" y="30" width="120" height="56" rx="8" fill="#f5f0eb" stroke="#e5e2de" stroke-width="0.5"/>
-          <text x="76" y="52" text-anchor="middle" font-family="Outfit,sans-serif" font-size="12" font-weight="600" fill="#1a1a1a">Student query</text>
-          <text x="76" y="70" text-anchor="middle" font-family="Outfit,sans-serif" font-size="10" fill="#767676">&ldquo;Why does F=ma?&rdquo;</text>
-          <!-- Arrow 1 -->
-          <line x1="136" y1="58" x2="162" y2="58" stroke="#c2410c" stroke-width="1.2" marker-end="url(#a1)"/>
-          <!-- Step 2: Encode -->
-          <rect x="168" y="30" width="100" height="56" rx="8" fill="#fff7ed" stroke="#c2410c" stroke-width="0.5"/>
-          <text x="218" y="52" text-anchor="middle" font-family="Outfit,sans-serif" font-size="12" font-weight="600" fill="#9a3412">Encode</text>
-          <text x="218" y="70" text-anchor="middle" font-family="Outfit,sans-serif" font-size="10" fill="#c2410c">Dense vector</text>
-          <!-- Arrow 2 -->
-          <line x1="268" y1="58" x2="294" y2="58" stroke="#c2410c" stroke-width="1.2" marker-end="url(#a1)"/>
-          <!-- Step 3: Retrieve -->
-          <rect x="300" y="30" width="120" height="56" rx="8" fill="#fff7ed" stroke="#c2410c" stroke-width="0.5"/>
-          <text x="360" y="52" text-anchor="middle" font-family="Outfit,sans-serif" font-size="12" font-weight="600" fill="#9a3412">Retrieve</text>
-          <text x="360" y="70" text-anchor="middle" font-family="Outfit,sans-serif" font-size="10" fill="#c2410c">Top-k passages</text>
-          <!-- Arrow 3 -->
-          <line x1="420" y1="58" x2="446" y2="58" stroke="#c2410c" stroke-width="1.2" marker-end="url(#a1)"/>
-          <!-- Step 4: Generate -->
-          <rect x="452" y="30" width="170" height="56" rx="8" fill="#c2410c" stroke="#9a3412" stroke-width="0.5"/>
-          <text x="537" y="52" text-anchor="middle" font-family="Outfit,sans-serif" font-size="12" font-weight="600" fill="#fff">LLM generates</text>
-          <text x="537" y="70" text-anchor="middle" font-family="Outfit,sans-serif" font-size="10" fill="#fed7aa">Grounded answer</text>
-          <!-- Corpus below -->
-          <rect x="300" y="120" width="120" height="50" rx="8" fill="#f5f0eb" stroke="#e5e2de" stroke-width="0.5" stroke-dasharray="4 3"/>
-          <text x="360" y="142" text-anchor="middle" font-family="Outfit,sans-serif" font-size="11" font-weight="500" fill="#4a4a4a">Course corpus</text>
-          <text x="360" y="158" text-anchor="middle" font-family="Outfit,sans-serif" font-size="9.5" fill="#767676">Textbooks, notes, problems</text>
-          <!-- Arrow from corpus up to retrieve -->
-          <line x1="360" y1="120" x2="360" y2="90" stroke="#767676" stroke-width="0.8" stroke-dasharray="3 2" marker-end="url(#a1)"/>
-          <!-- Educator control label -->
-          <text x="296" y="195" font-family="Outfit,sans-serif" font-size="9.5" fill="#767676" font-style="italic">&#8593; Educators curate &amp; update this</text>
-        </svg>
+     <div class="rag-console-wrapper fade-in" id="rag-live-demo">
+        <div class="rag-console-header">
+          <span>RAG Pipeline Execution Log</span>
+          <span id="rag-status-indicator" style="color:#f7768e;">Status: Standby</span>
+        </div>
+        <div class="rag-console-body" id="rag-console-container">
+          
+          <div class="rag-log" id="r-log-1">
+            <span class="rag-tag tag-query">QUERY</span>
+            Intercepted student input: <span class="rag-text-highlight">"Why does F=ma?"</span>
+          </div>
+          
+          <div class="rag-log" id="r-log-2">
+            <span class="rag-tag tag-encode">ENCODE</span>
+            Converting query to dense vector...
+            <div class="rag-vector-text" id="r-vector-text"></div>
+          </div>
+          
+          <div class="rag-log" id="r-log-3">
+            <span class="rag-tag tag-retrieve">RETRIEVE</span>
+            Searching <span class="rag-text-highlight">Course Corpus</span> (Textbooks, notes, problems)...
+          </div>
+          
+          <div class="rag-log" id="r-log-4">
+            <div class="rag-doc-box">
+              <strong>Top-1 Match Found (Score: 0.92):</strong><br>
+              Source: <em>ELEC0139_Physics_Notes_Ch4.pdf</em><br>
+              Context: "Newton's Second Law defines force as the rate of change of momentum. For a constant mass, this simplifies to F = m * a."
+            </div>
+          </div>
+          
+          <div class="rag-log" id="r-log-5">
+            <span class="rag-tag tag-llm">GENERATE</span>
+            Injecting retrieved context. LLM generating grounded answer...
+            <div class="rag-answer-box">
+              <span id="r-answer-text"></span><span class="rag-cursor" id="r-cursor" style="display:none;"></span>
+            </div>
+          </div>
+
+        </div>
       </div>
 
       <h3 id="sec-2-3" class="text-h2 mb-5 mt-14">2.3&ensp;When One Agent Isn&rsquo;t Enough: Multi-Agent Collaboration</h3>
