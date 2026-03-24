@@ -269,6 +269,113 @@
     .space-y-1 > * + * { margin-top: 0.25rem; }
     .space-y-3 > * + * { margin-top: 0.75rem; }
 
+    /* ===== Stat Callout (full-width accent card) ===== */
+    .stat-callout {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d1a0e 100%);
+      border-radius: 12px;
+      padding: 2rem 2.5rem;
+      margin: 2.5rem 0;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      overflow: hidden;
+      position: relative;
+    }
+    .stat-callout::before {
+      content: '';
+      position: absolute;
+      right: -20px;
+      top: -20px;
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle, rgba(194,65,12,0.15), transparent 70%);
+      pointer-events: none;
+    }
+    .stat-callout-number {
+      font-family: var(--font-sans);
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: -0.03em;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .stat-callout-text {
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.5;
+    }
+    .stat-callout-text strong {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* ===== Tech Badge (inline highlight for key terms) ===== */
+    .tech-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      background: #fff7ed;
+      color: #9a3412;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      border: 1px solid rgba(194,65,12,0.15);
+      font-weight: 500;
+      vertical-align: baseline;
+    }
+
+    /* ===== Conclusions Dark Section ===== */
+    .conclusions-section {
+      background: linear-gradient(160deg, #1a1a1a 0%, #2d1a0e 50%, #1a1a1a 100%);
+      border-radius: 16px;
+      padding: 3rem 2.5rem;
+      margin: 0 -1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .conclusions-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='0.8' fill='%23ffffff'/%3E%3C/svg%3E");
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+    .conclusions-section .text-body { color: rgba(255,255,255,0.75); }
+    .conclusions-section strong { color: #fff; }
+    .conclusions-section em { color: rgba(255,255,255,0.85); }
+    .conclusions-section .pull-quote { border-left-color: var(--accent); }
+    .conclusions-section .pull-quote p:first-child { color: rgba(255,255,255,0.9); }
+
+    /* ===== Enhanced Footer ===== */
+    .site-footer {
+      background: #1a1a1a;
+      color: rgba(255,255,255,0.4);
+      padding: 3rem 1.5rem;
+    }
+    .site-footer a { color: var(--accent); }
+    .footer-inner {
+      max-width: var(--max-wide);
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+      text-align: center;
+    }
+    .footer-brand {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* ===== Scroll-triggered number animation ===== */
+    @keyframes countUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .stat-callout.visible .stat-callout-number { animation: countUp 0.6s ease forwards; }
+
     /* ===== Print ===== */
     @media print { .toc-sidebar, #progress-bar { display: none !important; } }
 
@@ -547,7 +654,13 @@
       <h3 id="sec-1-1" class="text-h2 mb-5 mt-12">1.1&ensp;A Teacher Shortage That Keeps Getting Worse</h3>
       <p class="text-body text-ink-light mb-6">Here is a number that should alarm you: the world needs approximately <strong class="text-ink font-medium">44 million additional teachers by 2030</strong> just to achieve universal basic education (UNESCO, 2024). That is not a projection about some distant future &mdash; it is six years away, and we are nowhere close to being on track.</p>
       <p class="text-body text-ink-light mb-6">The pipeline is collapsing from the other end, too. The 2024 TALIS survey found that one in five teachers under 30 plans to leave the profession within five years; in some countries, that figure rises to nearly half (Education International, 2025). In the United States alone, roughly 411,500 teaching positions were either unfilled or occupied by under-qualified staff in the 2024&ndash;25 school year, roughly one in eight positions nationally (Learning Policy Institute, 2025). These are not abstract statistics. They translate directly into overcrowded classrooms, widening achievement gaps, and students in STEM subjects who may never encounter a fully qualified teacher.</p>
-      <p class="text-body text-ink-light mb-6">The pattern is self-reinforcing: burnout drives experienced educators out, which increases the workload on those who remain, which drives more burnout. Across OECD countries, secondary schools consistently suffer worse vacancies than primary &mdash; especially in science, mathematics, and technology (OECD Education at a Glance, 2025). Rural and economically disadvantaged communities bear the heaviest burden: limited tax bases, geographic isolation, and distance from teacher-training programmes compound recruitment challenges. In Sub-Saharan Africa, the student-to-teacher ratio can exceed <strong class="text-ink font-medium">56:1</strong> (UNESCO, 2024). At that density, personalised instruction is not merely difficult &mdash; it is physically impossible.</p>
+      <p class="text-body text-ink-light mb-6">The pattern is self-reinforcing: burnout drives experienced educators out, which increases the workload on those who remain, which drives more burnout. Across OECD countries, secondary schools consistently suffer worse vacancies than primary, especially in science, mathematics, and technology (OECD Education at a Glance, 2025). Rural and economically disadvantaged communities bear the heaviest burden: limited tax bases, geographic isolation, and distance from teacher-training programmes compound recruitment challenges. In Sub-Saharan Africa, the student-to-teacher ratio can exceed <strong class="text-ink font-medium">56:1</strong> (UNESCO, 2024). At that density, personalised instruction is not merely difficult; it is physically impossible.</p>
+
+      <!-- Stat Callout: Teacher Shortage -->
+      <div class="stat-callout fade-in">
+        <div class="stat-callout-number">1 in 8</div>
+        <div class="stat-callout-text"><strong>U.S. teaching positions</strong> were either unfilled or staffed by under-qualified teachers in the 2024-25 school year. In Sub-Saharan Africa, one teacher can face 56 students. The global gap: 44 million teachers short by 2030.</div>
+      </div>
 
       <h3 id="sec-1-2" class="text-h2 mb-5 mt-14">1.2&ensp;MOOCs Promised a Revolution. They Delivered a Library Card.</h3>
       <p class="text-body text-ink-light mb-6">We have been here before. MOOCs burst onto the scene in the early 2010s with world-changing ambitions: top-university lectures, free, for everyone with an internet connection. The reality was more modest. Dropout rates were staggering, and the experience was fundamentally passive: watching videos and clicking through quizzes is not the same as learning. Adaptive platforms like early Khan Academy and Carnegie Learning added a layer of personalisation through item-response algorithms, but they remained confined to predefined content paths and rigid rule-based logic. They could make a problem slightly harder if you got the last one right. They could not ask you <em>why</em> you got it wrong.</p>
@@ -594,7 +707,13 @@
         <p class="font-sans text-caption text-ink-muted mt-3" style="text-align:left;">where <em>S</em> is a learned scale factor and <em>Z</em> is a zero-point offset defining the mapping between the continuous weight distribution and the discrete integer grid.</p>
       </div>
 
-      <p class="text-body text-ink-light mb-6">The payoff is enormous. Representing each weight in 4 bits instead of 32 slashes the memory footprint by up to 8&times;, directly relieving the DRAM bandwidth bottleneck. Recent edge-device benchmarks confirm this works in practice: 4-bit quantized models retain over 91% accuracy while halving memory usage and shaving inference latency from 150ms to 110ms (Agrawal et al., 2025). Two complementary techniques complete the picture. <strong class="text-ink font-medium">Knowledge distillation</strong> compresses a large &ldquo;teacher&rdquo; model into a smaller &ldquo;student&rdquo; that captures 85% of its capability at a fraction of the cost. <strong class="text-ink font-medium">Structured pruning</strong> surgically removes entire layers or attention heads that contribute little to output quality, shrinking models by up to 60%. Together, these methods are what make it possible to run an intelligent tutor on the same Chromebook a student uses for everything else &mdash; a prerequisite for equitable deployment.</p>
+      <p class="text-body text-ink-light mb-6">The payoff is enormous. Representing each weight in 4 bits instead of 32 slashes the memory footprint by up to 8&times;, directly relieving the DRAM bandwidth bottleneck. Recent edge-device benchmarks confirm this works in practice: 4-bit quantized models retain over 91% accuracy while halving memory usage and shaving inference latency from 150ms to 110ms (Agrawal et al., 2025). Two complementary techniques complete the picture. <strong class="text-ink font-medium">Knowledge distillation</strong> compresses a large &ldquo;teacher&rdquo; model into a smaller &ldquo;student&rdquo; that captures 85% of its capability at a fraction of the cost. <strong class="text-ink font-medium">Structured pruning</strong> surgically removes entire layers or attention heads that contribute little to output quality, shrinking models by up to 60%. Together, these methods are what make it possible to run an intelligent tutor on the same Chromebook a student uses for everything else.</p>
+
+      <!-- Stat Callout: Compression -->
+      <div class="stat-callout fade-in">
+        <div class="stat-callout-number">8&times;</div>
+        <div class="stat-callout-text"><strong>Memory reduction</strong> from 4-bit quantization, with over 91% accuracy retained. Combined with distillation (85% capability at a fraction of the cost) and pruning (60% size reduction), these techniques make classroom-grade hardware viable for intelligent tutoring.</div>
+      </div>
 
       <!-- Chart #2: Model Compression Techniques -->
       <div class="my-12 fade-in" style="background:#fff;border:1px solid var(--border-subtle);border-radius:12px;padding:1.5rem;">
@@ -828,18 +947,20 @@
 
     <!-- ===== CONCLUSIONS ===== -->
     <section id="conclusions" class="fade-in mb-20">
-      <div class="font-sans text-caption uppercase tracking-widest text-accent font-semibold mb-3">Conclusions</div>
-      <h2 class="text-h1 mb-10">The Two-Sigma Problem, Forty Years Later</h2>
-      <p class="text-body text-ink-light mb-6">In 1984, Benjamin Bloom proved that one-on-one tutoring could lift student performance by two standard deviations. The result was electrifying, and then, for four decades, frustrating. Everyone knew personalised tutoring worked. Nobody could afford to provide it. For the first time, the convergence of large language models, agentic architectures, retrieval-augmented generation, multi-agent systems, and multimodal perception offers a credible technological pathway to that goal. Millions of students are already interacting with AI tutors daily.</p>
-      <p class="text-body text-ink-light mb-6">But the evidence in this blog points to a critical qualification that should temper any utopian impulse: <strong class="text-ink font-medium">hybrid human&ndash;AI workflows consistently outperform fully autonomous systems</strong>. The most effective implementations &mdash; Khanmigo, LPITutor, multi-agent educational frameworks &mdash; position AI as a tool <em>for</em> teachers and students, not a replacement for the relationships at the heart of education.</p>
+      <div class="conclusions-section">
+        <div class="font-sans text-caption uppercase tracking-widest text-accent font-semibold mb-3">Conclusions</div>
+        <h2 style="font-size:2rem;line-height:1.25;letter-spacing:-0.02em;font-weight:600;color:#fff;margin-bottom:2.5rem;">The Two-Sigma Problem, Forty Years Later</h2>
+        <p class="text-body mb-6">In 1984, Benjamin Bloom proved that one-on-one tutoring could lift student performance by two standard deviations. The result was electrifying, and then, for four decades, frustrating. Everyone knew personalised tutoring worked. Nobody could afford to provide it. For the first time, the convergence of large language models, agentic architectures, retrieval-augmented generation, multi-agent systems, and multimodal perception offers a credible technological pathway to that goal. Millions of students are already interacting with AI tutors daily.</p>
+        <p class="text-body mb-6">But the evidence in this blog points to a critical qualification that should temper any utopian impulse: <strong>hybrid human-AI workflows consistently outperform fully autonomous systems</strong>. The most effective implementations (Khanmigo, LPITutor, multi-agent educational frameworks) position AI as a tool <em>for</em> teachers and students, not a replacement for the relationships at the heart of education.</p>
 
-      <div class="pull-quote pl-6 py-1 my-10">
-        <p class="text-xl md:text-2xl font-serif font-medium text-ink leading-snug tracking-tight">Teachers do not merely transmit information. They inspire curiosity, model intellectual integrity, navigate the emotional complexities of learning, and socialise young people into communities of practice. These functions are not replicable by current AI systems, however sophisticated.</p>
+        <div class="pull-quote pl-6 py-1 my-10">
+          <p class="text-xl md:text-2xl font-serif font-medium leading-snug tracking-tight">Teachers do not merely transmit information. They inspire curiosity, model intellectual integrity, navigate the emotional complexities of learning, and socialise young people into communities of practice. These functions are not replicable by current AI systems, however sophisticated.</p>
+        </div>
+
+        <p class="text-body mb-6">Three open research questions will shape what comes next. First, <strong>cross-lingual equity</strong>: rigorous development and auditing of AI tutors in underrepresented languages, using participatory design that incorporates local pedagogical traditions. Second, <strong>longitudinal evidence</strong>: most existing evaluations span fewer than eight weeks; we need sustained, large-scale studies to understand long-term effects on learning, motivation, and cognitive development. Third, <strong>governance that keeps pace</strong>: AI deployment in education is outrunning the regulatory institutions meant to oversee it, and international coordination through frameworks like the EU AI Act and UNESCO&rsquo;s Ethics of AI Recommendation will be essential.</p>
+        <p class="text-body mb-6">The intelligent classroom is no longer speculative. It is emerging. The question is not whether AI will transform education (it already is) but whether that transformation will be guided by the values of equity, agency, and genuine understanding, or by commercial imperatives and technological momentum alone.</p>
+        <p class="text-body mb-6" style="color:rgba(255,255,255,0.85);font-weight:500;">The promise of agentic AI in education is not that it will make teachers obsolete. It is that it will make the <em>best practices</em> of teaching (individualised attention, Socratic dialogue, formative assessment, adaptive scaffolding) available at a scale that was previously impossible. Bloom&rsquo;s two-sigma problem may finally have a solution. But walking that path responsibly demands investment not only in technology, but in the institutional, ethical, and deeply human capital that gives education its meaning.</p>
       </div>
-
-      <p class="text-body text-ink-light mb-6">Three open research questions will shape what comes next. First, <strong class="text-ink font-medium">cross-lingual equity</strong>: rigorous development and auditing of AI tutors in underrepresented languages, using participatory design that incorporates local pedagogical traditions. Second, <strong class="text-ink font-medium">longitudinal evidence</strong>: most existing evaluations span fewer than eight weeks; we need sustained, large-scale studies to understand long-term effects on learning, motivation, and cognitive development. Third, <strong class="text-ink font-medium">governance that keeps pace</strong>: AI deployment in education is outrunning the regulatory institutions meant to oversee it, and international coordination through frameworks like the EU AI Act and UNESCO&rsquo;s Ethics of AI Recommendation will be essential.</p>
-      <p class="text-body text-ink-light mb-6">The intelligent classroom is no longer speculative. It is emerging. The question is not whether AI will transform education (it already is) but whether that transformation will be guided by the values of equity, agency, and genuine understanding, or by commercial imperatives and technological momentum alone.</p>
-      <p class="text-body text-ink-light mb-6">The promise of agentic AI in education is not that it will make teachers obsolete. It is that it will make the <em>best practices</em> of teaching (individualised attention, Socratic dialogue, formative assessment, adaptive scaffolding) available at a scale that was previously impossible. Bloom&rsquo;s two-sigma problem may finally have a solution. But walking that path responsibly demands investment not only in technology, but in the institutional, ethical, and deeply human capital that gives education its meaning.</p>
     </section>
 
     <!-- ===== REFERENCES ===== -->
@@ -894,10 +1015,16 @@
   </main>
 
   <!-- ====== FOOTER ====== -->
-  <footer class="border-t border-border-subtle py-10">
-    <div class="max-w-wide mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 font-sans text-caption text-ink-muted">
-      <span>ELEC0139 Emerging Topics in Integrated Machine Learning Systems &middot; UCL Electronic &amp; Electrical Engineering &middot; May 2026</span>
-      <span>~5,000 words</span>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">The Intelligent Classroom</div>
+      <div style="font-family:var(--font-sans);font-size:0.8rem;line-height:1.6;">
+        ELEC0139 Emerging Topics in Integrated Machine Learning Systems 25/26<br>
+        UCL Electronic &amp; Electrical Engineering &middot; May 2026 &middot; ~5,000 words
+      </div>
+      <div style="font-family:var(--font-sans);font-size:0.7rem;margin-top:0.5rem;opacity:0.5;">
+        Built with Newsreader, Outfit, Chart.js, and MathJax. Hosted on GitHub Pages.
+      </div>
     </div>
   </footer>
 
