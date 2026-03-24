@@ -2341,39 +2341,102 @@
       }
     });
 
-    // Chart 4: Global Digital Divide — ITU 2024
-    new Chart(document.getElementById('chart4'), {
-      type: 'bar',
-      data: {
-        labels: ['Europe', 'CIS', 'Americas', 'Arab States', 'Asia-Pacific', 'Africa', 'LDCs'],
-        datasets: [{
-          label: 'Urban (%)',
-          data: [95, 92, 90, 82, 76, 55, 52],
-          backgroundColor: '#c2410c', borderRadius: 4
-        },{
-          label: 'Rural (%)',
-          data: [88, 84, 72, 52, 45, 22, 17],
-          backgroundColor: '#fed7aa', borderColor: '#c2410c', borderWidth: 1, borderRadius: 4
-        },{
-          label: 'Overall (%)',
-          data: [92, 89, 87, 70, 66, 38, 35],
-          type: 'line', borderColor: '#1a1a1a', backgroundColor: 'transparent',
-          pointBackgroundColor: '#1a1a1a', pointRadius: 4, borderWidth: 2, tension: 0.3
-        }]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        interaction: { mode: 'index', intersect: false },
-        plugins: {
-          legend: { position: 'bottom', labels: { usePointStyle: true, padding: 16 } },
-          tooltip: { callbacks: { label: function(ctx) { return ctx.dataset.label + ': ' + ctx.parsed.y + '%'; }}}
-        },
-        scales: {
-          y: { title: { display: true, text: '% of Population' }, grid: { color: '#e5e2de' }, min: 0, max: 100 },
-          x: { grid: { display: false } }
-        }
+       // ===== Chart 4: Interactive Digital Divide World Map (Replacing Bar Chart) =====
+    (function() {
+      const mapContainer = document.digitalDivideMapSection; // Placeholder, not reliable
+      // Safer selector:
+      const sectionEl = document.getElementById('digital-divide-map-section');
+      if (!sectionEl) return;
+      const svgMap = document.getElementById('svg-world-map');
+      const tooltip = document.getElementById('map-tooltip');
+
+      // 1. Data Structure based on ITU 2024 (Provided in prompt)
+      // Metric used for shading (Choropleth): Gap Ratio (higher is worse)
+      const data = {
+        'reg-africa': { name: 'Africa', urban: 55, rural: 22, ratio: 2.50 },
+        'reg-asiapacific': { name: 'Asia-Pacific', urban: 76, rural: 45, ratio: 1.69 },
+        'reg-arab': { name: 'Arab States', urban: 82, rural: 52, ratio: 1.58 },
+        'reg-americas': { name: 'Americas', urban: 90, rural: 72, ratio: 1.25 },
+        'reg-cis': { name: 'CIS', urban: 92, rural: 84, ratio: 1.10 },
+        'reg-europe': { name: 'Europe', urban: 95, rural: 88, ratio: 1.08 }
+      };
+
+      // 2. Color Scale Function (Mapping Ratio to Orange Shading)
+      // Input: Gap Ratio (Range ~1.0 to 2.5)
+      // Output: Shading Color (Light Orange -> Dark Red-Orange)
+      function getColor(ratio) {
+        // Linear Interpolation manually for simplified logic
+        const minRatio = 1.0; const maxRatio = 2.5;
+        // Normalize ratio to 0.0 - 1.0
+        let norm = (ratio - minRatio) / (maxRatio - minRatio);
+        norm = Math.max(0, Math.min(1, norm)); // Clamp
+
+        // Shading scale: light-accent-warm -> accent -> dark-accent-warm
+        // We use a simplified mapping of normalized value to pre-defined hex steps
+        if (norm > 0.8) return '#9a3412'; // Darkest (Africa 2.5)
+        if (norm > 0.6) return '#c2410c'; // Saturated Accent (Arab/AP ~1.6-1.7)
+        if (norm > 0.3) return '#f97316'; // Saturated Orange (Americas ~1.25)
+        return '#fed7aa'; // Lightest (Europe/CIS ~1.0-1.1)
       }
-    });
+
+      // 3. Initialize Map: Apply initial color shading based on Ratio
+      svgMap.querySelectorAll('.region-path').forEach(path => {
+        const regionId = path.id;
+        const regionData = data[regionId];
+        
+        if (regionData) {
+          // Calculate and apply initial shading
+          path.style.fill = getColor(regionData.ratio);
+
+          // Setup Interaction Listeners
+          path.addEventListener('mouseover', (e) => showTooltip(e, regionData));
+          path.addEventListener('mousemove', (e) => moveTooltip(e));
+          path.addEventListener('mouseout', (e) => hideTooltip(e));
+        }
+      });
+
+      // 4. Interaction Functions
+      function showTooltip(e, regionData) {
+        // Highlight the path
+        e.target.classList.add('highlight');
+
+        // Populate tooltip content
+        tooltip.innerHTML = `
+          <div class="tooltip-header">${regionData.name}</div>
+          <div class="tooltip-stat-row">
+            <span class="stat-label">Urban Usage</span>
+            <span class="stat-val">${regionData.urban}%</span>
+          </div>
+          <div class="tooltip-stat-row">
+            <span class="stat-label">Rural Usage</span>
+            <span class="stat-val">${regionData.rural}%</span>
+          </div>
+          <div class="tooltip-stat-row" style="margin-top:0.6rem; padding-top:0.4rem; border-top:1px dashed rgba(255,255,255,0.15)">
+            <span class="stat-label" style="color:var(--accent); font-weight:600;">城乡差距倍数 (Gap)</span>
+            <span class="stat-val" style="color:#f97316; font-size:1rem;">${regionData.ratio.toFixed(2)}&times;</span>
+          </div>
+        `;
+
+        // Make visible and position it initially
+        tooltip.classList.add('visible');
+        moveTooltip(e); // Set initial position
+      }
+
+      function moveTooltip(e) {
+        // Get mouse position relative to the document
+        // Tooltip is placed in a relative container, so we use pageX/Y
+        const offsetLeft = 15; const offsetTop = 20;
+        tooltip.style.left = (e.pageX + offsetLeft) + 'px';
+        tooltip.style.top = (e.pageY + offsetTop) + 'px';
+      }
+
+      function hideTooltip(e) {
+        // Remove highlight and hide tooltip
+        e.target.classList.remove('highlight');
+        tooltip.classList.remove('visible');
+      }
+
+    })();
 // ===== Socratic Chat Typewriter Animation =====
     (function() {
       const chatContainer = document.getElementById('socratic-chat-demo');
@@ -2886,102 +2949,7 @@
       }
     })();
 
-    // ===== Chart 4: Interactive Digital Divide World Map (Replacing Bar Chart) =====
-    (function() {
-      const mapContainer = document.digitalDivideMapSection; // Placeholder, not reliable
-      // Safer selector:
-      const sectionEl = document.getElementById('digital-divide-map-section');
-      if (!sectionEl) return;
-      const svgMap = document.getElementById('svg-world-map');
-      const tooltip = document.getElementById('map-tooltip');
-
-      // 1. Data Structure based on ITU 2024 (Provided in prompt)
-      // Metric used for shading (Choropleth): Gap Ratio (higher is worse)
-      const data = {
-        'reg-africa': { name: 'Africa', urban: 55, rural: 22, ratio: 2.50 },
-        'reg-asiapacific': { name: 'Asia-Pacific', urban: 76, rural: 45, ratio: 1.69 },
-        'reg-arab': { name: 'Arab States', urban: 82, rural: 52, ratio: 1.58 },
-        'reg-americas': { name: 'Americas', urban: 90, rural: 72, ratio: 1.25 },
-        'reg-cis': { name: 'CIS', urban: 92, rural: 84, ratio: 1.10 },
-        'reg-europe': { name: 'Europe', urban: 95, rural: 88, ratio: 1.08 }
-      };
-
-      // 2. Color Scale Function (Mapping Ratio to Orange Shading)
-      // Input: Gap Ratio (Range ~1.0 to 2.5)
-      // Output: Shading Color (Light Orange -> Dark Red-Orange)
-      function getColor(ratio) {
-        // Linear Interpolation manually for simplified logic
-        const minRatio = 1.0; const maxRatio = 2.5;
-        // Normalize ratio to 0.0 - 1.0
-        let norm = (ratio - minRatio) / (maxRatio - minRatio);
-        norm = Math.max(0, Math.min(1, norm)); // Clamp
-
-        // Shading scale: light-accent-warm -> accent -> dark-accent-warm
-        // We use a simplified mapping of normalized value to pre-defined hex steps
-        if (norm > 0.8) return '#9a3412'; // Darkest (Africa 2.5)
-        if (norm > 0.6) return '#c2410c'; // Saturated Accent (Arab/AP ~1.6-1.7)
-        if (norm > 0.3) return '#f97316'; // Saturated Orange (Americas ~1.25)
-        return '#fed7aa'; // Lightest (Europe/CIS ~1.0-1.1)
-      }
-
-      // 3. Initialize Map: Apply initial color shading based on Ratio
-      svgMap.querySelectorAll('.region-path').forEach(path => {
-        const regionId = path.id;
-        const regionData = data[regionId];
-        
-        if (regionData) {
-          // Calculate and apply initial shading
-          path.style.fill = getColor(regionData.ratio);
-
-          // Setup Interaction Listeners
-          path.addEventListener('mouseover', (e) => showTooltip(e, regionData));
-          path.addEventListener('mousemove', (e) => moveTooltip(e));
-          path.addEventListener('mouseout', (e) => hideTooltip(e));
-        }
-      });
-
-      // 4. Interaction Functions
-      function showTooltip(e, regionData) {
-        // Highlight the path
-        e.target.classList.add('highlight');
-
-        // Populate tooltip content
-        tooltip.innerHTML = `
-          <div class="tooltip-header">${regionData.name}</div>
-          <div class="tooltip-stat-row">
-            <span class="stat-label">Urban Usage</span>
-            <span class="stat-val">${regionData.urban}%</span>
-          </div>
-          <div class="tooltip-stat-row">
-            <span class="stat-label">Rural Usage</span>
-            <span class="stat-val">${regionData.rural}%</span>
-          </div>
-          <div class="tooltip-stat-row" style="margin-top:0.6rem; padding-top:0.4rem; border-top:1px dashed rgba(255,255,255,0.15)">
-            <span class="stat-label" style="color:var(--accent); font-weight:600;">城乡差距倍数 (Gap)</span>
-            <span class="stat-val" style="color:#f97316; font-size:1rem;">${regionData.ratio.toFixed(2)}&times;</span>
-          </div>
-        `;
-
-        // Make visible and position it initially
-        tooltip.classList.add('visible');
-        moveTooltip(e); // Set initial position
-      }
-
-      function moveTooltip(e) {
-        // Get mouse position relative to the document
-        // Tooltip is placed in a relative container, so we use pageX/Y
-        const offsetLeft = 15; const offsetTop = 20;
-        tooltip.style.left = (e.pageX + offsetLeft) + 'px';
-        tooltip.style.top = (e.pageY + offsetTop) + 'px';
-      }
-
-      function hideTooltip(e) {
-        // Remove highlight and hide tooltip
-        e.target.classList.remove('highlight');
-        tooltip.classList.remove('visible');
-      }
-
-    })();
+ 
     
   </script>
 </body>
