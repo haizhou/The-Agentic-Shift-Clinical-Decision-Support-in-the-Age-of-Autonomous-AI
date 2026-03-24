@@ -1046,7 +1046,7 @@
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1 });
+    }, { rootMargin: "0px 0px -50px 0px", threshold: 0 });
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
     // 3. TOC active highlight — robust scrollspy using getBoundingClientRect
