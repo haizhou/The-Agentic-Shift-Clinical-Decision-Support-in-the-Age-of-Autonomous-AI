@@ -1215,6 +1215,92 @@
     .stat-label { color: rgba(255,255,255,0.6); }
     .stat-val { font-family: var(--font-mono); font-weight: 500; color: var(--accent-light); }
 
+    /* ===== Interactive Digital Divide World Map (Replacing Console) ===== */
+    .map-wrapper {
+      background: #fff;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 3rem 0;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.04);
+      font-family: var(--font-sans);
+    }
+    
+    .map-container {
+      position: relative;
+      width: 100%;
+      /* Aspect ratio control for SVG in responsive container */
+      padding-bottom: 52%; 
+      height: 0;
+      overflow: hidden;
+      margin: 1.5rem 0;
+    }
+    
+    #svg-world-map {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+    }
+
+    /* Map Paths Default Style */
+    .region-path {
+      stroke: #fff;
+      stroke-width: 0.75;
+      stroke-linejoin: round;
+      transition: fill 0.3s ease, stroke-width 0.3s ease;
+      cursor: pointer;
+    }
+    
+    /* Choropleth Color Scale base (Will be overridden by JS inline styles) */
+    .region-path { fill: #f5f0eb; } /* No Data gray */
+
+    /* Hover Highlight Style */
+    .region-path.highlight {
+      stroke: var(--ink);
+      stroke-width: 1.5;
+      z-index: 10;
+    }
+
+    /* Interactive Tooltip */
+    .div-tooltip {
+      position: absolute;
+      background: rgba(26, 26, 26, 0.96);
+      color: #fff;
+      padding: 0.75rem 1rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      pointer-events: none; /* Let clicks pass through */
+      opacity: 0;
+      transform: translateY(10px) scale(0.95);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      z-index: 100;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      backdrop-filter: blur(4px);
+    }
+    
+    .div-tooltip.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    
+    .tooltip-header {
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 0.3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      padding-bottom: 0.3rem;
+    }
+    
+    .tooltip-stat-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 1.5rem;
+      margin-top: 0.25rem;
+    }
+    
+    .stat-label { color: rgba(255,255,255,0.6); }
+    .stat-val { font-family: var(--font-mono); font-weight: 500; color: var(--accent-light); }
+
     /* ===== References section ===== */
     .ref-list p { margin-bottom: 0.75rem; }
 
@@ -2056,7 +2142,7 @@
       <p class="text-body text-ink-light mb-6">AI tutoring could be the great equaliser &mdash; or the great amplifier. As of 2024, <strong class="text-ink font-medium">2.6 billion people remain offline</strong>. Internet access reaches 83% in urban areas but just 48% in rural ones (ITU, 2024). The divide is not just connectivity: it is AI literacy, linguistic inclusion, and cultural relevance. Most AI educational tools are built in English, for English-speaking contexts, with limited accommodation for the multilingual and indigenous communities that need them most (Frontiers in Computer Science, 2026).</p>
       <p class="text-body text-ink-light mb-6">Brookings (2024) articulated what they call the &ldquo;new digital divide&rdquo;: affluent students get AI tools <em>plus</em> human teachers who coach them on how to use those tools effectively. Disadvantaged students get the technology alone, without the scaffolding to make it educationally productive. The implication is sobering: simply distributing AI tutors without investing in teacher training, multilingual models, culturally responsive content, and basic infrastructure could make inequality worse, not better.</p>
 
-     <div class="map-wrapper my-12 fade-in" id="digital-divide-map-section">
+    <div class="map-wrapper my-12 fade-in" id="digital-divide-map-section">
         <p class="font-sans text-caption text-ink-muted uppercase tracking-wide mb-3" style="font-weight:600;">Fig. 4 &mdash; Global Digital Divide: Urban-Rural Internet Gap (2024)</p>
         
         <div class="map-container">
@@ -2079,6 +2165,9 @@
             
           </svg>
         </div>
+        
+        <p class="font-sans text-caption text-ink-muted mt-3" style="text-align:left;">Source: ITU Facts and Figures 2024. Total offline: 2.6 billion (1.8 billion in rural areas). Legend: Shading represents the Urban-to-Rural Internet Gap Ratio. The stagnation of the 1.7x global ratio masks massive disparities, reaching as high as 2.5x in Africa, severely limiting access to real-time educational agents in disadvantaged communities.</p>
+      </div>
         
         <p class="font-sans text-caption text-ink-muted mt-3" style="text-align:left;">Source: ITU Facts and Figures 2024. Total offline: 2.6 billion (1.8 billion in rural areas). Legend: Shading represents the Urban-to-Rural Internet Gap Ratio. The stagnation of the 1.7x global ratio masks massive disparities, reaching as high as 2.5x in Africa, severely limiting access to real-time educational agents in disadvantaged communities.</p>
       </div>
@@ -2341,10 +2430,8 @@
       }
     });
 
-       // ===== Chart 4: Interactive Digital Divide World Map (Replacing Bar Chart) =====
+      // ===== Chart 4: Interactive Digital Divide World Map (Replacing Console) =====
     (function() {
-      const mapContainer = document.digitalDivideMapSection; // Placeholder, not reliable
-      // Safer selector:
       const sectionEl = document.getElementById('digital-divide-map-section');
       if (!sectionEl) return;
       const svgMap = document.getElementById('svg-world-map');
@@ -2371,8 +2458,7 @@
         let norm = (ratio - minRatio) / (maxRatio - minRatio);
         norm = Math.max(0, Math.min(1, norm)); // Clamp
 
-        // Shading scale: light-accent-warm -> accent -> dark-accent-warm
-        // We use a simplified mapping of normalized value to pre-defined hex steps
+        // Saturated orange -> dark red-ish orange
         if (norm > 0.8) return '#9a3412'; // Darkest (Africa 2.5)
         if (norm > 0.6) return '#c2410c'; // Saturated Accent (Arab/AP ~1.6-1.7)
         if (norm > 0.3) return '#f97316'; // Saturated Orange (Americas ~1.25)
@@ -2412,7 +2498,7 @@
             <span class="stat-val">${regionData.rural}%</span>
           </div>
           <div class="tooltip-stat-row" style="margin-top:0.6rem; padding-top:0.4rem; border-top:1px dashed rgba(255,255,255,0.15)">
-            <span class="stat-label" style="color:var(--accent); font-weight:600;">城乡差距倍数 (Gap)</span>
+            <span class="stat-label" style="color:var(--accent); font-weight:600;">城乡差距倍数 (Gap Ratio)</span>
             <span class="stat-val" style="color:#f97316; font-size:1rem;">${regionData.ratio.toFixed(2)}&times;</span>
           </div>
         `;
@@ -2423,9 +2509,12 @@
       }
 
       function moveTooltip(e) {
-        // Get mouse position relative to the document
-        // Tooltip is placed in a relative container, so we use pageX/Y
+        // Position the tooltip near the mouse, using document page coordinates
+        // Calculate offset relative to the containing element
+        const containerRect = svgMap.closest('.map-container').getBoundingClientRect();
         const offsetLeft = 15; const offsetTop = 20;
+        
+        // Calculate relative offset within the document for a safe document-level placement
         tooltip.style.left = (e.pageX + offsetLeft) + 'px';
         tooltip.style.top = (e.pageY + offsetTop) + 'px';
       }
