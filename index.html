@@ -1588,13 +1588,7 @@
 
       <p class="text-body text-ink-light mb-6">In 1984, Benjamin Bloom published a finding that should have changed everything. Students receiving one-on-one tutoring consistently performed two standard deviations above their conventionally taught peers &mdash; a gap so large it became its own shorthand: the &ldquo;two-sigma problem.&rdquo; The implication was unambiguous. Personalised instruction, delivered by a tutor who knows you, adapts to you, and asks you why rather than just whether &mdash; it works, reliably and dramatically. The problem was equally unambiguous: there are not enough tutors, and there has never been enough money.</p>
 
-      <div class="pull-quote pl-6 py-1 my-10">
-        <p class="text-xl md:text-2xl font-serif font-medium text-ink leading-snug tracking-tight">&ldquo;The search for methods of group instruction as effective as one-to-one tutoring &mdash; that is the &lsquo;2 sigma problem.&rsquo;&rdquo;</p>
-        <p class="font-sans text-caption text-ink-muted mt-3 uppercase">Benjamin Bloom, <em>Educational Researcher</em>, 1984</p>
-      </div>
-
-      <p class="text-body text-ink-light mb-6">Forty years later, the structural reality makes Bloom&rsquo;s finding feel even more remote. The world now needs <strong class="text-ink font-medium">44 million additional teachers by 2030</strong> just to achieve universal basic education (UNESCO, 2024). In the United States, one in eight teaching positions was unfilled or staffed by an under-qualified teacher in 2024&ndash;25 (Learning Policy Institute, 2025). In Sub-Saharan Africa, the student-to-teacher ratio can exceed <strong class="text-ink font-medium">56:1</strong> &mdash; at which point personalised instruction is not merely unaffordable; it is physically impossible. And the pipeline is collapsing from the other end too: one in five teachers under 30 plans to leave the profession within five years (TALIS, 2024), with burnout, workload, and stagnating pay cited as the driving forces. The crisis is not a shortage of evidence about what works. It is a shortage of the people and resources needed to deliver it.</p>
-    <div class="crisis-dialogue fade-in" style="background: var(--surface); border: 1px solid var(--border-subtle); padding: 0; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.06); position: relative;">
+     <div class="crisis-dialogue fade-in" style="background: var(--surface); border: 1px solid var(--border-subtle); padding: 0; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.06); position: relative;">
   
   <div class="crisis-header" style="background: rgba(250,250,249,0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; padding: 1rem 1.5rem; position: relative; z-index: 10;">
     <span class="crisis-label" style="color: var(--ink-muted); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;">System Topology: Capacity & Load</span>
@@ -1619,8 +1613,8 @@
     <canvas id="fluid-evolution-canvas" style="display: block; width: 100%; height: 100%;"></canvas>
   </div>
 
-  <div style="padding: 1.5rem 2.5rem; background: #fff; border-top: 1px solid var(--border-subtle);">
-    <div style="position: relative; height: 6px; background: #e2e8f0; border-radius: 100px; margin-bottom: 1.5rem;">
+  <div style="padding: 1.5rem 3rem 2.5rem 3rem; background: #fff; border-top: 1px solid var(--border-subtle);">
+    <div style="position: relative; height: 6px; background: #e2e8f0; border-radius: 100px;">
       <div id="spectrum-fill" style="position: absolute; top: 0; left: 0; height: 100%; width: 50%; background: #ef4444; border-radius: 100px; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.5s ease;"></div>
       
       <div class="t-node" data-idx="0" style="left: 0%;"></div>
@@ -1628,14 +1622,12 @@
       <div class="t-node active" data-idx="2" style="left: 50%;"></div>
       <div class="t-node" data-idx="3" style="left: 75%;"></div>
       <div class="t-node" data-idx="4" style="left: 100%;"></div>
-    </div>
-    
-    <div style="display: flex; justify-content: space-between; font-family: var(--font-sans); font-size: 0.7rem; font-weight: 600; color: var(--ink-muted); text-align: center;">
-      <div style="width: 20%; transform: translateX(-50%);">Ideal</div>
-      <div style="width: 20%; transform: translateX(-50%);">Baseline</div>
-      <div style="width: 20%; transform: translateX(-50%);">Crisis (Now)</div>
-      <div style="width: 20%; transform: translateX(-50%);">MOOC</div>
-      <div style="width: 20%; transform: translateX(-50%);">Agentic AI</div>
+
+      <div style="position: absolute; top: 22px; left: 0%; transform: translateX(-50%); width: 80px; text-align: center; font-family: var(--font-sans); font-size: 0.7rem; font-weight: 600; color: var(--ink-muted);">Ideal</div>
+      <div style="position: absolute; top: 22px; left: 25%; transform: translateX(-50%); width: 80px; text-align: center; font-family: var(--font-sans); font-size: 0.7rem; font-weight: 600; color: var(--ink-muted);">Baseline</div>
+      <div style="position: absolute; top: 22px; left: 50%; transform: translateX(-50%); width: 80px; text-align: center; font-family: var(--font-sans); font-size: 0.7rem; font-weight: 600; color: var(--ink-muted);">Crisis (Now)</div>
+      <div style="position: absolute; top: 22px; left: 75%; transform: translateX(-50%); width: 80px; text-align: center; font-family: var(--font-sans); font-size: 0.7rem; font-weight: 600; color: var(--ink-muted);">MOOC</div>
+      <div style="position: absolute; top: 22px; left: 100%; transform: translateX(-50%); width: 80px; text-align: center; font-family: var(--font-sans); font-size: 0.7rem; font-weight: 600; color: var(--ink-muted);">Agentic AI</div>
     </div>
   </div>
   
@@ -1650,7 +1642,6 @@
     .t-node:hover { transform: scale(1.3); border-color: var(--accent); }
     .t-node.active { transform: scale(1.4); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
     
-    /* 新顺序: 0=Ideal(蓝), 1=Baseline(灰), 2=Crisis(红), 3=MOOC(绿), 4=Agentic(橙) */
     .t-node.active[data-idx="0"] { border-color: #3b82f6; }
     .t-node.active[data-idx="1"] { border-color: #64748b; }
     .t-node.active[data-idx="2"] { border-color: #ef4444; }
@@ -1670,7 +1661,6 @@
       const canvasContainer = document.getElementById('fluid-evolution-canvas').parentElement;
       const statusText = document.getElementById('sim-status');
 
-      // 更新后的叙事数据 (按新顺序)
       const phasesData = [
         { color: '#3b82f6', t: "Bloom's Vision", s: "Universal 1:1 scaling", d: "The ultimate theoretical ideal. A perfectly distributed matrix where every learner receives dedicated, personalized scaffolding." },
         { color: '#64748b', t: "The Baseline", s: "Historical equilibrium", d: "A stable past ecosystem. Teaching capacity structurally matches student volume, allowing for functional pedagogical connections." },
@@ -1722,8 +1712,7 @@
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
       let W, H;
-      // 初始状态设定为 Crisis (Phase 2)
-      let currentPhase = 2; 
+      let currentPhase = 2; // 默认危机状态
 
       const NUM_TEACHERS = 120;
       const NUM_STUDENTS = 600;
@@ -1750,8 +1739,19 @@
         teachers = Array.from({length: NUM_TEACHERS}, (_, i) => {
           const c = i % tCols;
           const r = Math.floor(i / tCols);
-          const baseX = c * tCellW + tCellW/2 + (Math.random()-0.5)*tCellW*0.6;
-          const baseY = r * tCellH + tCellH/2 + (Math.random()-0.5)*tCellH*0.6;
+          let baseX = c * tCellW + tCellW/2 + (Math.random()-0.5)*tCellW*0.6;
+          let baseY = r * tCellH + tCellH/2 + (Math.random()-0.5)*tCellH*0.6;
+          
+          // 【核心修复：排斥力场】防止老师生成在屏幕正中央与 MOOC 抢位置
+          const dx = baseX - W/2;
+          const dy = baseY - H/2;
+          const distFromCenter = Math.hypot(dx, dy);
+          if (distFromCenter < 120) { // 120px 的中心禁区
+              const angle = Math.atan2(dy, dx);
+              baseX = W/2 + Math.cos(angle) * 120;
+              baseY = H/2 + Math.sin(angle) * 120;
+          }
+
           return {
             id: i, x: baseX, y: baseY, tx: baseX, ty: baseY,
             originX: baseX, originY: baseY, opacity: 1, targetOpacity: 1,
@@ -1777,7 +1777,7 @@
             id: i, x: originX, y: originY, tx: originX, ty: originY,
             originX: originX, originY: originY,
             teacherId: 0, stress: 0, hasAI: 0,
-            isMoocing: false, moocTimer: 0 // 新增 MOOC 动态流失算法状态
+            isMoocing: false, moocTimer: 0
           };
         });
 
@@ -1789,7 +1789,6 @@
         const now = Date.now();
         teachers.forEach(t => t.load = 0);
         
-        // MOOC 节点在 Phase 3 始终可见
         mooc.opacity += ((currentPhase === 3 ? 0.9 : 0) - mooc.opacity) * 0.05;
 
         // 1. 老师定位
@@ -1798,16 +1797,13 @@
           const tFloatY = Math.sin(now * 0.0004 + t.id) * 6;
 
           if (currentPhase === 0) {
-            // Bloom: 老师褪去，仅留 AI 和学生
             t.targetOpacity = 0; t.ty = H + 100;
           } 
           else if (currentPhase === 1) {
-            // Baseline: 所有老师归位
             t.tx = t.originX + tFloatX; t.ty = t.originY + tFloatY;
             t.state = 'active'; t.targetOpacity = 1;
           } 
           else if (currentPhase >= 2 && currentPhase <= 4) {
-            // Crisis, MOOC, Agentic: 只有幸存者在场
             if (t.survivor) {
               t.tx = t.originX + tFloatX; t.ty = t.originY + tFloatY;
               t.state = 'active'; t.targetOpacity = 1;
@@ -1827,13 +1823,12 @@
 
         const activeTeachers = teachers.filter(t => t.state === 'active');
 
-        // 2. 学生逻辑：极近邻 + MOOC 流失动态模拟
+        // 2. 学生逻辑
         students.forEach((s, i) => {
           let targetStress = 0, targetAI = 0, pullX = s.originX, pullY = s.originY, pullStrength = 0;
           const sFloatX = Math.cos(now * 0.0008 + s.id * 1.2) * 5;
           const sFloatY = Math.sin(now * 0.0009 + s.id * 1.5) * 5;
 
-          // 寻找最近的活跃老师
           let nearestTeacher = null, minDist = Infinity;
           if (activeTeachers.length > 0) {
             activeTeachers.forEach(t => {
@@ -1843,34 +1838,30 @@
           }
 
           if (currentPhase === 0) {
-            // Bloom: 网格独立存在，配合 AI
             pullStrength = 0; targetAI = 1; 
           } 
           else if (currentPhase === 1) {
-            // Baseline: 正常连接
             if(nearestTeacher) {
               s.teacherId = nearestTeacher.id; teachers[s.teacherId].load++;
               pullX = nearestTeacher.tx; pullY = nearestTeacher.ty; pullStrength = 0.08;
             }
           } 
           else if (currentPhase === 2) {
-            // Crisis: 高压拉扯
-            s.isMoocing = false; // 退出 MOOC 状态
+            s.isMoocing = false; 
             if(nearestTeacher) {
               s.teacherId = nearestTeacher.id; teachers[s.teacherId].load++;
               pullX = nearestTeacher.tx; pullY = nearestTeacher.ty; pullStrength = 0.25; targetStress = 1; 
             }
           } 
           else if (currentPhase === 3) {
-            // MOOC: 动态连线与高流失率 (Markov Chain)
-            // 每个帧有 0.5% 的概率决定去连 MOOC
-            if (!s.isMoocing && Math.random() < 0.005) {
+            // 【核心修复：调低 MOOC 连通概率】从 0.005 大幅降到 0.001
+            if (!s.isMoocing && Math.random() < 0.001) {
                 s.isMoocing = true;
                 s.moocTimer = 0;
             }
             if (s.isMoocing) {
                 s.moocTimer++;
-                // 连上之后，撑不过 60~120 帧就会断开
+                // 存活时间随机在 60~120 帧之间
                 if (s.moocTimer > 60 + Math.random() * 60) {
                     s.isMoocing = false;
                 }
@@ -1886,7 +1877,6 @@
             }
           } 
           else if (currentPhase === 4) {
-            // Agentic: 有AI辅助，压力降级
             s.isMoocing = false;
             if(nearestTeacher) {
               s.teacherId = nearestTeacher.id; teachers[s.teacherId].load++;
@@ -1908,10 +1898,9 @@
         ctx.clearRect(0, 0, W, H);
         updateTargets();
 
-        // 1. 绘制连线
         ctx.lineWidth = 1;
         students.forEach(s => {
-          if (currentPhase === 0) return; // 理想态无集线
+          if (currentPhase === 0) return;
 
           let targetNode = null;
           if (currentPhase === 3 && s.isMoocing) targetNode = mooc;
@@ -1927,7 +1916,6 @@
             ctx.quadraticCurveTo(cx, cy, targetNode.x, targetNode.y);
 
             if (targetNode === mooc) {
-                // MOOC 是绿线
                 ctx.strokeStyle = `rgba(16, 185, 129, 0.25)`;
             } else {
                 let r = 148 + s.stress * (239 - 148);
@@ -1939,7 +1927,6 @@
           }
         });
 
-        // 2. 绘制 MOOC
         if (mooc.opacity > 0.01) {
           ctx.save(); ctx.globalAlpha = mooc.opacity;
           ctx.beginPath(); ctx.arc(mooc.x, mooc.y, 24, 0, Math.PI*2);
@@ -1950,12 +1937,10 @@
           ctx.restore();
         }
 
-        // 3. 绘制老师
         teachers.forEach(t => {
           if (t.opacity < 0.01) return;
           ctx.save(); ctx.globalAlpha = t.opacity;
           ctx.beginPath(); ctx.arc(t.x, t.y, 6.5, 0, Math.PI*2);
-          // 超载判断标准：危机或MOOC阶段，幸存老师肯定超载
           const isOverloaded = (currentPhase === 2 || currentPhase === 3) && t.survivor;
           ctx.fillStyle = isOverloaded ? '#ef4444' : '#1e293b'; ctx.fill();
           
@@ -1967,7 +1952,6 @@
           ctx.restore();
         });
 
-        // 4. 绘制学生与 AI Copilot
         students.forEach(s => {
           ctx.beginPath(); ctx.arc(s.x, s.y, 2, 0, Math.PI*2);
           let r = 148 + s.stress * (239 - 148);
@@ -1980,7 +1964,6 @@
              const aiX = s.x + Math.cos(Date.now()*0.002 + s.id) * 5;
              const aiY = s.y + Math.sin(Date.now()*0.002 + s.id) * 5;
              ctx.beginPath(); ctx.moveTo(s.x, s.y); ctx.lineTo(aiX, aiY);
-             // 完美匹配 var(--accent) #c2410c 的 RGBA 值
              ctx.strokeStyle = 'rgba(194, 65, 12, 0.4)'; ctx.lineWidth = 1; ctx.stroke();
              ctx.beginPath(); ctx.arc(aiX, aiY, 1.5, 0, Math.PI*2);
              ctx.fillStyle = '#c2410c'; ctx.fill();
