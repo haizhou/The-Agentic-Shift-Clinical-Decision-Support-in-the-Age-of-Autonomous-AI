@@ -1595,50 +1595,35 @@
 
       <p class="text-body text-ink-light mb-6">Forty years later, the structural reality makes Bloom&rsquo;s finding feel even more remote. The world now needs <strong class="text-ink font-medium">44 million additional teachers by 2030</strong> just to achieve universal basic education (UNESCO, 2024). In the United States, one in eight teaching positions was unfilled or staffed by an under-qualified teacher in 2024&ndash;25 (Learning Policy Institute, 2025). In Sub-Saharan Africa, the student-to-teacher ratio can exceed <strong class="text-ink font-medium">56:1</strong> &mdash; at which point personalised instruction is not merely unaffordable; it is physically impossible. And the pipeline is collapsing from the other end too: one in five teachers under 30 plans to leave the profession within five years (TALIS, 2024), with burnout, workload, and stagnating pay cited as the driving forces. The crisis is not a shortage of evidence about what works. It is a shortage of the people and resources needed to deliver it.</p>
 
-      <div class="crisis-dialogue fade-in" id="crisis-dialogue">
-        <div class="crisis-header">
-          <span class="crisis-label">The Crisis in Two Voices</span>
-          <span class="crisis-dot"></span>
-        </div>
-        <div class="crisis-stage">
-          <div class="crisis-side crisis-teacher">
-            <div class="crisis-avatar">
-              <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="18" cy="13" r="6" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
-                <path d="M6 30c0-7 24-7 24 0" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round"/>
-                <path d="M10 13l8-4 8 4-8 4-8-4z" fill="rgba(255,255,255,0.5)"/>
-                <path d="M22 15v5" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="crisis-role">Teacher</div>
-            <div class="crisis-bubbles crisis-teacher-bubbles"></div>
-          </div>
-          <div class="crisis-divider">
-            <div class="crisis-divider-line"></div>
-            <div class="crisis-vs">vs</div>
-            <div class="crisis-divider-line"></div>
-          </div>
-          <div class="crisis-side crisis-student">
-            <div class="crisis-avatar">
-              <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="18" cy="13" r="6" fill="rgba(251,191,36,0.15)" stroke="rgba(251,191,36,0.5)" stroke-width="1.5"/>
-                <path d="M6 30c0-7 24-7 24 0" stroke="rgba(251,191,36,0.5)" stroke-width="1.5" stroke-linecap="round"/>
-                <rect x="11" y="20" width="8" height="6" rx="1" fill="rgba(251,191,36,0.4)"/>
-                <line x1="15" y1="20" x2="15" y2="26" stroke="rgba(251,191,36,0.6)" stroke-width="1"/>
-              </svg>
-            </div>
-            <div class="crisis-role" style="color:rgba(251,191,36,0.8);">Student</div>
-            <div class="crisis-bubbles crisis-student-bubbles"></div>
-          </div>
-        </div>
-        <div class="crisis-footer">
-          <span class="crisis-footer-stat"><span class="crisis-footer-num" id="cf-num-1">0</span>M teachers short by 2030</span>
-          <span class="crisis-footer-divider">·</span>
-          <span class="crisis-footer-stat"><span class="crisis-footer-num" id="cf-num-2">0</span>:1 ratio in Sub-Saharan Africa</span>
-          <span class="crisis-footer-divider">·</span>
-          <span class="crisis-footer-stat">1 in <span class="crisis-footer-num" id="cf-num-3">0</span> U.S. positions unfilled</span>
-        </div>
-      </div>
+   <div class="crisis-dialogue fade-in" style="background: var(--surface); border: 1px solid var(--border-subtle); padding: 0;">
+  <div class="crisis-header" style="background: #fafaf9; border-bottom: 1px solid var(--border-subtle); justify-content: space-between;">
+    <span class="crisis-label" style="color: var(--ink-muted);">System Simulation: The Evolution of Tutoring Load</span>
+    <span id="sim-status" style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent); font-weight: 600;">STATUS: BALANCED</span>
+  </div>
+  
+  <div style="position: relative; width: 100%; height: 320px; background: #fff; overflow: hidden;">
+    <canvas id="evolution-canvas" style="display: block; width: 100%; height: 100%;"></canvas>
+  </div>
+
+  <div style="display: flex; gap: 0.5rem; padding: 1rem 1.5rem; background: #fafaf9; border-top: 1px solid var(--border-subtle); overflow-x: auto;">
+    <button class="sim-btn active" data-phase="0">1. Baseline</button>
+    <button class="sim-btn" data-phase="1">2. The Crisis</button>
+    <button class="sim-btn" data-phase="2">3. MOOC Era</button>
+    <button class="sim-btn" data-phase="3">4. Agentic AI</button>
+    <button class="sim-btn" data-phase="4">5. Bloom's Ideal</button>
+  </div>
+  
+  <style>
+    .sim-btn {
+      font-family: var(--font-sans); font-size: 0.75rem; font-weight: 600;
+      padding: 0.4rem 0.8rem; border-radius: 4px; border: 1px solid var(--border-subtle);
+      background: #fff; color: var(--ink-muted); cursor: pointer; transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .sim-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .sim-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  </style>
+</div>
 
 
 
@@ -3607,6 +3592,219 @@
         layout(); render();
       });
     })();
+    (function() {
+  const canvas = document.getElementById('evolution-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H;
+  let raf;
+  let currentPhase = 0;
+
+  // 实体定义
+  let students = [];
+  let teachers = [];
+  let mooc = null;
+  let agents = [];
+
+  function initSim() {
+    W = canvas.parentElement.offsetWidth;
+    H = canvas.parentElement.offsetHeight;
+    canvas.width = W * (window.devicePixelRatio || 1);
+    canvas.height = H * (window.devicePixelRatio || 1);
+    ctx.scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
+
+    // 初始化 40 个学生，环绕分布
+    students = Array.from({length: 40}, (_, i) => {
+      const angle = (i / 40) * Math.PI * 2;
+      return {
+        id: i,
+        x: W/2 + Math.cos(angle) * (W*0.35),
+        y: H/2 + Math.sin(angle) * (H*0.35),
+        targetId: i % 4, // 初始分配给 4 个老师
+        type: 'student',
+        color: '#94a3b8',
+        moocTimer: 0 // 用于 MOOC 阶段的流失计时
+      };
+    });
+
+    // 初始化 4 个老师在中央
+    teachers = Array.from({length: 4}, (_, i) => ({
+      id: i,
+      x: W/2 + (i%2===0?-40:40),
+      y: H/2 + (i<2?-40:40),
+      active: true,
+      load: 0,
+      shake: 0
+    }));
+  }
+
+  function update() {
+    // 重置老师负载
+    teachers.forEach(t => t.load = 0);
+    if(mooc) mooc.load = 0;
+
+    students.forEach(s => {
+      if (currentPhase === 0) {
+        s.targetId = s.id % 4; // 平均分给 4 个老师
+      } 
+      else if (currentPhase === 1) {
+        s.targetId = s.id % 2; // 只剩 2 个老师，负载翻倍
+      } 
+      else if (currentPhase === 2) {
+        // MOOC 阶段：一部分人连向 MOOC，但一定时间后断开
+        if (s.id % 2 === 0) { // 50% 的人去 MOOC
+          s.moocTimer++;
+          if (s.moocTimer < 180) { // 大约 3 秒后放弃
+            s.targetId = 'mooc';
+          } else {
+            s.targetId = s.id % 2; // 回归老师，系统再次崩溃
+          }
+        } else {
+          s.targetId = s.id % 2;
+        }
+      } 
+      else if (currentPhase === 3) {
+        // 智能体时代：分配专属 Agent
+        s.targetId = `agent-${s.id}`;
+      }
+      else if (currentPhase === 4) {
+        // Bloom 理想：完全 1对1
+        s.targetId = `tutor-${s.id}`;
+      }
+
+      // 计算目标位置的连线
+      if (typeof s.targetId === 'number') {
+         let t = teachers[s.targetId];
+         if (t && t.active) t.load++;
+      }
+    });
+
+    // 老师过载震动逻辑
+    teachers.forEach(t => {
+      if (t.active && t.load > 12) {
+        t.shake = Math.random() * 4 - 2; // 负载过高产生震动
+      } else {
+        t.shake = 0;
+      }
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    // 绘制连线
+    students.forEach(s => {
+      let tx, ty, strokeColor;
+      
+      if (typeof s.targetId === 'number' && teachers[s.targetId].active) {
+        let t = teachers[s.targetId];
+        tx = t.x + t.shake; ty = t.y + t.shake;
+        // 负载过高，连线变红
+        strokeColor = t.load > 12 ? 'rgba(239, 68, 68, 0.4)' : 'rgba(148, 163, 184, 0.3)';
+      } 
+      else if (s.targetId === 'mooc' && mooc) {
+        tx = mooc.x; ty = mooc.y;
+        strokeColor = 'rgba(16, 185, 129, 0.4)'; // 绿色连线代表 MOOC
+      }
+      else if (typeof s.targetId === 'string' && s.targetId.startsWith('agent')) {
+        // 智能体就在学生旁边
+        tx = s.x - 15; ty = s.y - 15;
+        strokeColor = 'rgba(194, 65, 12, 0.5)'; // Agent 主题色
+        
+        // 顺便画出 Agent 节点
+        ctx.beginPath(); ctx.arc(tx, ty, 3, 0, Math.PI*2);
+        ctx.fillStyle = '#c2410c'; ctx.fill();
+      }
+      else if (typeof s.targetId === 'string' && s.targetId.startsWith('tutor')) {
+        tx = s.x - 20; ty = s.y;
+        strokeColor = 'rgba(59, 130, 246, 0.5)'; 
+        ctx.beginPath(); ctx.arc(tx, ty, 4, 0, Math.PI*2);
+        ctx.fillStyle = '#3b82f6'; ctx.fill();
+      }
+
+      if (tx && ty) {
+        ctx.beginPath();
+        ctx.moveTo(s.x, s.y);
+        ctx.lineTo(tx, ty);
+        ctx.strokeStyle = strokeColor;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+      
+      // 绘制学生
+      ctx.beginPath(); ctx.arc(s.x, s.y, 3, 0, Math.PI*2);
+      ctx.fillStyle = s.color; ctx.fill();
+    });
+
+    // 绘制 MOOC 节点
+    if (currentPhase === 2 && mooc) {
+      ctx.beginPath(); ctx.arc(mooc.x, mooc.y, 15, 0, Math.PI*2);
+      ctx.fillStyle = '#10b981'; ctx.fill();
+      ctx.fillStyle = '#fff'; ctx.font = '10px sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText('MOOC', mooc.x, mooc.y + 4);
+    }
+
+    // 绘制老师
+    teachers.forEach(t => {
+      if (!t.active) return;
+      ctx.beginPath();
+      ctx.arc(t.x + t.shake, t.y + t.shake, 8, 0, Math.PI*2);
+      ctx.fillStyle = t.load > 12 ? '#ef4444' : '#334155'; // 过载变红
+      ctx.fill();
+    });
+  }
+
+  function loop() {
+    update();
+    draw();
+    raf = requestAnimationFrame(loop);
+  }
+
+  // UI 交互绑定
+  document.querySelectorAll('.sim-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      document.querySelectorAll('.sim-btn').forEach(b => b.classList.remove('active'));
+      e.target.classList.add('active');
+      currentPhase = parseInt(e.target.getAttribute('data-phase'));
+      
+      const statusText = document.getElementById('sim-status');
+      
+      // 切换逻辑
+      if (currentPhase === 0) {
+        teachers.forEach(t => t.active = true); mooc = null;
+        statusText.innerText = "STATUS: BALANCED (10:1)";
+        statusText.style.color = "#64748b";
+      } else if (currentPhase === 1) {
+        teachers[2].active = false; teachers[3].active = false; mooc = null;
+        statusText.innerText = "CRITICAL: TEACHER BURNOUT (20:1)";
+        statusText.style.color = "#ef4444";
+      } else if (currentPhase === 2) {
+        mooc = {x: W/2, y: H/2};
+        students.forEach(s => s.moocTimer = 0); // 重置计时器
+        statusText.innerText = "STATUS: MOOC ILLUSION (High dropout)";
+        statusText.style.color = "#10b981";
+      } else if (currentPhase === 3) {
+        mooc = null;
+        statusText.innerText = "STATUS: AGENTIC COPILOT";
+        statusText.style.color = "var(--accent)";
+      } else if (currentPhase === 4) {
+        teachers.forEach(t => t.active = false); mooc = null;
+        statusText.innerText = "IDEAL: BLOOM'S 2-SIGMA (1:1)";
+        statusText.style.color = "#3b82f6";
+      }
+    });
+  });
+
+  // 观察者启动
+  const obs = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      initSim();
+      loop();
+      obs.disconnect();
+    }
+  });
+  obs.observe(canvas.parentElement);
+})();
   </script>
 </body>
 </html>
