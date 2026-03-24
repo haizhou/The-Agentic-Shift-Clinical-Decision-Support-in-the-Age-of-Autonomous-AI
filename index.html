@@ -477,6 +477,20 @@
     .tag-encode { background: #bb9af7; } /* Purple */
     .tag-retrieve { background: #e0af68; } /* Orange */
     .tag-llm { background: #9ece6a; } /* Green */
+    .tag-graph { background: #f7768e; } /* Pink/Red for Knowledge Graph */
+    .rag-graph-box {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: #7dcfff;
+      background: rgba(125, 207, 255, 0.05);
+      border-left: 2px solid #7dcfff;
+      padding: 0.75rem 1rem;
+      margin-top: 0.5rem;
+      border-radius: 0 4px 4px 0;
+      white-space: pre; /* Preserves ASCII art formatting */
+      line-height: 1.3;
+      overflow-x: auto;
+    }
     
     .rag-text-highlight { color: #c0caf5; font-weight: 500; }
     .rag-vector-text { color: #565f89; word-break: break-all; font-size: 0.75rem; font-family: var(--font-mono); margin-top: 0.3rem; line-height: 1.4; }
@@ -1546,9 +1560,8 @@
       </div>
 
       <h3 id="sec-2-2" class="text-h2 mb-5 mt-14">2.2&ensp;RAG: Teaching the Tutor Not to Make Things Up</h3>
-      <p class="text-body text-ink-light mb-6">An LLM that confidently tells a student that the mitochondria is the &ldquo;brain of the cell&rdquo; is worse than no tutor at all. In general applications, hallucination is annoying; in education, it directly implants misconceptions. Retrieval-augmented generation (RAG) attacks this problem at its root by coupling the model&rsquo;s generative fluency with a retrieval step that fetches verified passages <em>before</em> the model speaks (Lewis et al., 2020).</p>
-      <p class="text-body text-ink-light mb-4">The mathematics is elegant. RAG reformulates generation as a marginalisation over retrieved documents:</p>
-
+     <p class="text-body text-ink-light mb-6">An LLM that confidently tells a student that the mitochondria is the &ldquo;brain of the cell&rdquo; is worse than no tutor at all. Retrieval-augmented generation (RAG) attacks this hallucination problem by fetching verified passages before the model speaks. However, early dense-vector RAG had a fatal flaw in education: it lacked structural understanding. It could find semantically similar text, but it couldn't map prerequisite dependencies.</p>
+      <p class="text-body text-ink-light mb-6">Enter <strong class="text-ink font-medium">GraphRAG</strong> and <strong class="text-ink font-medium">Knowledge Graphs (KG)</strong>. Instead of just searching a flat database of text chunks, the system traverses a structured network of concepts. If a student struggles with $F=ma$, the Knowledge Graph explicitly links this to <em>Mass</em> and <em>Acceleration</em>, and maps <em>Acceleration</em> back to <em>Velocity</em>. By running a hybrid retrieval (Dense Vector Search + Graph Traversal), the agentic tutor retrieves not just the answer, but the entire cognitive scaffolding needed to understand it. This guarantees the AI teaches what <em>your</em> course intends, following the exact pedagogical structure defined by the educators.</p>
       <div class="formula-block my-8 text-center">
         $$ P(y \mid x) = \sum_{z \in \mathcal{Z}} P(z \mid x)\, P(y \mid z, x) $$
         <p class="font-sans text-caption text-ink-muted mt-3" style="text-align:left;">where <em>x</em> is the student&rsquo;s query, <em>Z</em> is the set of candidate documents, <em>P</em>(<em>z</em> | <em>x</em>) is the retrieval probability (via dense vector similarity), and <em>P</em>(<em>y</em> | <em>z</em>, <em>x</em>) is the conditional generation probability given query and retrieved context.</p>
@@ -1559,7 +1572,7 @@
 
      <div class="rag-console-wrapper fade-in" id="rag-live-demo">
         <div class="rag-console-header">
-          <span>RAG Pipeline Execution Log</span>
+          <span>GraphRAG Pipeline Execution Log</span>
           <span id="rag-status-indicator" style="color:#f7768e;">Status: Standby</span>
         </div>
         <div class="rag-console-body" id="rag-console-container">
@@ -1576,21 +1589,24 @@
           </div>
           
           <div class="rag-log" id="r-log-3">
-            <span class="rag-tag tag-retrieve">RETRIEVE</span>
-            Searching <span class="rag-text-highlight">Course Corpus</span> (Textbooks, notes, problems)...
+            <span class="rag-tag tag-graph">KG TRAVERSAL</span>
+            Mapping conceptual dependencies via Educational Knowledge Graph...
+            <div class="rag-graph-box" id="r-graph-text"></div>
           </div>
           
           <div class="rag-log" id="r-log-4">
+            <span class="rag-tag tag-retrieve">HYBRID RETRIEVE</span>
+            Fusing Vector Search + Sub-graph matching in <span class="rag-text-highlight">Course Corpus</span>...
             <div class="rag-doc-box">
-              <strong>Top-1 Match Found (Score: 0.92):</strong><br>
+              <strong>Hybrid Match (Score: 0.94):</strong><br>
               Source: <em>ELEC0139_Physics_Notes_Ch4.pdf</em><br>
-              Context: "Newton's Second Law defines force as the rate of change of momentum. For a constant mass, this simplifies to F = m * a."
+              Context: "Newton's Second Law defines force as the rate of change of momentum (dp/dt). For a constant mass, this simplifies to F = m * a."
             </div>
           </div>
           
           <div class="rag-log" id="r-log-5">
             <span class="rag-tag tag-llm">GENERATE</span>
-            Injecting retrieved context. LLM generating grounded answer...
+            Injecting retrieved sub-graph & context. LLM generating grounded answer...
             <div class="rag-answer-box">
               <span id="r-answer-text"></span><span class="rag-cursor" id="r-cursor" style="display:none;"></span>
             </div>
@@ -1598,7 +1614,7 @@
 
         </div>
       </div>
-
+      
       <h3 id="sec-2-3" class="text-h2 mb-5 mt-14">2.3&ensp;When One Agent Isn&rsquo;t Enough: Multi-Agent Collaboration</h3>
       <p class="text-body text-ink-light mb-6">A single tutor, no matter how capable, cannot simultaneously diagnose a learning gap, design a personalised lesson plan, adapt content difficulty, and assess progress &mdash; at least, not well. The solution? Split the job. Wang et al. (2025b) propose a <strong class="text-ink font-medium">five-agent system</strong> where each agent has one focused role: a Gap Identifier (diagnoses deficits), a Learner Profiler (models student characteristics), a Dynamic Planner (generates learning paths), a Content Adapter (tailors difficulty), and a Feedback Synthesiser (consolidates assessment data). Think of it less like a single tutor and more like a well-coordinated teaching team.</p>
       <p class="text-body text-ink-light mb-6">An especially promising technique is <strong class="text-ink font-medium">multi-agent debate</strong>: several LLM agents independently reason about a problem, then compare and reconcile their outputs. This consistently improves accuracy on open-ended tasks like essay evaluation (Garcia-Bosque et al., 2025). The <strong class="text-ink font-medium">EduThink4AI</strong> framework (2026) pushes this further with a four-agent pipeline &mdash; one generates answers, one checks validity, one critiques, and one synthesises &mdash; explicitly designed to model and develop critical thinking in students.</p>
@@ -2198,18 +2214,17 @@
       }
     })();
 
-    // ===== RAG Console Live Animation =====
+   // ===== GraphRAG Console Live Animation =====
     (function() {
       const ragContainer = document.getElementById('rag-live-demo');
       if (!ragContainer) return;
 
-      // Helper function for delays
       const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
       const ragObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            runRagSequence();
+            runGraphRagSequence();
             ragObserver.unobserve(entry.target);
           }
         });
@@ -2217,49 +2232,56 @@
 
       ragObserver.observe(ragContainer);
 
-      async function runRagSequence() {
-        document.getElementById('rag-status-indicator').innerText = "Status: Processing...";
+      async function runGraphRagSequence() {
+        document.getElementById('rag-status-indicator').innerText = "Status: Hybrid Processing...";
         document.getElementById('rag-status-indicator').style.color = "#9ece6a";
 
         // Step 1: Query
         await sleep(400);
         document.getElementById('r-log-1').classList.add('visible');
 
-        // Step 2: Encode
-        await sleep(800);
-        const log2 = document.getElementById('r-log-2');
-        log2.classList.add('visible');
-        
-        // Simulate vector generation rapidly
+        // Step 2: Dense Vector Encode
+        await sleep(600);
+        document.getElementById('r-log-2').classList.add('visible');
         const vectorEl = document.getElementById('r-vector-text');
         await sleep(300);
         vectorEl.innerText = "[0.012, -0.043, 0.891, 0.112";
         await sleep(150);
         vectorEl.innerText += ", -0.993, 0.442, 0.001, -0.334";
         await sleep(150);
-        vectorEl.innerText += ", 0.776, -0.128, ... 1536 dimensions]";
+        vectorEl.innerText += ", 0.776, -0.128, ... 1536 dim]";
 
-        // Step 3: Retrieve
-        await sleep(900);
+        // Step 3: Knowledge Graph Traversal (The New Magic!)
+        await sleep(700);
         document.getElementById('r-log-3').classList.add('visible');
+        const graphEl = document.getElementById('r-graph-text');
+        await sleep(400);
+        graphEl.innerText = "[Force (Target)]";
+        await sleep(200);
+        graphEl.innerText += "\n   ├── requires ──> [Mass]";
+        await sleep(200);
+        graphEl.innerText += "\n   └── requires ──> [Acceleration]";
+        await sleep(200);
+        graphEl.innerText += "\n                      └── requires ──> [Velocity]";
+        await sleep(200);
+        graphEl.innerText += "\n                      └── derives_from ──> [Momentum (dp/dt)]";
 
-        // Step 4: Document Match
-        await sleep(1200);
+        // Step 4: Hybrid Retrieve
+        await sleep(900);
         document.getElementById('r-log-4').classList.add('visible');
 
-        // Step 5: Generate & Typewriter
+        // Step 5: Generate
         await sleep(1000);
         document.getElementById('r-log-5').classList.add('visible');
         document.getElementById('r-cursor').style.display = 'inline-block';
 
-        const answerString = "Based on your Chapter 4 notes, F=ma is actually a simplification. Newton originally defined force as the rate of change of momentum (dp/dt). If mass is constant, this becomes m*(dv/dt), which is m*a.";
+        const answerString = "Based on the graph context, F=ma is a special case. Newton defined force as the rate of change of momentum (dp/dt). Only when mass is constant does this simplify to m*(dv/dt), which is m*a.";
         const answerEl = document.getElementById('r-answer-text');
         
-        await sleep(500); // Pause before typing
-        
+        await sleep(400);
         for (let i = 0; i < answerString.length; i++) {
           answerEl.innerHTML += answerString.charAt(i);
-          await sleep(25); // Extremely fast typing speed
+          await sleep(20); // Fast typing
         }
         
         document.getElementById('rag-status-indicator').innerText = "Status: Completed";
