@@ -258,6 +258,88 @@
       background: repeating-linear-gradient(-45deg, transparent, transparent 8px, rgba(194,65,12,0.02) 8px, rgba(194,65,12,0.02) 16px);
     }
 
+    /* ===== Comparison Cards (Part 1) ===== */
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin: 3rem 0;
+    }
+    @media (min-width: 768px) {
+      .comparison-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    .comp-card {
+      background: #fff;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.75rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .comp-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+    }
+    .comp-card.highlight {
+      background: linear-gradient(135deg, var(--surface) 0%, var(--surface-warm) 100%);
+      border-color: rgba(194, 65, 12, 0.3); /* Subtle accent border */
+      position: relative;
+    }
+    .comp-card.highlight::before {
+      content: 'THE PARADIGM SHIFT';
+      position: absolute;
+      top: -10px;
+      left: 1.5rem;
+      background: var(--accent);
+      color: #fff;
+      font-family: var(--font-sans);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 0.2rem 0.6rem;
+      border-radius: 100px;
+    }
+    .comp-title {
+      font-family: var(--font-sans);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+    .comp-desc {
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+      color: var(--ink-muted);
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .comp-features {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      color: var(--ink-light);
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+    .comp-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      line-height: 1.4;
+    }
+    .comp-features li svg {
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
     /* ===== References section ===== */
     .ref-list p { margin-bottom: 0.75rem; }
 
@@ -676,6 +758,40 @@
       <p class="text-body text-ink-light mb-6">The difference between a chatbot and an agentic AI is the difference between a search engine and a research assistant. A chatbot responds to queries; an agentic system <em>pursues goals</em>. It plans, reasons, uses tools, and adapts its approach based on what is working. In education, that means a tutor that does not just answer your question. It notices you are confused, traces the confusion to a specific misconception, retrieves a relevant example from your textbook, and walks you through it with Socratic questions (Schneider, 2025; Acharya et al., 2025).</p>
       <p class="text-body text-ink-light mb-6">This is not theoretical. Khan Academy&rsquo;s Khanmigo, built on GPT-4, grew from roughly 68,000 users during its 2023&ndash;24 pilot to <strong class="text-ink font-medium">over 700,000</strong> in 2024&ndash;25, with projections exceeding one million for 2025&ndash;26 (Khan Academy, 2025; DiCerbo, 2025). A 2025 systematic review covering 82 peer-reviewed studies distilled the field into five recurring themes: RAG dramatically reduces hallucination; prompt-engineering guardrails preserve academic integrity; multi-agent debate improves accuracy on complex tasks; affective scaffolding increases student persistence; and &mdash; perhaps most importantly &mdash; hybrid human&ndash;AI workflows consistently outperform fully autonomous tutors (Garcia-Bosque et al., 2025). The question is no longer <em>whether</em> AI can enhance education, but how to design, deploy, and govern it responsibly.</p>
 
+      <div class="comparison-grid fade-in">
+        
+        <div class="comp-card">
+          <div class="comp-title">Traditional EdTech</div>
+          <div class="comp-desc">MOOCs & basic adaptive platforms.</div>
+          <ul class="comp-features">
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> Passive knowledge delivery</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> Rigid, rule-based branching logic</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> Fails to diagnose underlying misconceptions</li>
+          </ul>
+        </div>
+
+        <div class="comp-card">
+          <div class="comp-title">Basic LLM / Chatbot</div>
+          <div class="comp-desc">Standard ChatGPT or Claude without guardrails.</div>
+          <ul class="comp-features">
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Natural language conversational fluency</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> Severe hallucination risk in specialized subjects</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> Solves problems instead of teaching (the cognitive crutch)</li>
+          </ul>
+        </div>
+
+        <div class="comp-card highlight">
+          <div class="comp-title text-accent">Agentic Tutor</div>
+          <div class="comp-desc">The Intelligent Classroom architecture.</div>
+          <ul class="comp-features">
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> <strong>Goal-driven planning</strong> & multi-agent collaboration</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> <strong>RAG-grounded</strong> directly in your verified course materials</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> <strong>Socratic scaffolding</strong> (guides discovery, preserves struggle)</li>
+          </ul>
+        </div>
+
+      </div>
+      
       <!-- Chart #1: Khanmigo User Growth -->
       <div class="my-12 fade-in" style="background:#fff;border:1px solid var(--border-subtle);border-radius:12px;padding:1.5rem;">
         <p class="font-sans text-caption text-ink-muted uppercase tracking-wide mb-3" style="font-weight:600;">Fig. 1 &mdash; Khanmigo User Growth &amp; Adoption</p>
