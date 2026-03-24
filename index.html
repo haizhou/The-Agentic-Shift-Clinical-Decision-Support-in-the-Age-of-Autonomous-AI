@@ -762,14 +762,95 @@
        KEY TAKEAWAY BOX
        ============================================================ */
     .takeaway {
-      background: linear-gradient(135deg, #fffbf5 0%, #fef3e2 100%);
-      border-left: 4px solid var(--accent);
-      border-radius: 0 8px 8px 0;
-      padding: 1.25rem 1.5rem;
+      position: relative;
       margin: 2rem 0;
+      padding: 0;
+      background: none;
+      border: none;
     }
-    .takeaway-label { font-family: var(--font-sans); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 0.5rem; }
-    .takeaway p { font-size: 1rem; line-height: 1.65; color: var(--ink-light); }
+    .takeaway-inner {
+      position: relative;
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d1a0e 55%, #1e1208 100%);
+      border-radius: 12px;
+      padding: 1.75rem 2rem 1.75rem 2rem;
+      overflow: hidden;
+    }
+    /* Ambient glow top-right */
+    .takeaway-inner::before {
+      content: '';
+      position: absolute;
+      top: -30px; right: -30px;
+      width: 160px; height: 160px;
+      background: radial-gradient(circle, rgba(194,65,12,0.22) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    /* Subtle dot grid texture */
+    .takeaway-inner::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='0.8' fill='%23ffffff'/%3E%3C/svg%3E");
+      background-size: 20px 20px;
+      pointer-events: none;
+      border-radius: 12px;
+    }
+    .takeaway-label {
+      font-family: var(--font-sans);
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      position: relative;
+      z-index: 1;
+    }
+    .takeaway-label::before {
+      content: '';
+      display: inline-block;
+      width: 18px; height: 2px;
+      background: var(--accent);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .takeaway-label::after {
+      content: '';
+      display: inline-block;
+      flex: 1;
+      height: 1px;
+      background: rgba(194,65,12,0.25);
+    }
+    .takeaway p {
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      line-height: 1.72;
+      color: rgba(255,255,255,0.72);
+      position: relative;
+      z-index: 1;
+      margin: 0;
+    }
+    .takeaway p strong {
+      color: #fff;
+      font-weight: 600;
+    }
+    /* Key stats pulled out inline */
+    .takeaway-stat {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--accent);
+      background: rgba(194,65,12,0.12);
+      border: 1px solid rgba(194,65,12,0.25);
+      border-radius: 4px;
+      padding: 0.05rem 0.45rem;
+      margin: 0 0.1rem;
+      vertical-align: baseline;
+    }
 
     /* ============================================================
        CONCLUSIONS DARK SECTION
@@ -808,7 +889,8 @@
     .hero-bg {
       background: linear-gradient(160deg, #1a1a1a 0%, #2d1a0e 40%, #1a1a1a 100%);
       position: relative;
-      overflow: hidden;
+      overflow: visible;
+      padding-bottom: 140px;
     }
     .hero-bg::before {
       content: '';
@@ -876,8 +958,28 @@
       display: inline-flex; align-items: center; gap: 0.4rem;
     }
     .hero-transition {
-      height: 120px;
-      background: linear-gradient(to bottom, #1a1a1a 0%, #231208 35%, var(--surface-warm) 75%, var(--surface) 100%);
+      display: none;
+    }
+    .hero-bottom-fade {
+      position: absolute;
+      bottom: -2px; left: 0; right: 0;
+      height: 180px;
+      background: linear-gradient(to bottom,
+        transparent                0%,
+        #2a1509               28%,
+        #4a2510               48%,
+        #8a5228               62%,
+        #c89060               74%,
+        #e8cfa8               84%,
+        var(--surface-warm)   92%,
+        var(--surface)       100%
+      );
+      pointer-events: none;
+      z-index: 2;
+    }
+    .hero-bg .relative {
+      position: relative;
+      z-index: 3;
     }
     main { position: relative; }
     main::before {
@@ -959,8 +1061,366 @@
     }
 
     /* ============================================================
-       PRINT
+       TEACHER-STUDENT CRISIS DIALOGUE (Section 1.1)
        ============================================================ */
+    .crisis-dialogue {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d1a0e 55%, #1e1208 100%);
+      border-radius: 14px;
+      overflow: hidden;
+      margin: 2rem 0 2.5rem;
+      position: relative;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+    }
+    .crisis-dialogue::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='0.8' fill='%23ffffff'/%3E%3C/svg%3E");
+      background-size: 20px 20px;
+      pointer-events: none;
+    }
+    .crisis-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.9rem 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .crisis-label {
+      font-family: var(--font-sans);
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.35);
+    }
+    .crisis-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #ef4444;
+      box-shadow: 0 0 6px rgba(239,68,68,0.6);
+      animation: crisis-blink 2s ease-in-out infinite;
+      margin-left: auto;
+    }
+    @keyframes crisis-blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .crisis-stage {
+      display: flex;
+      gap: 0;
+      padding: 1.5rem 1.25rem 1.25rem;
+      min-height: 220px;
+      align-items: flex-start;
+    }
+    .crisis-side {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .crisis-avatar {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .crisis-avatar svg { width: 28px; height: 28px; }
+    .crisis-role {
+      font-family: var(--font-sans);
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 0.25rem;
+    }
+    .crisis-bubbles {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .crisis-teacher-bubbles { align-items: flex-start; }
+    .crisis-student-bubbles { align-items: flex-end; }
+
+    .crisis-bubble {
+      max-width: 92%;
+      padding: 0.65rem 0.9rem;
+      border-radius: 10px;
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      line-height: 1.5;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+    }
+    .crisis-bubble.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .crisis-teacher .crisis-bubble {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.75);
+      border-bottom-left-radius: 3px;
+    }
+    .crisis-student .crisis-bubble {
+      background: rgba(251,191,36,0.1);
+      border: 1px solid rgba(251,191,36,0.2);
+      color: rgba(251,191,36,0.9);
+      border-bottom-right-radius: 3px;
+    }
+    .crisis-bubble em {
+      font-style: normal;
+      font-weight: 600;
+      color: #fff;
+    }
+    .crisis-student .crisis-bubble em {
+      color: #fbbf24;
+    }
+
+    .crisis-divider {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 0.75rem;
+      gap: 0.4rem;
+      padding-top: 3.5rem;
+      flex-shrink: 0;
+    }
+    .crisis-divider-line {
+      width: 1px;
+      flex: 1;
+      background: rgba(255,255,255,0.08);
+      min-height: 30px;
+    }
+    .crisis-vs {
+      font-family: var(--font-sans);
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .crisis-footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.5rem 1rem;
+      padding: 0.85rem 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      background: rgba(0,0,0,0.15);
+    }
+    .crisis-footer-stat {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.35);
+    }
+    .crisis-footer-num {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 0.85rem;
+    }
+    .crisis-footer-divider {
+      color: rgba(255,255,255,0.15);
+      font-size: 0.8rem;
+    }
+
+
+    /* ============================================================
+       THREE-MODE REASONING COMPARISON (Section 2.1)
+       ============================================================ */
+    .reasoning-compare {
+      margin: 2.5rem 0;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.05);
+      font-family: var(--font-sans);
+    }
+    .rc-header {
+      background: var(--surface);
+      padding: 0.9rem 1.25rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .rc-question {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .rc-question em { font-style: normal; color: var(--ink-muted); font-weight: 400; }
+    .rc-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 640px) {
+      .rc-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .rc-card {
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      border-right: 1px solid var(--border-subtle);
+    }
+    .rc-card:last-child { border-right: none; }
+    @media (max-width: 639px) {
+      .rc-card { border-right: none; border-bottom: 1px solid var(--border-subtle); }
+      .rc-card:last-child { border-bottom: none; }
+    }
+    .rc-direct   { background: #fafafa; }
+    .rc-cot      { background: #fffbf5; }
+    .rc-thinking { background: linear-gradient(160deg, #1a1a1a 0%, #2d1a0e 100%); }
+    .rc-mode-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .rc-mode-badge {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border-radius: 100px;
+    }
+    .rc-badge-direct   { background: #f1f5f9; color: #64748b; }
+    .rc-badge-cot      { background: #fff7ed; color: #c2410c; border: 1px solid rgba(194,65,12,0.2); }
+    .rc-badge-thinking { background: rgba(251,191,36,0.15); color: #fbbf24; border: 1px solid rgba(251,191,36,0.3); }
+    .rc-mode-sub { font-size: 0.7rem; color: var(--ink-muted); }
+    .rc-thinking .rc-mode-sub { color: rgba(255,255,255,0.4); }
+    .rc-body { flex: 1; min-height: 140px; }
+    .rc-output { font-size: 0.82rem; line-height: 1.65; }
+    .rc-direct .rc-output   { color: var(--ink-light); }
+    .rc-cot .rc-output      { color: var(--ink-light); }
+    .rc-thinking .rc-output { color: rgba(255,255,255,0.75); }
+    .rc-token-think {
+      display: block;
+      font-size: 0.74rem;
+      color: var(--ink-muted);
+      font-family: var(--font-mono);
+      margin-bottom: 0.25rem;
+    }
+    .rc-token-tool {
+      display: inline-block;
+      font-size: 0.71rem;
+      font-family: var(--font-mono);
+      background: rgba(194,65,12,0.08);
+      color: #c2410c;
+      border: 1px solid rgba(194,65,12,0.18);
+      border-radius: 3px;
+      padding: 0.05rem 0.4rem;
+      margin: 0.2rem 0;
+    }
+    .rc-token-internal {
+      display: block;
+      font-size: 0.71rem;
+      font-family: var(--font-mono);
+      color: rgba(251,191,36,0.45);
+      margin-bottom: 0.18rem;
+      font-style: italic;
+    }
+    .rc-token-answer {
+      display: block;
+      font-weight: 600;
+      margin-top: 0.6rem;
+      font-size: 0.88rem;
+    }
+    .rc-direct   .rc-token-answer { color: #ef4444; }
+    .rc-cot      .rc-token-answer { color: #15803d; }
+    .rc-thinking .rc-token-answer { color: #fbbf24; }
+    .rc-token-socratic {
+      display: block;
+      margin-top: 0.5rem;
+      font-size: 0.76rem;
+      color: rgba(255,255,255,0.45);
+      font-style: italic;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding-top: 0.45rem;
+    }
+    .rc-token-wrong {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.68rem;
+      color: #ef4444;
+      margin-top: 0.35rem;
+    }
+    .rc-footer {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 0.75rem;
+    }
+    .rc-thinking .rc-footer { border-top-color: rgba(255,255,255,0.08); }
+    .rc-metric {
+      font-size: 0.72rem;
+      color: var(--ink-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .rc-thinking .rc-metric         { color: rgba(255,255,255,0.4); }
+    .rc-thinking .rc-metric strong  { color: rgba(255,255,255,0.8); }
+    .rc-metric strong { color: var(--ink); font-weight: 600; }
+    .rc-metric-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .rc-caption {
+      background: var(--surface);
+      border-top: 1px solid var(--border-subtle);
+      padding: 0.75rem 1.25rem;
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      color: var(--ink-muted);
+      font-style: italic;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .rc-replay-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      font-weight: 600;
+      font-style: normal;
+      color: var(--accent);
+      background: rgba(194,65,12,0.06);
+      border: 1px solid rgba(194,65,12,0.2);
+      border-radius: 100px;
+      padding: 0.25rem 0.7rem;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      flex-shrink: 0;
+    }
+    .rc-replay-btn:hover {
+      background: rgba(194,65,12,0.12);
+      transform: scale(1.03);
+    }
+    .rc-replay-btn:active { transform: scale(0.97); }
+    .rc-replay-btn.spinning svg {
+      animation: rcSpin 0.5s linear;
+    }
+    @keyframes rcSpin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(-360deg); }
+    }
+
     @media print { .toc-sidebar, #progress-bar { display: none !important; } }
   </style>
 </head>
@@ -979,11 +1439,12 @@
       <li><a href="#sec-1-2" class="toc-link toc-sub block py-1 pl-5 border-l-2 hover:text-accent">1.2 MOOCs &amp; EdTech Limits</a></li>
       <li><a href="#sec-1-3" class="toc-link toc-sub block py-1 pl-5 border-l-2 hover:text-accent">1.3 Enter Agentic AI</a></li>
       <li><a href="#part-2" class="toc-link block py-1 pl-3 border-l-2 text-ink-muted hover:text-accent">Part 2: The Tech Stack</a></li>
-      <li><a href="#sec-2-1" class="toc-link toc-sub block py-1 pl-5 border-l-2 hover:text-accent">2.1 The Socratic Machine</a></li>
-      <li><a href="#sec-2-2" class="toc-link toc-sub block py-1 pl-5 border-l-2 hover:text-accent">2.2 RAG &amp; Grounding</a></li>
-      <li><a href="#sec-2-3" class="toc-link toc-sub block py-1 pl-5 border-l-2 hover:text-accent">2.3 Multi-Agent Systems</a></li>
-      <li><a href="#sec-2-4" class="toc-link toc-sub block py-1 pl-5 border-l-2 hover:text-accent">2.4 The Multimodal Tutor</a></li>
-      <li><a href="#sec-2-5" class="toc-link toc-sub block py-1 pl-5 border-l-2 hover:text-accent">2.5 Putting It Together</a></li>
+      <li><a href="#sec-2-1" class="toc-link toc-sub block py-1 pl-5 border-l-2 hover:text-accent">2.1 How AI Thinks</a></li>
+      <li><a href="#sec-2-2" class="toc-link toc-sub block py-1 pl-5 border-l-2 hover:text-accent">2.2 Grounding &amp; Correctness</a></li>
+      <li><a href="#sec-2-3" class="toc-link toc-sub block py-1 pl-5 border-l-2 hover:text-accent">2.3 Multimodal Expression</a></li>
+      <li><a href="#sec-2-4" class="toc-link toc-sub block py-1 pl-5 border-l-2 hover:text-accent">2.4 Persistent Memory</a></li>
+      <li><a href="#sec-2-5" class="toc-link toc-sub block py-1 pl-5 border-l-2 hover:text-accent">2.5 Multi-Agent Systems</a></li>
+      <li><a href="#sec-2-6" class="toc-link toc-sub block py-1 pl-5 border-l-2 hover:text-accent">2.6 Deployment &amp; Speed</a></li>
       <li><a href="#part-3" class="toc-link block py-1 pl-3 border-l-2 text-ink-muted hover:text-accent">Part 3: The Hard Questions</a></li>
       <li><a href="#sec-3-1" class="toc-link toc-sub block py-1 pl-5 border-l-2 hover:text-accent">3.1 Student Data Privacy</a></li>
       <li><a href="#sec-3-2" class="toc-link toc-sub block py-1 pl-5 border-l-2 hover:text-accent">3.2 The Cognitive Crutch</a></li>
@@ -1019,9 +1480,10 @@
         <span class="hero-meta-pill">Emerging Topics in Integrated Machine Learning Systems 25/26</span>
       </div>
     </div>
+  <div class="hero-bottom-fade"></div>
   </header>
 
-  <div class="hero-transition"></div>
+  <!-- hero-transition removed: fade is now baked into header -->
 
   <!-- ====== MAIN CONTENT ====== -->
   <main class="max-w-prose mx-auto px-6" style="padding-top:2rem;padding-bottom:4rem;">
@@ -1031,18 +1493,64 @@
       <div class="font-sans text-caption uppercase tracking-widest text-accent font-semibold mb-3">Part 1</div>
       <h2 class="text-h1 mb-4">Education at a Crossroads</h2>
       <div class="takeaway fade-in" style="margin-bottom:2.5rem;">
-        <div class="takeaway-label">TL;DR</div>
-        <p>The world needs 44 million more teachers by 2030. Bloom proved one-on-one tutoring works forty years ago, but we could never afford to deliver it at scale. Then agentic AI entered the picture. Khanmigo has already reached 1.4 million users, and a systematic review of 82 studies confirms: hybrid human-AI approaches outperform fully autonomous ones.</p>
+        <div class="takeaway-inner">
+          <div class="takeaway-label">TL;DR</div>
+          <p>The world needs <span class="takeaway-stat">44 million</span> more teachers by 2030. Bloom proved one-on-one tutoring works forty years ago, but we could never afford to deliver it at scale. Then agentic AI entered the picture. Khanmigo has already reached <span class="takeaway-stat">1.4M users</span>, and a systematic review of <span class="takeaway-stat">82 studies</span> confirms: <strong>hybrid human-AI approaches outperform fully autonomous ones.</strong></p>
+        </div>
       </div>
 
       <h3 id="sec-1-1" class="text-h2 mb-5 mt-12">1.1&ensp;A Teacher Shortage That Keeps Getting Worse</h3>
+
+      <!-- Teacher-Student Crisis Dialogue -->
       <p class="text-body text-ink-light mb-6">Here is a number that should alarm you: the world needs approximately <strong class="text-ink font-medium">44 million additional teachers by 2030</strong> just to achieve universal basic education (UNESCO, 2024). That is not a projection about some distant future &mdash; it is six years away, and we are nowhere close to being on track.</p>
       <p class="text-body text-ink-light mb-6">The pipeline is collapsing from the other end, too. The 2024 TALIS survey found that one in five teachers under 30 plans to leave the profession within five years; in some countries, that figure rises to nearly half (Education International, 2025). In the United States alone, roughly 411,500 teaching positions were either unfilled or occupied by under-qualified staff in the 2024&ndash;25 school year, roughly one in eight positions nationally (Learning Policy Institute, 2025). These are not abstract statistics. They translate directly into overcrowded classrooms, widening achievement gaps, and students in STEM subjects who may never encounter a fully qualified teacher.</p>
       <p class="text-body text-ink-light mb-6">The pattern is self-reinforcing: burnout drives experienced educators out, which increases the workload on those who remain, which drives more burnout. Across OECD countries, secondary schools consistently suffer worse vacancies than primary, especially in science, mathematics, and technology (OECD Education at a Glance, 2025). Rural and economically disadvantaged communities bear the heaviest burden: limited tax bases, geographic isolation, and distance from teacher-training programmes compound recruitment challenges. In Sub-Saharan Africa, the student-to-teacher ratio can exceed <strong class="text-ink font-medium">56:1</strong> (UNESCO, 2024). At that density, personalised instruction is not merely difficult; it is physically impossible.</p>
 
-      <div class="stat-callout fade-in">
-        <div class="stat-callout-number">1 in 8</div>
-        <div class="stat-callout-text"><strong>U.S. teaching positions</strong> were either unfilled or staffed by under-qualified teachers in the 2024-25 school year. In Sub-Saharan Africa, one teacher can face 56 students. The global gap: 44 million teachers short by 2030.</div>
+      <p class="text-body text-ink-light mb-6">The numbers crystallise into something almost surreal when placed side by side. In the United States, roughly one in eight teaching positions was either unfilled or occupied by under-qualified staff in the 2024&ndash;25 school year &mdash; not in struggling rural districts alone, but nationally (Learning Policy Institute, 2025). In Sub-Saharan Africa, where the ratio can exceed 56 students to every one teacher, the very idea of individual attention collapses under its own arithmetic. These are not parallel crises. They are the same crisis, playing out at different latitudes.</p>
+
+      <div class="crisis-dialogue fade-in" id="crisis-dialogue">
+        <div class="crisis-header">
+          <span class="crisis-label">The Crisis in Two Voices</span>
+          <span class="crisis-dot"></span>
+        </div>
+        <div class="crisis-stage">
+          <div class="crisis-side crisis-teacher">
+            <div class="crisis-avatar">
+              <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="18" cy="13" r="6" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+                <path d="M6 30c0-7 24-7 24 0" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M10 13l8-4 8 4-8 4-8-4z" fill="rgba(255,255,255,0.5)"/>
+                <path d="M22 15v5" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="crisis-role">Teacher</div>
+            <div class="crisis-bubbles crisis-teacher-bubbles"></div>
+          </div>
+          <div class="crisis-divider">
+            <div class="crisis-divider-line"></div>
+            <div class="crisis-vs">vs</div>
+            <div class="crisis-divider-line"></div>
+          </div>
+          <div class="crisis-side crisis-student">
+            <div class="crisis-avatar">
+              <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="18" cy="13" r="6" fill="rgba(251,191,36,0.15)" stroke="rgba(251,191,36,0.5)" stroke-width="1.5"/>
+                <path d="M6 30c0-7 24-7 24 0" stroke="rgba(251,191,36,0.5)" stroke-width="1.5" stroke-linecap="round"/>
+                <rect x="11" y="20" width="8" height="6" rx="1" fill="rgba(251,191,36,0.4)"/>
+                <line x1="15" y1="20" x2="15" y2="26" stroke="rgba(251,191,36,0.6)" stroke-width="1"/>
+              </svg>
+            </div>
+            <div class="crisis-role" style="color:rgba(251,191,36,0.8);">Student</div>
+            <div class="crisis-bubbles crisis-student-bubbles"></div>
+          </div>
+        </div>
+        <div class="crisis-footer">
+          <span class="crisis-footer-stat"><span class="crisis-footer-num" id="cf-num-1">0</span>M teachers short by 2030</span>
+          <span class="crisis-footer-divider">·</span>
+          <span class="crisis-footer-stat"><span class="crisis-footer-num" id="cf-num-2">0</span>:1 ratio in Sub-Saharan Africa</span>
+          <span class="crisis-footer-divider">·</span>
+          <span class="crisis-footer-stat">1 in <span class="crisis-footer-num" id="cf-num-3">0</span> U.S. positions unfilled</span>
+        </div>
       </div>
 
       <h3 id="sec-1-2" class="text-h2 mb-5 mt-14">1.2&ensp;MOOCs Promised a Revolution. They Delivered a Library Card.</h3>
@@ -1104,76 +1612,86 @@
       <div class="font-sans text-caption uppercase tracking-widest text-accent font-semibold mb-3">Part 2</div>
       <h2 class="text-h1 mb-4">The Tech Stack Behind the Intelligent Classroom</h2>
       <div class="takeaway fade-in" style="margin-bottom:2.5rem;">
-        <div class="takeaway-label">TL;DR</div>
-        <p>Four technologies are converging into a single architecture. LLMs handle Socratic dialogue. RAG grounds every answer in verified course materials. Multi-agent orchestration splits diagnosis, planning, and assessment across specialised roles. Multimodal perception lets the system see, hear, and speak. Edge-cloud co-design and 4-bit quantization (98%+ accuracy retained) make all of this feasible on a Chromebook.</p>
-      </div>
-
-      <h3 id="sec-2-1" class="text-h2 mb-5 mt-12">2.1&ensp;The Socratic Machine: LLMs That Teach by Asking</h3>
-      <p class="text-body text-ink-light mb-6">The best human tutors do not lecture. They ask questions. They probe for misunderstandings, offer hints at the right moment, and resist the urge to simply hand over the answer. It turns out that large language models (GPT-4, Gemini, Claude) are surprisingly good at this, once you tell them to do it. Equip an LLM with agentic capabilities like planning, tool use, memory, and reflection, and it becomes capable of sustained, pedagogically meaningful dialogue with a learner.</p>
-      <p class="text-body text-ink-light mb-6">Khanmigo is the clearest example. Ask it to help you solve a quadratic equation, and it will not show you the answer. It will ask what you have tried so far, nudge you toward the right factorisation, and wait for you to get there yourself. Its Writing Coach module guides students through essay planning, thesis refinement, and draft revision without generating a single sentence on their behalf. It also flags passages of more than fifteen words pasted from external sources for teacher review (Khan Academy, 2025). This is not a gimmick. It is a structural encoding of pedagogical principles into the agent&rsquo;s behaviour.</p>
-
-      <!-- Socratic Chat Demo -->
-      <div class="chat-demo-wrapper my-12" id="socratic-chat-demo">
-        <div class="chat-header">
-          <span class="chat-title">Live Socratic Dialogue Demo</span>
-          <span class="chat-status">Agent Active</span>
-        </div>
-        <div class="chat-window">
-          <div class="chat-msg student" id="msg-student">
-            <div class="chat-bubble">I'm stuck. Why isn't the derivative of sin(x²) just cos(x²)?</div>
-          </div>
-          <div class="chat-msg tutor" id="msg-tutor-typing" style="display: none;">
-            <div class="chat-bubble">
-              <div class="typing-dots"><span></span><span></span><span></span></div>
-            </div>
-          </div>
-          <div class="chat-msg tutor" id="msg-tutor-text" style="display: none;">
-            <div class="chat-bubble">
-              <span id="tutor-text-content"></span><span class="typewriter-cursor"></span>
-            </div>
-          </div>
+        <div class="takeaway-inner">
+          <div class="takeaway-label">TL;DR</div>
+          <p>Building a tutor that actually works is a sequence of engineering problems, each one exposed by solving the last. How does the AI reason carefully rather than guess? How do you stop it making things up &mdash; and guarantee the maths is right? How does it communicate in a way students can actually follow? How does it remember a specific student across months? How do multiple specialised roles coordinate? And how does any of this run fast enough to feel like a conversation? Each question has an answer. Together, they add up to something that did not exist five years ago.</p>
         </div>
       </div>
 
-      <p class="text-body text-ink-light mb-6">Under the hood, several key techniques make this possible. <strong class="text-ink font-medium">Chain-of-thought prompting</strong> (Wei et al., 2023) gets the model to &ldquo;show its working&rdquo; &mdash; generating intermediate reasoning steps before committing to a final answer, which dramatically improves performance on maths and logic. The <strong class="text-ink font-medium">ReAct framework</strong> (Yao et al., 2023) goes further, interleaving reasoning with tool use: the agent can pause mid-thought to search a knowledge base, run a calculation, or check a database, then resume with that new information in hand. Chen et al. (2024) showed that chaining multiple LLM calls into a pipeline (one to diagnose the student&rsquo;s state, another to generate a response, a third to verify its quality) produces tutoring interactions that approach expert human tutors.</p>
-      <p class="text-body text-ink-light mb-6">But there is a catch that often gets overlooked: <strong class="text-ink font-medium">deployment cost</strong>. State-of-the-art LLMs contain billions of parameters. Running them requires serious GPU memory &mdash; far more than the Chromebooks, tablets, and shared classroom PCs that most students actually use. On such devices, the bottleneck is usually not raw compute but the <em>memory wall</em>: the bandwidth limit when shuttling billions of weights between DRAM and the processor for each inference pass.</p>
-      <p class="text-body text-ink-light mb-6">This is where model compression enters the picture. <strong class="text-ink font-medium">Quantization</strong> takes each weight from its original 32-bit floating-point representation and squeezes it into 4 or 8 bits. Formally, each floating-point weight \( W_{\text{fp}} \) maps to its quantized counterpart \( W_q \) via:</p>
+      <h3 id="sec-2-1" class="text-h2 mb-5 mt-12">2.1&ensp;How Should an AI Think? From Chain-of-Thought to Thinking Time</h3>
+      <p class="text-body text-ink-light mb-6">The most obvious failure mode of an early AI tutor is not that it lacks knowledge &mdash; it is that it does not <em>think.</em> Ask a standard language model a physics problem and it produces an answer in a single forward pass, with the same computational budget whether the question is trivial or graduate-level. The confidence of the output tells you nothing about its correctness. This is the opposite of how a good teacher works.</p>
+      <p class="text-body text-ink-light mb-6"><strong class="text-ink font-medium">Chain-of-thought prompting</strong> (Wei et al., 2023) was the first crack in this wall: prompt the model to reason step by step before committing, and performance on mathematics and logic improves substantially. The <strong class="text-ink font-medium">ReAct framework</strong> (Yao et al., 2023) went further &mdash; interleaving reasoning with tool use so the agent can pause mid-thought to query a knowledge base or run a calculation, then resume with that result in hand. Both were improvements. But they still operated within a fixed inference budget, allocating the same compute to every query regardless of difficulty.</p>
+      <p class="text-body text-ink-light mb-6">The deeper shift came with <strong class="text-ink font-medium">test-time compute scaling.</strong> OpenAI&rsquo;s o1 and o3 demonstrated something that upended the conventional wisdom: a model does not need to be bigger to be smarter &mdash; it needs more time to think. Performance scales smoothly with compute allocated at inference, not just with parameter count. A smaller model given a longer reasoning budget can outperform one fourteen times its size running standard decoding (Snell et al., ICLR 2025). For a tutor, this changes the design question entirely. Vocabulary recall needs a fraction of a second. A calculus proof benefits from extended internal deliberation. The system can now allocate thinking time dynamically, matching the depth of reasoning to the actual difficulty of the question &mdash; exactly as an experienced teacher would.</p>
 
-      <div class="formula-block my-8 text-center">
-        $$ W_q = \text{round}\!\left(\frac{W_{\text{fp}}}{S}\right) + Z $$
-        <p class="font-sans text-caption text-ink-muted mt-3" style="text-align:left;">where <em>S</em> is a learned scale factor and <em>Z</em> is a zero-point offset defining the mapping between the continuous weight distribution and the discrete integer grid.</p>
+      <!-- Three-Mode Reasoning Comparison -->
+      <div class="reasoning-compare fade-in" id="reasoning-compare">
+        <div class="rc-header">
+          <span class="rc-question">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            A ball is dropped from 80 m. How long to hit the ground? <em>(g = 10 m/s&sup2;)</em>
+          </span>
+        </div>
+        <div class="rc-grid">
+          <div class="rc-card rc-direct">
+            <div class="rc-mode-label">
+              <span class="rc-mode-badge rc-badge-direct">Direct</span>
+              <span class="rc-mode-sub">No reasoning budget</span>
+            </div>
+            <div class="rc-body"><div class="rc-output" id="rc-out-1"></div></div>
+            <div class="rc-footer">
+              <div class="rc-metric"><span class="rc-metric-dot" style="background:#ef4444"></span>Accuracy: <strong>Unreliable</strong></div>
+              <div class="rc-metric"><span class="rc-metric-dot" style="background:#6b7280"></span>Latency: <strong>~80ms</strong></div>
+              <div class="rc-metric"><span class="rc-metric-dot" style="background:#6b7280"></span>Reasoning: <strong>None</strong></div>
+            </div>
+          </div>
+          <div class="rc-card rc-cot">
+            <div class="rc-mode-label">
+              <span class="rc-mode-badge rc-badge-cot">CoT + ReAct</span>
+              <span class="rc-mode-sub">Structured reasoning</span>
+            </div>
+            <div class="rc-body"><div class="rc-output" id="rc-out-2"></div></div>
+            <div class="rc-footer">
+              <div class="rc-metric"><span class="rc-metric-dot" style="background:#16a34a"></span>Accuracy: <strong>Reliable</strong></div>
+              <div class="rc-metric"><span class="rc-metric-dot" style="background:#ef4444"></span>Latency: <strong>~680ms</strong></div>
+              <div class="rc-metric"><span class="rc-metric-dot" style="background:#d97706"></span>Reasoning: <strong>Stepwise</strong></div>
+            </div>
+          </div>
+          <div class="rc-card rc-thinking">
+            <div class="rc-mode-label">
+              <span class="rc-mode-badge rc-badge-thinking">Thinking Time</span>
+              <span class="rc-mode-sub">Adaptive compute &middot; o1-style</span>
+            </div>
+            <div class="rc-body"><div class="rc-output" id="rc-out-3"></div></div>
+            <div class="rc-footer">
+              <div class="rc-metric"><span class="rc-metric-dot" style="background:#16a34a"></span>Accuracy: <strong>Verified</strong></div>
+              <div class="rc-metric"><span class="rc-metric-dot" style="background:#16a34a"></span>Latency: <strong>~340ms</strong></div>
+              <div class="rc-metric"><span class="rc-metric-dot" style="background:#16a34a"></span>Reasoning: <strong>Adaptive</strong></div>
+            </div>
+          </div>
+        </div>
+        <div class="rc-caption">
+          Same question. Three different relationships between compute and correctness.
+          <button id="rc-replay" class="rc-replay-btn" title="Replay animation">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg>
+            Replay
+          </button>
+        </div>
       </div>
 
-      <p class="text-body text-ink-light mb-6">The payoff is enormous. Representing each weight in 4 bits instead of 32 slashes the memory footprint by up to 8&times;, directly relieving the DRAM bandwidth bottleneck. Recent edge-device benchmarks confirm this works in practice: 4-bit quantized models retain over 91% accuracy while halving memory usage and shaving inference latency from 150ms to 110ms (Agrawal et al., 2025). Two complementary techniques complete the picture. <strong class="text-ink font-medium">Knowledge distillation</strong> compresses a large &ldquo;teacher&rdquo; model into a smaller &ldquo;student&rdquo; that captures 85% of its capability at a fraction of the cost. <strong class="text-ink font-medium">Structured pruning</strong> surgically removes entire layers or attention heads that contribute little to output quality, shrinking models by up to 60%. Together, these methods are what make it possible to run an intelligent tutor on the same Chromebook a student uses for everything else.</p>
-
-      <div class="stat-callout fade-in">
-        <div class="stat-callout-number">8&times;</div>
-        <div class="stat-callout-text"><strong>Memory reduction</strong> from 4-bit quantization, with over 91% accuracy retained. Combined with distillation (85% capability at a fraction of the cost) and pruning (60% size reduction), these techniques make classroom-grade hardware viable for intelligent tutoring.</div>
-      </div>
-
-      <!-- Chart #2: Model Compression -->
-      <div class="my-12 fade-in" style="background:#fff;border:1px solid var(--border-subtle);border-radius:12px;padding:1.5rem;">
-        <p class="font-sans text-caption text-ink-muted uppercase tracking-wide mb-3" style="font-weight:600;">Fig. 2 &mdash; Model Compression: Accuracy Retention vs. Memory Reduction</p>
-        <div style="position:relative;height:340px;"><canvas id="chart2"></canvas></div>
-        <p class="font-sans text-caption text-ink-muted mt-3" style="text-align:left;">Sources: Agrawal et al. (2025), ICMLAS; Red Hat quantization benchmark (2024), 500K+ evaluations; SitePoint 4-bit vs 8-bit analysis (2025); IJCAI-25 quantization evaluation. Accuracy deltas measured on Llama-3.1 family models across OpenLLM Leaderboard benchmarks.</p>
-      </div>
-
-      <h3 id="sec-2-2" class="text-h2 mb-5 mt-14">2.2&ensp;RAG: Teaching the Tutor Not to Make Things Up</h3>
-      <p class="text-body text-ink-light mb-6">An LLM that confidently tells a student that the mitochondria is the &ldquo;brain of the cell&rdquo; is worse than no tutor at all. Retrieval-augmented generation (RAG) attacks this hallucination problem by fetching verified passages before the model speaks. However, early dense-vector RAG had a fatal flaw in education: it lacked structural understanding. It could find semantically similar text, but it couldn't map prerequisite dependencies.</p>
-      <p class="text-body text-ink-light mb-6">Enter <strong class="text-ink font-medium">GraphRAG</strong> and <strong class="text-ink font-medium">Knowledge Graphs (KG)</strong>. Instead of just searching a flat database of text chunks, the system traverses a structured network of concepts. If a student struggles with $F=ma$, the Knowledge Graph explicitly links this to <em>Mass</em> and <em>Acceleration</em>, and maps <em>Acceleration</em> back to <em>Velocity</em>. By running a hybrid retrieval (Dense Vector Search + Graph Traversal), the agentic tutor retrieves not just the answer, but the entire cognitive scaffolding needed to understand it. This guarantees the AI teaches what <em>your</em> course intends, following the exact pedagogical structure defined by the educators.</p>
+      <h3 id="sec-2-2" class="text-h2 mb-5 mt-14">2.2&ensp;Can We Trust the Answer? Grounding Facts and Guaranteeing Correctness</h3>
+      <p class="text-body text-ink-light mb-6">Good reasoning applied to the wrong sources produces confident nonsense. A model trained on the entire internet has no particular reason to prefer your department&rsquo;s lecture notes over a decade-old Reddit thread. And even when the sources are right, the model&rsquo;s reasoning over them may produce plausible-looking mathematics that is subtly wrong. This section is about two complementary mechanisms for making answers actually trustworthy: retrieval grounding for factual accuracy, and neurosymbolic verification for computational correctness.</p>
+      <p class="text-body text-ink-light mb-6"><strong class="text-ink font-medium">Retrieval-augmented generation (RAG)</strong> fixes the sourcing problem by fetching verified passages from a curated corpus before the model speaks, constraining generation to what your course actually says. But early dense-vector RAG had a structural flaw in education: it retrieved <em>semantically similar</em> text without understanding <em>prerequisite dependencies.</em> A student asking about Newton&rsquo;s second law might receive a perfectly accurate passage about force &mdash; but without the scaffolding of momentum and rate of change, the answer lands without the cognitive architecture needed to make sense of it.</p>
+      <p class="text-body text-ink-light mb-6"><strong class="text-ink font-medium">GraphRAG</strong> addresses this by traversing a structured concept network rather than a flat document store. If a student struggles with \(F=ma\), the knowledge graph maps this node to <em>Mass</em>, <em>Acceleration</em>, back to <em>Velocity</em>, and further to <em>Momentum (dp/dt)</em> &mdash; returning not just the answer, but the entire scaffold needed to reach it. In practice, a <strong class="text-ink font-medium">two-stage retrieval pipeline</strong> sharpens this further: BM25 sparse retrieval casts a wide net in milliseconds; a cross-encoder reranker then scores every candidate with full attention, surfacing the passages that are genuinely most relevant rather than merely most similar. LPITutor (Verma, 2025) extends this with a dedicated intent-extraction stage, correctly parsing a confused student&rsquo;s question before deciding what to fetch.</p>
 
       <div class="formula-block my-8 text-center">
         $$ P(y \mid x) = \sum_{z \in \mathcal{Z}} P(z \mid x)\, P(y \mid z, x) $$
-        <p class="font-sans text-caption text-ink-muted mt-3" style="text-align:left;">where <em>x</em> is the student&rsquo;s query, <em>Z</em> is the set of candidate documents, <em>P</em>(<em>z</em> | <em>x</em>) is the retrieval probability (via dense vector similarity), and <em>P</em>(<em>y</em> | <em>z</em>, <em>x</em>) is the conditional generation probability given query and retrieved context.</p>
+        <p class="font-sans text-caption text-ink-muted mt-3" style="text-align:left;">The RAG objective: marginalise over retrieved documents \(z\). The retrieval distribution \(P(z \mid x)\) is computed via dense vector similarity; the generation distribution \(P(y \mid z, x)\) is conditioned on both query and retrieved context. The two-stage pipeline (BM25 recall &rarr; cross-encoder reranking) tightens the precision of \(z\) before it reaches the language model.</p>
       </div>
-
-      <p class="text-body text-ink-light mb-6">In plain English: when a student asks a question, the system first encodes the query into a vector and searches a curated corpus (textbooks, lecture notes, problem sets) for semantically similar content. The best matches are fed to the LLM as context, constraining it to generate answers grounded in <em>your course materials</em>, not the unfiltered internet. Verma (2025) describes <strong class="text-ink font-medium">LPITutor</strong>, which takes this further with a modular pipeline: one stage extracts the student&rsquo;s intent, another retrieves relevant materials, and a third synthesises a pedagogically appropriate response anchored in those sources.</p>
-      <p class="text-body text-ink-light mb-6">The Garcia-Bosque et al. (2025) systematic review identifies retrieval grounding as the single most effective technique for reducing hallucination in educational agents. But the benefits extend beyond accuracy. RAG gives educators institutional control: you curate and update the corpus, and the AI teaches what <em>your</em> course intends, not whatever happened to be popular on the internet during pre-training.</p>
 
       <!-- GraphRAG Console Demo -->
       <div class="rag-console-wrapper fade-in" id="rag-live-demo">
         <div class="rag-console-header">
-          <span>GraphRAG Pipeline Execution Log</span>
+          <span>GraphRAG + Two-Stage Retrieval Pipeline</span>
           <span id="rag-status-indicator" style="color:#f7768e;">Status: Standby</span>
         </div>
         <div class="rag-console-body" id="rag-console-container">
@@ -1191,18 +1709,28 @@
             Mapping conceptual dependencies via Educational Knowledge Graph...
             <div class="rag-graph-box" id="r-graph-text"></div>
           </div>
-          <div class="rag-log" id="r-log-4">
-            <span class="rag-tag tag-retrieve">HYBRID RETRIEVE</span>
-            Fusing Vector Search + Sub-graph matching in <span class="rag-text-highlight">Course Corpus</span>...
+          <div class="rag-log" id="r-log-4a">
+            <span class="rag-tag tag-retrieve">BM25 RECALL</span>
+            Fast sparse retrieval &mdash; casting wide net across <span class="rag-text-highlight">Course Corpus</span>...
+            <div class="rag-doc-box" id="r-recall-box"></div>
+          </div>
+          <div class="rag-log" id="r-log-4b">
+            <span class="rag-tag" style="background:#bb9af7;color:#1a1b26;">RERANK</span>
+            Cross-encoder scoring candidates with full attention...
+            <div class="rag-doc-box" id="r-rerank-box"></div>
+          </div>
+          <div class="rag-log" id="r-log-4c">
+            <span class="rag-tag tag-retrieve">FINAL MATCH</span>
+            Top-ranked passage selected after reranking...
             <div class="rag-doc-box">
-              <strong>Hybrid Match (Score: 0.94):</strong><br>
+              <strong>Reranked Match (Score: 0.94 &uarr; from 0.71):</strong><br>
               Source: <em>ELEC0139_Physics_Notes_Ch4.pdf</em><br>
               Context: "Newton's Second Law defines force as the rate of change of momentum (dp/dt). For a constant mass, this simplifies to F = m * a."
             </div>
           </div>
           <div class="rag-log" id="r-log-5">
             <span class="rag-tag tag-llm">GENERATE</span>
-            Injecting retrieved sub-graph & context. LLM generating grounded answer...
+            Injecting retrieved sub-graph &amp; context. LLM generating grounded answer...
             <div class="rag-answer-box">
               <span id="r-answer-text"></span><span class="rag-cursor" id="r-cursor" style="display:none;"></span>
             </div>
@@ -1210,10 +1738,82 @@
         </div>
       </div>
 
-      <h3 id="sec-2-3" class="text-h2 mb-5 mt-14">2.3&ensp;When One Agent Isn&rsquo;t Enough: Multi-Agent Collaboration</h3>
-      <p class="text-body text-ink-light mb-6">A single tutor, no matter how capable, cannot simultaneously diagnose a learning gap, design a personalised lesson plan, adapt content difficulty, and assess progress &mdash; at least, not well. The solution? Split the job. Wang et al. (2025b) propose a <strong class="text-ink font-medium">five-agent system</strong> where each agent has one focused role: a Gap Identifier (diagnoses deficits), a Learner Profiler (models student characteristics), a Dynamic Planner (generates learning paths), a Content Adapter (tailors difficulty), and a Feedback Synthesiser (consolidates assessment data). Think of it less like a single tutor and more like a well-coordinated teaching team.</p>
-      <p class="text-body text-ink-light mb-6">An especially promising technique is <strong class="text-ink font-medium">multi-agent debate</strong>: several LLM agents independently reason about a problem, then compare and reconcile their outputs. This consistently improves accuracy on open-ended tasks like essay evaluation (Garcia-Bosque et al., 2025). The <strong class="text-ink font-medium">EduThink4AI</strong> framework (2026) pushes this further with a four-agent pipeline &mdash; one generates answers, one checks validity, one critiques, and one synthesises &mdash; explicitly designed to model and develop critical thinking in students.</p>
-      <p class="text-body text-ink-light mb-6"><strong class="text-ink font-medium">Knowledge tracing</strong> is another natural fit for multi-agent approaches. Instead of relying on static test scores, these systems model what a student knows and how that knowledge evolves in real time. Xu et al. (2024) simulate students as different personas to track varied learning trajectories; Scarlatos et al. (2025) use dialogue itself as the probe, refining knowledge estimates through conversational exchanges rather than formal assessments.</p>
+      <p class="text-body text-ink-light mb-6">Retrieval solves the sourcing problem. It does not solve the calculation problem. Even when the retrieved passage is correct, the model&rsquo;s reasoning <em>over</em> it may produce mathematics that looks right but is not. For a student who cannot yet verify the answer, this is the core failure. <strong class="text-ink font-medium">Neurosymbolic reasoning</strong> addresses this with a clear division of labour: the LLM handles intent parsing, pedagogical framing, and natural-language explanation; the symbolic solver handles deterministic, verifiable computation. <strong class="text-ink font-medium">SymCode</strong> (2025) operationalises this directly &mdash; translating a student&rsquo;s problem into Python and SymPy, executing it, and feeding any errors back into a self-debugging loop until the result is guaranteed correct by execution, not by the model&rsquo;s confidence. At the research frontier, <strong class="text-ink font-medium">LIPS</strong> (ICLR 2025) demonstrates the same principle on Olympiad-level inequalities: partition the tactic space so enumerable algebraic lemmas go to symbolic modules and open-ended rewriting goes to the LLM, achieving state-of-the-art results without additional training data.</p>
+
+      <div class="pull-quote pl-6 py-1 my-10">
+        <p class="text-xl md:text-2xl font-serif font-medium text-ink leading-snug tracking-tight">RAG ensures the tutor draws on your course materials. Neurosymbolic reasoning ensures the answer is actually correct. Both layers are necessary. Neither is sufficient on its own.</p>
+      </div>
+
+      <h3 id="sec-2-3" class="text-h2 mb-5 mt-14">2.3&ensp;How Should the Answer Be Expressed? The Multimodal Layer</h3>
+      <p class="text-body text-ink-light mb-6">A correct, well-grounded answer can still fail a student if it arrives in the wrong form. Mathematics expressed only as text is hard to follow. A physics concept that exists only as an equation never becomes intuitive. And for younger learners or those with typing difficulties, a text-only interface is a barrier before the teaching even begins. Getting the content right is not the same as getting the communication right.</p>
+      <p class="text-body text-ink-light mb-6">Foundation models like GPT-4o, Gemini 2.5, and Claude now process text, speech, and vision natively &mdash; which means the tutoring interface can hear a student&rsquo;s spoken question, see the diagram they are pointing at, and respond in kind. Researchers at the NSF iSAT Institute have fine-tuned a Discrete Multimodal LLM specifically for classroom speech, tackling the real challenges that standard ASR handles poorly: background noise, children&rsquo;s pronunciation patterns, and the accents of a genuinely diverse student population (Trinh et al., 2025).</p>
+      <p class="text-body text-ink-light mb-6">But the more consequential development is not perception &mdash; it is <strong class="text-ink font-medium">generation.</strong> The most effective agentic tutors are beginning to produce interactive environments on the fly: not diagrams to look at, but simulations to manipulate. The student does not read about the Ideal Gas Law; they compress the gas themselves, watch the pressure climb, and arrive at \(PV=nRT\) through their own hands. This shifts the tutor&rsquo;s role from explaining to creating the conditions for understanding &mdash; a distinction that turns out to matter enormously for retention.</p>
+
+      <!-- Exploratory Sandbox -->
+      <div class="sandbox-wrapper my-12 fade-in" id="exploratory-sandbox">
+        <div class="sandbox-header">
+          <div class="sandbox-title">
+            <svg viewBox="0 0 24 24" fill="none" width="18" height="18" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            Interactive Explainer: Ideal Gas Law
+          </div>
+          <div class="sandbox-badge">Live Module</div>
+        </div>
+        <div class="sandbox-body">
+          <div class="sandbox-viz">
+            <div class="gauge-wrapper">
+              <div class="gauge-value" id="gauge-p">1.0 atm</div>
+              <div class="gauge-label">Pressure (P)</div>
+            </div>
+            <div class="cylinder-container" id="gas-cylinder">
+              <div class="piston" id="gas-piston">
+                <div class="piston-rod"></div>
+              </div>
+              <div id="particles-container"></div>
+            </div>
+          </div>
+          <div class="sandbox-interaction">
+            <div class="controls-area">
+              <div class="slider-group">
+                <div class="slider-header">
+                  <span>Temperature (T)</span>
+                  <span class="slider-value" id="val-t">300 K</span>
+                </div>
+                <input type="range" id="slider-t" min="100" max="800" value="300">
+              </div>
+              <div class="slider-group">
+                <div class="slider-header">
+                  <span>Volume (V)</span>
+                  <span class="slider-value" id="val-v">5.0 L</span>
+                </div>
+                <input type="range" id="slider-v" min="2" max="10" value="5" step="0.1">
+              </div>
+            </div>
+            <div class="sandbox-tutor">
+              <div class="tutor-header">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
+                AI Tutor is observing...
+              </div>
+              <div class="tutor-text" id="tutor-dynamic-text">
+                Try dragging the sliders. Notice what happens to the pressure when you compress the volume or heat up the gas.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sandbox-caption">
+          Fig. 4 &mdash; Exploratory Learning Interface. The AI generates a dynamic physics sandbox where explanations update in real-time as the student manipulates variables, turning \(PV=nRT\) from a formula to be memorised into a relationship to be discovered.
+        </div>
+      </div>
+
+      <h3 id="sec-2-4" class="text-h2 mb-5 mt-14">2.4&ensp;Does It Remember You? Persistent Memory Across Sessions</h3>
+      <p class="text-body text-ink-light mb-6">A tutor that reasons carefully, draws on the right sources, and communicates well will still fail if it forgets everything between sessions. The student makes real progress on Monday. They return on Thursday to find the system has no memory of Monday at all. Every session restarts from zero. This is not a minor inconvenience &mdash; it makes genuine personalisation impossible. A good teacher is defined, in large part, by the accumulated understanding of a specific person built over time.</p>
+      <p class="text-body text-ink-light mb-6">The challenge is architectural. LLMs operate within a fixed context window; anything outside it is simply gone. Early workarounds prepended a summary of past sessions, but this degrades quickly as weeks of interaction compress into a lossy paragraph that loses precisely the fine-grained detail personalisation requires. The more principled approach, emerging actively from 2025&ndash;2026 research, treats the LLM as an operating system managing its own tiered memory.</p>
+      <p class="text-body text-ink-light mb-6"><strong class="text-ink font-medium">MemGPT</strong> (Packer et al., 2023; now Letta) introduced the core insight: the model itself decides what to retain, summarise, and discard, using tool calls to move information between a fast in-context working memory and a slower external archival store. More recent architectures extend this considerably. <strong class="text-ink font-medium">MIRIX</strong> (2025) separates memory into six distinct types &mdash; Core, Episodic, Semantic, Procedural, Resource, and Knowledge Vault &mdash; each managed by a dedicated sub-agent under a meta memory controller, yielding up to 26% improvement on conversational benchmarks with more than 90% reduction in token costs compared to naive full-context approaches.</p>
+      <p class="text-body text-ink-light mb-6">In educational terms, this is the <strong class="text-ink font-medium">student model</strong> that the Intelligent Tutoring Systems literature has theorised for decades &mdash; now implementable at meaningful scale. A persistent-memory tutor knows that this student consistently confuses correlation with causation, has struggled with integration by parts across three separate weeks, and responds better to worked examples than to abstract definitions. It can act on all of that next session. The gap between a chatbot and a mentor is, in large part, the gap between stateless and persistent.</p>
+
+      <h3 id="sec-2-5" class="text-h2 mb-5 mt-14">2.5&ensp;Can One Agent Do Everything? Multi-Agent Specialisation</h3>
+      <p class="text-body text-ink-light mb-6">Even with memory, there is a coordination problem. Diagnosing what a student does not understand, designing a remediation plan, adapting the difficulty of the next problem, and evaluating whether the intervention worked are genuinely distinct tasks &mdash; each requiring different priorities and a different kind of attention. Collapsing them into a single agent produces something mediocre at each. The solution is the same one human institutions have used for centuries: divide the labour.</p>
+      <p class="text-body text-ink-light mb-6">Wang et al. (2025b) formalise this as a <strong class="text-ink font-medium">five-agent architecture</strong>: a Gap Identifier diagnoses knowledge deficits from interaction data; a Learner Profiler maintains a model of the student&rsquo;s characteristics and pace; a Dynamic Planner generates a personalised learning path; a Content Adapter calibrates difficulty and modality in real time; and a Feedback Synthesiser aggregates assessment signals into a coherent picture the other agents can act on. Think less &ldquo;one very clever tutor&rdquo; and more &ldquo;a well-coordinated teaching team running in parallel.&rdquo;</p>
+      <p class="text-body text-ink-light mb-6">The deeper question underneath the architecture is: <em>how does the system actually know what a student knows?</em> Static test scores are a blunt instrument. <strong class="text-ink font-medium">Bayesian Knowledge Tracing (BKT)</strong> models each skill as a hidden binary state &mdash; known or unknown &mdash; updated via observed responses. <strong class="text-ink font-medium">Deep Knowledge Tracing (DKT)</strong> replaces this binary state with a continuous latent representation learned by an LSTM, capturing richer inter-skill dependencies. The most recent work goes further: Scarlatos et al. (2025) use the tutoring dialogue itself as the assessment instrument, refining knowledge estimates through conversation rather than formal tests. A well-designed agentic tutor is always assessing &mdash; even when it appears to simply be talking.</p>
 
       <!-- Multi-Agent Dashboard -->
       <div class="mas-wrapper fade-in" id="mas-demo">
@@ -1278,88 +1878,43 @@
 
       <!-- Chart #3: Education Themes -->
       <div class="my-12 fade-in" style="background:#fff;border:1px solid var(--border-subtle);border-radius:12px;padding:1.5rem;">
-        <p class="font-sans text-caption text-ink-muted uppercase tracking-wide mb-3" style="font-weight:600;">Fig. 3 &mdash; Recurring Themes in LLM Agent Education Research (82 studies)</p>
+        <p class="font-sans text-caption text-ink-muted uppercase tracking-wide mb-3" style="font-weight:600;">Fig. 5 &mdash; Recurring Themes in LLM Agent Education Research (82 studies)</p>
         <div style="position:relative;height:300px;"><canvas id="chart3"></canvas></div>
-        <p class="font-sans text-caption text-ink-muted mt-3" style="text-align:left;">Source: Garcia-Bosque et al. (2025), &lsquo;AI-Powered Educational Agents&rsquo;, <em>Information</em>, 16(6). Systematic review of 82 peer-reviewed studies. Bars represent the relative prevalence of each theme across the reviewed literature.</p>
+        <p class="font-sans text-caption text-ink-muted mt-3" style="text-align:left;">Source: Garcia-Bosque et al. (2025), &lsquo;AI-Powered Educational Agents&rsquo;, <em>Information</em>, 16(6). Systematic review of 82 peer-reviewed studies.</p>
       </div>
 
-      <h3 id="sec-2-4" class="text-h2 mb-5 mt-14">2.4&ensp;Eyes, Ears, and Voice: The Multimodal Tutor</h3>
-      <p class="text-body text-ink-light mb-6">Text is only one way that learning happens. Students draw diagrams, speak questions aloud, point at confusing passages, and express frustration through facial expressions they may not even be aware of. The most advanced AI tutors are starting to perceive all of this. Foundation models like GPT-4o (OpenAI, 2024), Gemini 2.5 (Google DeepMind, 2025), and Claude (Anthropic, 2025) now integrate text, speech, and vision natively, opening educational interactions that were previously impossible.</p>
-      <p class="text-body text-ink-light mb-6"><strong class="text-ink font-medium">Speech</strong> is the most natural interface for young learners. Khanmigo&rsquo;s voice mode lets students who struggle with typing engage through conversation. Researchers at the NSF iSAT Institute (University of Colorado) have fine-tuned a Discrete Multimodal LLM specifically for classroom speech, tackling the unique challenges of background noise, children&rsquo;s speech patterns, and diverse accents that standard ASR handles poorly (Trinh et al., 2025).</p>
-      <p class="text-body text-ink-light mb-6">But the true paradigm shift in STEM education extends beyond passive image recognition. Abstract concepts in mathematics and physics are notoriously difficult to grasp through static text or equations alone. The most advanced agentic tutors now embrace <strong class="text-ink font-medium">Exploratory Learning</strong>. Instead of merely explaining a formula, the AI dynamically generates interactive visual modules directly within the conversational interface.</p>
-      <p class="text-body text-ink-light mb-6">Consider the Ideal Gas Law ($PV=nRT$). Rather than reading a definition, students are presented with a manipulable simulation. As they drag a slider to compress the volume or increase the temperature, they watch the pressure gauge spike in real-time, accompanied by the AI tutor's contextual, live-updating explanations. This transforms equations into tangible experiments, fundamentally shifting the AI's role from an answer-provider to a sandbox-creator.</p>
+      <h3 id="sec-2-6" class="text-h2 mb-5 mt-14">2.6&ensp;Can It Actually Run? Deployment, Compression, and the Two-Second Wall</h3>
+      <p class="text-body text-ink-light mb-6">Every component described above assumes access to a capable model running with acceptable latency. That assumption breaks quickly in real classrooms. State-of-the-art LLMs require GPU memory far beyond the Chromebooks and shared tablets that most students use. And even if the hardware exists, a voice-based tutor that pauses for more than two seconds between turns kills the conversational rhythm entirely. Deployment is not a downstream concern &mdash; it is a precondition for the system working at all.</p>
+      <p class="text-body text-ink-light mb-6">The first layer of the solution is model compression. <strong class="text-ink font-medium">Quantization</strong> reduces each weight from 32-bit floating point to 4 or 8 bits via a learned scale factor \(S\) and zero-point offset \(Z\):</p>
 
-      <!-- Exploratory Sandbox -->
-      <div class="sandbox-wrapper my-12 fade-in" id="exploratory-sandbox">
-        <div class="sandbox-header">
-          <div class="sandbox-title">
-            <svg viewBox="0 0 24 24" fill="none" width="18" height="18" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-            Interactive Explainer: Ideal Gas Law
-          </div>
-          <div class="sandbox-badge">Live Module</div>
-        </div>
-        <div class="sandbox-body">
-          <div class="sandbox-viz">
-            <div class="gauge-wrapper">
-              <div class="gauge-value" id="gauge-p">1.0 atm</div>
-              <div class="gauge-label">Pressure (P)</div>
-            </div>
-            <div class="cylinder-container" id="gas-cylinder">
-              <div class="piston" id="gas-piston">
-                <div class="piston-rod"></div>
-              </div>
-              <div id="particles-container"></div>
-            </div>
-          </div>
-          <div class="sandbox-interaction">
-            <div class="controls-area">
-              <div class="slider-group">
-                <div class="slider-header">
-                  <span>Temperature (T)</span>
-                  <span class="slider-value" id="val-t">300 K</span>
-                </div>
-                <input type="range" id="slider-t" min="100" max="800" value="300">
-              </div>
-              <div class="slider-group">
-                <div class="slider-header">
-                  <span>Volume (V)</span>
-                  <span class="slider-value" id="val-v">5.0 L</span>
-                </div>
-                <input type="range" id="slider-v" min="2" max="10" value="5" step="0.1">
-              </div>
-            </div>
-            <div class="sandbox-tutor">
-              <div class="tutor-header">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
-                AI Tutor is observing...
-              </div>
-              <div class="tutor-text" id="tutor-dynamic-text">
-                Try dragging the sliders. Notice what happens to the pressure when you compress the volume or heat up the gas.
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="sandbox-caption">
-          Fig. 5 &mdash; Exploratory Learning Interface. Inspired by modern agentic capabilities, the AI generates a dynamic physics sandbox where explanations evolve in real-time as the student manipulates variables.
-        </div>
+      <div class="formula-block my-8 text-center">
+        $$ W_q = 	ext{round}\!\left(rac{W_{	ext{fp}}}{S}
+ight) + Z $$
+        <p class="font-sans text-caption text-ink-muted mt-3" style="text-align:left;">Calibration-aware methods like AWQ and GPTQ select \(S\) and \(Z\) to minimise task-specific accuracy loss. 4-bit quantized models retain over 91% benchmark accuracy while cutting memory footprint by up to 8&times; (Agrawal et al., 2025).</p>
       </div>
 
-      <h3 id="sec-2-5" class="text-h2 mb-5 mt-14">2.5&ensp;Putting It All Together: The Real-Time Agentic Tutor</h3>
-      <p class="text-body text-ink-light mb-6">None of the technologies above works in isolation. The real breakthrough comes from <em>integration</em>: an LLM backbone for Socratic dialogue, a RAG pipeline anchoring every response in verified content, a multi-agent layer coordinating diagnosis and adaptation, and multimodal interfaces perceiving speech, vision, and context. The technical foundations are largely in place. The engineering challenge is orchestrating them with the sub-two-second latency that real-time classroom interaction demands.</p>
+      <p class="text-body text-ink-light mb-6"><strong class="text-ink font-medium">Knowledge distillation</strong> trains a compact student model to mimic a large teacher, recovering ~85% of capability at a fraction of the cost. <strong class="text-ink font-medium">Structured pruning</strong> removes attention heads and feed-forward layers that contribute least to output quality, shrinking models by up to 60% without retraining (Cai et al., 2026). Together, these make a capable tutor runnable on classroom hardware. But runnable is not the same as fast enough.</p>
 
-      <div class="pull-quote pl-6 py-1 my-10">
-        <p class="text-xl md:text-2xl font-serif font-medium text-ink leading-snug tracking-tight">The shift from generative AI to agentic AI in education is not merely a technological upgrade; it represents a reconceptualisation of the AI tutor from a question-answering engine to an autonomous pedagogical partner.</p>
-        <p class="font-sans text-caption text-ink-muted mt-3 uppercase">Chu et al., 2025</p>
+      <div class="stat-callout fade-in">
+        <div class="stat-callout-number">8&times;</div>
+        <div class="stat-callout-text"><strong>Memory reduction</strong> from 4-bit quantization with 91%+ accuracy retained &mdash; closing the gap between what frontier models can do and what classroom hardware can run. The remaining latency challenge is where speculative decoding takes over.</div>
       </div>
 
-      <p class="text-body text-ink-light mb-6">This is not theoretical. <strong class="text-ink font-medium">Duolingo Max</strong> already uses GPT-4 for contextual conversation practice in language learning. <strong class="text-ink font-medium">Squirrel AI</strong> in China has served over ten million students with dynamically adapted content. Research prototypes like <strong class="text-ink font-medium">CodeAgent</strong> (Zhang et al., 2024b) and <strong class="text-ink font-medium">Iris</strong> (Bassner et al., 2024) integrate web search, documentation retrieval, and code execution into the tutoring loop for computer science education.</p>
-      <p class="text-body text-ink-light mb-6">Picture this: a student working on a physics problem speaks a question aloud. The agent&rsquo;s speech module transcribes the query. Its vision module analyses the handwritten free-body diagram on the student&rsquo;s tablet. Its RAG pipeline retrieves the relevant textbook section. And its language model synthesises a Socratic response that addresses the specific conceptual error <em>visible in the diagram</em>. All before the student has time to feel stuck. Each component has matured independently; their integration into a coherent pipeline is what makes the intelligent classroom possible.</p>
-      <p class="text-body text-ink-light mb-6">The <strong class="text-ink font-medium">latency dimension</strong> is critical. If a voice-based tutor takes more than two seconds to respond, the conversational flow collapses and engagement evaporates. A cloud-only architecture decomposes latency as:</p>
+      <!-- Chart #2: Model Compression -->
+      <div class="my-12 fade-in" style="background:#fff;border:1px solid var(--border-subtle);border-radius:12px;padding:1.5rem;">
+        <p class="font-sans text-caption text-ink-muted uppercase tracking-wide mb-3" style="font-weight:600;">Fig. 6 &mdash; Model Compression: Accuracy Retention vs. Memory Reduction</p>
+        <div style="position:relative;height:340px;"><canvas id="chart2"></canvas></div>
+        <p class="font-sans text-caption text-ink-muted mt-3" style="text-align:left;">Sources: Agrawal et al. (2025), ICMLAS; Red Hat quantization benchmark (2024), 500K+ evaluations; SitePoint 4-bit vs 8-bit analysis (2025); IJCAI-25 quantization evaluation. Accuracy deltas measured on Llama-3.1 family models across OpenLLM Leaderboard benchmarks.</p>
+      </div>
+
+      <p class="text-body text-ink-light mb-6">The latency problem has a different shape. End-to-end response time decomposes as:</p>
 
       <div class="formula-block my-8 text-center">
         $$ T_{\text{total}} = T_{\text{edge}}^{\text{infer}} + T_{\text{net}}^{\text{tx}} + T_{\text{cloud}}^{\text{infer}} + T_{\text{net}}^{\text{rx}} $$
-        <p class="font-sans text-caption text-ink-muted mt-3" style="text-align:left;">Latency decomposition for edge-cloud co-design in agentic tutoring systems.</p>
+        <p class="font-sans text-caption text-ink-muted mt-3" style="text-align:left;">Each term is a distinct engineering target. Edge inference is minimised by quantization and pruning. Network transmission is minimised by sending compact feature vectors rather than raw audio. Cloud inference &mdash; the dominant cost &mdash; is where speculative decoding intervenes.</p>
       </div>
+
+      <p class="text-body text-ink-light mb-6"><strong class="text-ink font-medium">Edge-cloud co-design</strong> manages the architecture: privacy-sensitive, latency-critical tasks (speech detection, engagement scoring, audio feature extraction) run on the student&rsquo;s device; heavy reasoning, RAG retrieval, and agent orchestration run in the cloud. Transmitting compact feature vectors rather than raw waveforms compresses the upstream payload by an order of magnitude &mdash; directly cutting the most volatile part of the latency budget. <strong class="text-ink font-medium">Speculative decoding</strong> then handles the remaining bottleneck on the cloud side. Autoregressive generation is memory-bound: each token requires a full forward pass that loads billions of weights, leaving most GPU compute idle between steps. Speculative decoding pairs a small draft model with the large target model. The draft proposes a candidate sequence; the target verifies the entire sequence in a single parallel forward pass, accepting the correct prefix and regenerating from the first mismatch. When the draft model is accurate &mdash; which for predictable educational language it frequently is &mdash; multiple tokens are committed per step, raising throughput 2&ndash;3&times; with no change in output quality. PicoSpec (2025) implements this across an edge-cloud boundary with asynchronous pipelining, achieving up to 2.9&times; speedup on Llama-70B. Zhu et al. (2025) demonstrate 44.9% latency reduction through joint optimisation of speculation length and wireless resource allocation. The two-second wall is now an engineering specification with known solutions.</p>
 
       <!-- Edge-Cloud Dashboard -->
       <div class="ec-wrapper fade-in" id="edge-cloud-demo">
@@ -1397,12 +1952,12 @@
           <div class="ec-node ec-cloud" id="ec-node-cloud">
             <div class="ec-node-header">Cloud Compute</div>
             <div class="ec-grid" style="grid-template-columns: 1fr;">
-              <div class="ec-module" id="ec-m-llm">LLM Reasoning (Socratic)</div>
-              <div class="ec-module" id="ec-m-rag">GraphRAG Retrieval</div>
-              <div class="ec-module" id="ec-m-agent">Multi-Agent Layer</div>
+              <div class="ec-module" id="ec-m-llm">LLM + Speculative Decoding</div>
+              <div class="ec-module" id="ec-m-rag">GraphRAG + Reranker</div>
+              <div class="ec-module" id="ec-m-agent">Multi-Agent Orchestration</div>
             </div>
             <div class="ec-banner ec-target" style="border: 1px dashed #4a4a4a; background: transparent; color: #a3a3a3; margin-top: 0.75rem;">
-              Course Corpus (Textbooks, notes)
+              Course Corpus + Persistent Memory Store
             </div>
             <div class="ec-banner ec-target" id="ec-target-sla">
               Target: &lt; 2s end-to-end response
@@ -1410,13 +1965,12 @@
           </div>
         </div>
         <div class="sandbox-caption" style="margin: 2rem -1.5rem -2rem; border-top: 1px solid var(--border-subtle); background: #fafaf9;">
-          Fig. 6 &mdash; Latency Decomposition. By isolating feature extraction on the edge device, the system preserves privacy and compresses the payload, achieving the &lt;2s latency SLA necessary for natural conversational flow.
+          Fig. 7 &mdash; The full pipeline. Edge handles perception and privacy; cloud handles reasoning. Speculative decoding commits multiple tokens per verification pass, making the &lt;2s SLA achievable on real classroom hardware.
         </div>
       </div>
 
-      <p class="text-body text-ink-light mb-6">The solution is <strong class="text-ink font-medium">edge-cloud co-design</strong>: split the pipeline between the student&rsquo;s device and the cloud. Lightweight, latency-critical tasks (speech detection, audio feature extraction, engagement scoring) run locally. The heavy lifting (LLM reasoning, RAG retrieval, response generation) happens in the cloud. The key insight is that by extracting compact audio features on-device, you transmit feature vectors instead of raw waveforms, compressing the upstream payload by an order of magnitude and taming the most volatile component of latency. Frameworks like <strong class="text-ink font-medium">EdgeShard</strong> (Zhang et al., 2024) already demonstrate partitioned LLM inference across heterogeneous devices, and the NeurIPS 2024 Edge-Device LLM Competition pushed the frontier to models that run on a Raspberry Pi 4 with just 4GB of RAM (Liu et al., 2024). For education, this is not an engineering curiosity; it is an equity requirement. The performance-per-dollar frontier determines which students get intelligent tutoring and which do not.</p>
+      <p class="text-body text-ink-light mb-6">Five problems, five solutions, one system. None of the individual components are new in isolation &mdash; what is new is their convergence, and the evidence that they can be made to work together within the constraints of real schools. The intelligent classroom is not a product announcement. It is an engineering milestone assembled largely from papers published in the last eighteen months.</p>
     </section>
-
     <hr class="section-divider">
 
     <!-- ===== PART 3 ===== -->
@@ -1424,8 +1978,10 @@
       <div class="font-sans text-caption uppercase tracking-widest text-accent font-semibold mb-3">Part 3</div>
       <h2 class="text-h1 mb-4">The Hard Questions We Can&rsquo;t Afford to Ignore</h2>
       <div class="takeaway fade-in" style="margin-bottom:2.5rem;">
-        <div class="takeaway-label">TL;DR</div>
-        <p>Four risks need design-level responses, not just policy. Privacy can be guaranteed architecturally through edge computing. Cognitive dependency is countered by Socratic scaffolding. The digital divide (2.6 billion still offline) demands infrastructure investment alongside AI deployment. And academic integrity benefits more from prevention-by-design than post-hoc detection. The EU AI Act now classifies educational AI as &ldquo;high-risk.&rdquo;</p>
+        <div class="takeaway-inner">
+          <div class="takeaway-label">TL;DR</div>
+          <p>Four risks need design-level responses, not just policy. Privacy can be guaranteed architecturally through edge computing. Cognitive dependency is countered by Socratic scaffolding. The digital divide (<span class="takeaway-stat">2.6B</span> still offline) demands infrastructure investment alongside AI deployment. And academic integrity benefits more from <strong>prevention-by-design</strong> than post-hoc detection. The EU AI Act now classifies educational AI as <span class="takeaway-stat">"high-risk."</span></p>
+        </div>
       </div>
 
       <h3 id="sec-3-1" class="text-h2 mb-5 mt-12">3.1&ensp;Your Child&rsquo;s Learning Data: Who Sees It, and What Happens Next?</h3>
@@ -1797,54 +2353,98 @@
     })();
 
     /* ==========================================================
-       9. SOCRATIC CHAT TYPEWRITER ANIMATION
+       9. THREE-MODE REASONING COMPARISON
        ========================================================== */
     (function() {
-      var chatContainer = document.getElementById('socratic-chat-demo');
-      if (!chatContainer) return;
+      var container = document.getElementById('reasoning-compare');
+      if (!container) return;
 
-      var chatObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting) {
-            runChatSequence();
-            chatObserver.unobserve(entry.target);
-          }
+      /* Content for each mode */
+      var modes = [
+        {
+          id: 'rc-out-1',
+          html: [
+            '<span class="rc-token-answer">t ≈ 3.9 seconds.</span>',
+            '<span class="rc-token-wrong"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> Skipped formula — answered from pattern memory. Off by ~2.5%.</span>'
+          ]
+        },
+        {
+          id: 'rc-out-2',
+          html: [
+            '<span class="rc-token-think">[THINK] Need kinematic equation for free fall.</span>',
+            '<span class="rc-token-think">[THINK] Use h = ½gt² → rearrange to t = √(2h/g)</span>',
+            '<span class="rc-token-tool">[TOOL] calc → √(2 × 80 / 10) = √16</span>',
+            '<span class="rc-token-think">[THINK] √16 = 4. Units check: m/(m/s²) = s². ✓</span>',
+            '<span class="rc-token-answer">t = 4.0 seconds exactly.</span>'
+          ]
+        },
+        {
+          id: 'rc-out-3',
+          html: [
+            '<span class="rc-token-internal">// difficulty: medium — derivation needed</span>',
+            '<span class="rc-token-internal">// allocating 47 thinking tokens</span>',
+            '<span class="rc-token-internal">// h = ½gt² → t² = 2h/g = 16 → t = 4 ✓</span>',
+            '<span class="rc-token-internal">// cross-check: units m·s²/m = s² ✓</span>',
+            '<span class="rc-token-answer">t = 4.0 s. (Using h = ½gt², solving for t gives √(2×80/10) = 4.)</span>',
+            '<span class="rc-token-socratic">What would the answer be on the Moon, where g ≈ 1.6 m/s²?</span>'
+          ]
+        }
+      ];
+
+      /* Render all three in parallel on scroll */
+      /* Extracted run function so replay can call it */
+      function runAnimation() {
+        /* Clear all outputs */
+        ['rc-out-1','rc-out-2','rc-out-3'].forEach(function(id) {
+          var el = document.getElementById(id);
+          if (el) el.innerHTML = '';
         });
-      }, { rootMargin: '0px 0px -100px 0px' });
-      chatObserver.observe(chatContainer);
 
-      function runChatSequence() {
-        var msgStudent = document.getElementById('msg-student');
-        var msgTyping = document.getElementById('msg-tutor-typing');
-        var msgText = document.getElementById('msg-tutor-text');
-        var textContent = document.getElementById('tutor-text-content');
-        var responseString = "Good try! You correctly applied the derivative to the outer function (sin). But let's look closer. What does the Chain Rule tell us we need to do with the inner function (x²)?";
-
-        setTimeout(function() { msgStudent.classList.add('visible'); }, 400);
-
-        setTimeout(function() {
-          msgTyping.style.display = 'flex';
-          msgTyping.offsetHeight; // force reflow
-          msgTyping.classList.add('visible');
-        }, 1200);
-
-        setTimeout(function() {
-          msgTyping.style.display = 'none';
-          msgText.style.display = 'flex';
-          msgText.offsetHeight;
-          msgText.classList.add('visible');
-
+        modes.forEach(function(mode) {
+          var el = document.getElementById(mode.id);
+          if (!el) return;
+          var lines = mode.html;
+          var interval = mode.id === 'rc-out-1' ? 480
+                       : mode.id === 'rc-out-2' ? 1200
+                       : 550;
           var i = 0;
-          function typeWriter() {
-            if (i < responseString.length) {
-              textContent.innerHTML += responseString.charAt(i);
-              i++;
-              setTimeout(typeWriter, 35);
-            }
+          function addLine() {
+            if (i >= lines.length) return;
+            var span = document.createElement('span');
+            span.style.opacity = '0';
+            span.style.transition = 'opacity 0.4s ease';
+            span.innerHTML = lines[i];
+            el.appendChild(span);
+            requestAnimationFrame(function() {
+              requestAnimationFrame(function() { span.style.opacity = '1'; });
+            });
+            i++;
+            if (i < lines.length) setTimeout(addLine, interval);
           }
-          typeWriter();
-        }, 3000);
+          var delay = mode.id === 'rc-out-1' ? 0 : mode.id === 'rc-out-2' ? 80 : 160;
+          setTimeout(addLine, delay);
+        });
       }
+
+      /* Replay button */
+      var replayBtn = document.getElementById('rc-replay');
+      if (replayBtn) {
+        replayBtn.addEventListener('click', function() {
+          replayBtn.classList.add('spinning');
+          setTimeout(function() { replayBtn.classList.remove('spinning'); }, 500);
+          runAnimation();
+        });
+      }
+
+      var triggered = false;
+      var observer = new IntersectionObserver(function(entries) {
+        if (!entries[0].isIntersecting || triggered) return;
+        triggered = true;
+        observer.disconnect();
+        runAnimation();
+      }, { rootMargin: '0px 0px -50px 0px', threshold: 0 });
+
+      observer.observe(container);
     })();
 
     /* ==========================================================
@@ -1898,9 +2498,51 @@
         graphEl.innerText += '\n                      └── derives_from ──> [Momentum (dp/dt)]';
 
         await sleep(900);
-        document.getElementById('r-log-4').classList.add('visible');
+        /* Step 4a — BM25 Recall */
+        document.getElementById('r-log-4a').classList.add('visible');
+        var recallEl = document.getElementById('r-recall-box');
+        await sleep(350);
+        var candidates = [
+          { score: '0.71', src: 'Physics_Notes_Ch4.pdf',   preview: '"Newton\'s Second Law..."' },
+          { score: '0.58', src: 'Mechanics_Lecture3.pdf',  preview: '"Force is a vector quantity..."' },
+          { score: '0.52', src: 'GCSE_Physics_Review.pdf', preview: '"Weight = mass × gravity..."' },
+        ];
+        for (var c = 0; c < candidates.length; c++) {
+          var line = document.createElement('div');
+          line.style.cssText = 'margin-bottom:0.3rem;font-size:0.75rem;opacity:0;transition:opacity 0.25s ease;';
+          line.innerHTML = '<span style="font-family:var(--font-mono);color:#e0af68;">[' + candidates[c].score + ']</span> '
+            + '<em>' + candidates[c].src + '</em> — ' + candidates[c].preview;
+          recallEl.appendChild(line);
+          await sleep(180);
+          line.style.opacity = '1';
+        }
 
-        await sleep(1000);
+        await sleep(600);
+        /* Step 4b — Cross-encoder Rerank */
+        document.getElementById('r-log-4b').classList.add('visible');
+        var rerankEl = document.getElementById('r-rerank-box');
+        await sleep(300);
+        var reranked = [
+          { score: '0.94', src: 'Physics_Notes_Ch4.pdf',   delta: '↑ +0.23', color: '#9ece6a' },
+          { score: '0.61', src: 'Mechanics_Lecture3.pdf',  delta: '↑ +0.03', color: '#e0af68' },
+          { score: '0.29', src: 'GCSE_Physics_Review.pdf', delta: '↓ −0.23', color: '#f7768e' },
+        ];
+        for (var r = 0; r < reranked.length; r++) {
+          var rline = document.createElement('div');
+          rline.style.cssText = 'margin-bottom:0.3rem;font-size:0.75rem;opacity:0;transition:opacity 0.25s ease;';
+          rline.innerHTML = '<span style="font-family:var(--font-mono);color:' + reranked[r].color + ';">[' + reranked[r].score + ']</span> '
+            + '<em>' + reranked[r].src + '</em> '
+            + '<span style="font-family:var(--font-mono);font-size:0.68rem;color:' + reranked[r].color + ';">' + reranked[r].delta + '</span>';
+          rerankEl.appendChild(rline);
+          await sleep(200);
+          rline.style.opacity = '1';
+        }
+
+        await sleep(700);
+        /* Step 4c — Final match */
+        document.getElementById('r-log-4c').classList.add('visible');
+
+        await sleep(700);
         document.getElementById('r-log-5').classList.add('visible');
         document.getElementById('r-cursor').style.display = 'inline-block';
 
@@ -2171,6 +2813,82 @@
         targetBanner.style.borderColor = '#15803d';
         targetBanner.innerText = '✓ SLA Met: Delivered under 2s';
       }
+    })();
+
+    /* ==========================================================
+       CRISIS DIALOGUE — Teacher vs Student animation
+       ========================================================== */
+    (function() {
+      var container = document.getElementById('crisis-dialogue');
+      if (!container) return;
+
+      var teacherLines = [
+        "I'm exhausted. <em>56 students</em> in one class.",
+        "I didn't sign up to babysit. I wanted to <em>teach</em>.",
+        "I'm leaving at the end of term. I can't do this anymore."
+      ];
+      var studentLines = [
+        "We haven't had a qualified maths teacher <em>all year</em>.",
+        "My questions go unanswered. I'm falling <em>further behind</em>.",
+        "We need someone who actually <em>knows the subject</em>."
+      ];
+
+      var teacherContainer = container.querySelector('.crisis-teacher-bubbles');
+      var studentContainer = container.querySelector('.crisis-student-bubbles');
+
+      function createBubble(text, side) {
+        var div = document.createElement('div');
+        div.className = 'crisis-bubble';
+        div.innerHTML = text;
+        if (side === 'teacher') teacherContainer.appendChild(div);
+        else studentContainer.appendChild(div);
+        return div;
+      }
+
+      function countUp(el, target, duration) {
+        var start = performance.now();
+        function step(now) {
+          var t = Math.min((now - start) / duration, 1);
+          var ease = 1 - Math.pow(1 - t, 3);
+          el.textContent = Math.round(target * ease);
+          if (t < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }
+
+      function showBubble(text, side) {
+        var bubble = createBubble(text, side);
+        requestAnimationFrame(function() {
+          requestAnimationFrame(function() { bubble.classList.add('visible'); });
+        });
+      }
+
+      var triggered = false;
+      var observer = new IntersectionObserver(function(entries) {
+        if (!entries[0].isIntersecting || triggered) return;
+        triggered = true;
+        observer.disconnect();
+
+        /* Each round: teacher + student appear together */
+        for (var i = 0; i < 3; i++) {
+          (function(idx) {
+            setTimeout(function() {
+              showBubble(teacherLines[idx], 'teacher');
+              showBubble(studentLines[idx], 'student');
+            }, 500 + idx * 900);
+          })(i);
+        }
+
+        /* Footer counters after last round */
+        setTimeout(function() {
+          countUp(document.getElementById('cf-num-1'), 44, 900);
+          countUp(document.getElementById('cf-num-2'), 56, 900);
+          countUp(document.getElementById('cf-num-3'), 8,  900);
+        }, 500 + 3 * 900);
+
+      }, { rootMargin: '0px 0px -50px 0px', threshold: 0 });
+
+      observer.observe(container);
     })();
 
     /* ==========================================================
